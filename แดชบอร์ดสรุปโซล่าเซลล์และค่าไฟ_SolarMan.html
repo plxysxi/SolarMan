@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SolarMan & PEA Executive Suite - สรุปการผลิต ค่าไฟจริง ความคุ้มค่า CEO และระบบบันทึกสาขาพัทยา</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    if (window.tailwind) {
+      tailwind.config = {
+        darkMode: 'media',
+        theme: {
+          extend: {
+            colors: {
+              brand: { 50: '#eff6ff', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 900: '#1e3a8a', 950: '#0f172a' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sarabun:wght@300;400;500;600;700;800&display=swap');
+    
+    :root {
+      --bg-main: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-clr: #e2e8f0;
+      --subtle-bg: #f1f5f9;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-main: #0b0f19;
+        --card-bg: #111827;
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+        --border-clr: #1f2937;
+        --subtle-bg: #1e293b;
+      }
+    }
+    body {
+      font-family: 'Sarabun', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+    }
+    .custom-scrollbar::-webkit-scrollbar { height: 7px; width: 7px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.04); border-radius: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(100, 116, 139, 0.4); border-radius: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(100, 116, 139, 0.7); }
+    
+    #gen-tooltip, #pea-tooltip {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.12s ease-out, transform 0.12s ease-out;
+      transform: translate(-50%, -100%);
+      z-index: 50;
+    }
+    .glass-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-clr);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+<body class="p-3 sm:p-6 antialiased">
+  <div class="max-w-7xl mx-auto space-y-6">
+    
+    <!-- Top Header Banner -->
+    <div class="bg-gradient-to-r from-slate-950 via-blue-950 to-indigo-950 text-white p-6 sm:p-7 rounded-3xl shadow-xl border border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-5 relative overflow-hidden">
+      <div class="absolute -right-10 -top-10 w-60 h-60 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-10 -bottom-10 w-60 h-60 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 space-y-1.5">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-amber-400 text-slate-950 font-extrabold rounded-full text-xs shadow-md">
+          <span>👑</span> EXECUTIVE SOLAR & ENERGY SUITE
+        </div>
+        <h1 class="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white">
+          ระบบสรุปการผลิต ค่าไฟจริง ความคุ้มค่า CEO และระบบบันทึกสาขาพัทยา
+        </h1>
+        <p class="text-blue-200 text-xs sm:text-sm font-medium">
+          โครงการ LV Pool Villa & Office Cha-am & Pattaya | ครบถ้วนทั้งหน่วยประหยัด, ราคาต่อหน่วย (฿/kWh) และคู่มือปฏิบัติการ
+        </p>
+      </div>
+
+      <div class="relative z-10 bg-white/10 backdrop-blur-md px-5 py-3.5 rounded-2xl border border-white/20 text-left md:text-right shadow-lg flex flex-col justify-center">
+        <div class="text-xs text-emerald-300 font-bold flex items-center gap-1.5 md:justify-end">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          โซล่าเซลล์ประหยัดเงินสะสมไปแล้ว
+        </div>
+        <div class="text-2xl sm:text-3xl font-black text-amber-300 tracking-tight">
+          ฿78,011.40 <span class="text-xs font-normal text-slate-200">(9 เดือน)</span>
+        </div>
+        <div class="text-xs text-blue-200 mt-0.5">
+          ประหยัดไฟฟ้าได้รวม <b class="text-white font-bold">17,965.90 หน่วย</b> (เฉลี่ย ฿4.36/หน่วย)
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN 4-PAGE NAVIGATION TABS -->
+    <div class="glass-card p-2 rounded-2xl flex flex-wrap items-center justify-between gap-3">
+      <div class="inline-flex p-1.5 bg-slate-100 dark:bg-slate-800/80 rounded-xl border border-slate-200 dark:border-slate-700 w-full sm:w-auto shadow-inner flex-wrap">
+        <button id="main-tab-gen" onclick="switchPage('page-gen')" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-lg text-xs sm:text-sm font-black bg-blue-600 text-white shadow-md transition-all flex items-center justify-center gap-1.5">
+          <span>☀️</span> หน้า 1: สถิติการผลิต & ใช้ไฟ
+        </button>
+        <button id="main-tab-pea" onclick="switchPage('page-pea')" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-700/60 transition-all flex items-center justify-center gap-1.5">
+          <span>💰</span> หน้า 2: ค่าไฟจริง กฟภ. (4 มิเตอร์)
+        </button>
+        <button id="main-tab-ceo" onclick="switchPage('page-ceo')" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-700/60 transition-all flex items-center justify-center gap-1.5">
+          <span>📊</span> หน้า 3: สรุปความคุ้มค่ารายหลัง (CEO)
+        </button>
+        <button id="main-tab-pty" onclick="switchPage('page-pty')" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-700/60 transition-all flex items-center justify-center gap-1.5">
+          <span>📱</span> หน้า 4: ระบบบันทึกข้อมูลสาขาพัทยา
+        </button>
+      </div>
+      <div class="text-xs font-bold text-slate-500 dark:text-slate-400 px-3 hidden xl:flex items-center gap-1.5">
+        <span>💡</span> คลิกแท็บเพื่อสลับหน้าระหว่าง ข้อมูลผลิต / ค่าไฟ / สรุป CEO / บันทึกพัทยา
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- PAGE 1: SOLAR GENERATION & CONSUMPTION (MONTHLY & DAILY)               -->
+    <!-- ===================================================================== -->
+    <div id="page-gen" class="space-y-6">
+      
+      <!-- Controls for Page 1 -->
+      <div class="glass-card p-4 sm:p-5 rounded-2xl space-y-3.5">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-2.5">
+            <span class="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">เลือกมุมมองกราฟ:</span>
+            <div class="inline-flex p-1 bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+              <button id="gen-mode-monthly" onclick="switchGenMode('monthly')" class="px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-blue-600 text-white shadow-sm transition">
+                📊 กราฟรายเดือน (9 เดือน)
+              </button>
+              <button id="gen-mode-daily" onclick="switchGenMode('daily')" class="px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-slate-700 transition">
+                📅 กราฟรายวัน (เลือกเดือน)
+              </button>
+            </div>
+          </div>
+
+          <!-- House Filter Dropdown -->
+          <div class="flex items-center gap-2">
+            <span class="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">เน้นเฉพาะหลัง:</span>
+            <select id="gen-house-filter" onchange="renderGenChart()" class="bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-1.5 text-xs sm:text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer shadow-sm">
+              <option value="all">⭐ แสดงครบทั้ง 6 หลัง (เปรียบเทียบ)</option>
+              <option value="b1">🔵 Building 1 (หลัง 1)</option>
+              <option value="b2">🟢 Building 2 (หลัง 2)</option>
+              <option value="b3">🟣 Building 3 (หลัง 3)</option>
+              <option value="b4">🌸 Building 4 (หลัง 4)</option>
+              <option value="b5">🟠 Building 5 (หลัง 5)</option>
+              <option value="off">🔷 Office (ออฟฟิศ)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Month Selector Buttons (For Daily Mode) -->
+        <div id="gen-month-selector" class="hidden pt-3 border-t border-slate-200 dark:border-slate-800 space-y-2">
+          <div class="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+            <span>👇 คลิกเลือกเดือนที่ต้องการดูกราฟรายวัน:</span>
+            <span id="gen-active-month-text" class="text-blue-600 dark:text-blue-400 font-black">เมษายน 2569 (หน้าร้อนพีค 🏆)</span>
+          </div>
+          <div class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-9 gap-2">
+            <button onclick="pickGenMonth('2026/01')" id="gm-2026/01" class="gm-tab py-2 px-2 rounded-xl text-xs font-bold border transition text-center bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-blue-500 shadow-sm">ม.ค. 69</button>
+            <button onclick="pickGenMonth('2026/02')" id="gm-2026/02" class="gm-tab py-2 px-2 rounded-xl text-xs font-bold border transition text-center bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-blue-500 shadow-sm">ก.พ. 69</button>
+            <button onclick="pickGenMonth('2026/03')" id="gm-2026/03" class="gm-tab py-2 px-2 rounded-xl text-xs font-bold border transition text-center bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-blue-500 shadow-sm">มี.ค. 69 🔥</button>
+            <button onclick="pickGenMonth('2026/04')" id="gm-2026/04" class="gm-tab py-2 px-2 rounded-xl text-xs font-bold border transition text-center bg-blue-600 text-white border-blue-600 shadow-md ring-2 ring-blue-400 font-black">เม.ย. 69 🏆</button>
+            <button onclick="pickGenMonth('2026/05')" id="gm-2026/05" class="gm-tab py-2 px-2 rounded-xl text-xs font-bold border transition text-center bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-blue-500 shadow-sm">พ.ค. 69 🔥</button>
+            <button onclick="pickGenMonth('2026/06')" id="gm-2026/06" class="gm-tab py-2 px-2 rounded-xl text-xs font-bold border transition text-center bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-blue-500 shadow-sm">มิ.ย. 69</button>
+            <button onclick="pickGenMonth('2026/07')" id="gm-2026/07" class="gm-tab py-2 px-2 rounded-xl text-xs font-bold border transition text-center bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-blue-500 shadow-sm">ก.ค. 69</button>
+            <button onclick="pickGenMonth('2026/08')" id="gm-2026/08" class="gm-tab py-2 px-2 rounded-xl text-xs font-bold border transition text-center bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-blue-500 shadow-sm">ส.ค. 69</button>
+            <button onclick="pickGenMonth('2026/09')" id="gm-2026/09" class="gm-tab py-2 px-2 rounded-xl text-xs font-bold border transition text-center bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-blue-500 shadow-sm">ก.ย. 69*</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Color Legend Bar -->
+      <div class="glass-card px-5 py-3 rounded-2xl flex flex-wrap items-center justify-center gap-5 text-xs font-bold text-slate-700 dark:text-slate-200">
+        <div class="flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-md bg-blue-500 inline-block shadow-sm"></span> Building 1 (หลัง 1)</div>
+        <div class="flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-md bg-emerald-500 inline-block shadow-sm"></span> Building 2 (หลัง 2)</div>
+        <div class="flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-md bg-purple-500 inline-block shadow-sm"></span> Building 3 (หลัง 3)</div>
+        <div class="flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-md bg-pink-500 inline-block shadow-sm"></span> Building 4 (หลัง 4)</div>
+        <div class="flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-md bg-amber-500 inline-block shadow-sm"></span> Building 5 (หลัง 5)</div>
+        <div class="flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-md bg-cyan-500 inline-block shadow-sm"></span> Office (ออฟฟิศ)</div>
+      </div>
+
+      <!-- Chart 1 Card -->
+      <div class="glass-card p-5 sm:p-6 rounded-3xl space-y-4 relative">
+        <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-3.5">
+          <div>
+            <h2 id="gen-chart-title" class="text-base sm:text-lg font-black text-slate-900 dark:text-white">
+              📊 กราฟแท่งการผลิตไฟฟ้ารายเดือน (แยกแท่งแต่ละหลังชัดเจน 9 เดือน)
+            </h2>
+            <p id="gen-chart-subtitle" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              แยกเป็น 6 แท่งสีตามอาคาร ช่วยให้เปรียบเทียบแต่ละหลังได้ง่ายทันที (หน่วย: kWh)
+            </p>
+          </div>
+          <span class="text-xs font-bold bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300 px-3 py-1 rounded-full self-start sm:self-auto border border-blue-200 dark:border-blue-800 shadow-sm">
+            แสดงครบ 6 อาคาร
+          </span>
+        </div>
+
+        <div class="overflow-x-auto custom-scrollbar pb-2 relative">
+          <div id="gen-canvas-wrapper" class="w-full min-w-[650px] h-[370px] relative">
+            <canvas id="genChart" class="w-full h-full cursor-crosshair"></canvas>
+            
+            <div id="gen-tooltip" class="bg-slate-950 text-white p-3.5 rounded-2xl shadow-2xl border border-slate-700 text-xs space-y-2 backdrop-blur-xl min-w-[180px]">
+              <div id="gt-period" class="font-black text-blue-300 border-b border-slate-800 pb-1.5 text-xs">เมษายน 2569</div>
+              <div class="flex items-center justify-between gap-3">
+                <span id="gt-house" class="font-bold flex items-center gap-1.5">
+                  <span id="gt-color" class="w-2.5 h-2.5 rounded-full inline-block"></span>
+                  <span id="gt-housename">Building 1</span>
+                </span>
+                <span id="gt-val" class="font-black text-amber-300 text-sm">876.50 kWh</span>
+              </div>
+              <div class="text-[11px] text-slate-300 flex justify-between border-t border-slate-800/80 pt-1.5">
+                <span>⚡ รวมทุกหลัง:</span>
+                <span id="gt-total" class="font-bold text-white">2,902.90 kWh</span>
+              </div>
+              <div class="text-[11px] text-emerald-300 font-bold flex justify-between">
+                <span>💰 ประหยัดเงิน:</span>
+                <span id="gt-savings">~฿2,892.45</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-right text-[11px] text-slate-400 italic">
+          💡 เลื่อนเมาส์ชี้ไปที่แท่งกราฟเพื่อดูป๊อปอัปตัวเลขและมูลค่าประหยัดได้ทันที
+        </div>
+      </div>
+
+      <!-- Table 1: SIDE-BY-SIDE GENERATION VS CONSUMPTION TABLE -->
+      <div class="glass-card p-5 sm:p-6 rounded-3xl space-y-4">
+        <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-3">
+          <h3 id="gen-table-title" class="text-sm sm:text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
+            <span>📋</span> ตารางเปรียบเทียบ: ผลิตไฟฟ้าโซล่าเซลล์ vs การใช้ไฟฟ้าจริง (kWh)
+          </h3>
+          <div class="text-xs font-bold text-slate-500 dark:text-slate-400 flex items-center gap-4">
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-blue-100 border border-blue-400 rounded"></span> คอลัมน์สีฟ้า = ผลิต (Solar Gen)</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-slate-100 border border-slate-300 dark:bg-slate-800 dark:border-slate-700 rounded"></span> คอลัมน์ปกติ = ใช้ (Consumption)</span>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto custom-scrollbar border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm">
+          <table class="w-full text-xs text-left border-collapse min-w-[950px]">
+            <thead>
+              <tr class="bg-slate-950 text-white font-black text-center border-b border-slate-800">
+                <th rowspan="2" class="p-3 text-center text-white font-black border-r border-slate-800 bg-black" id="gth-period">เดือน</th>
+                <th colspan="2" class="p-2.5 text-center text-white font-bold border-r border-slate-800 bg-blue-900">Building 1 (หลัง 1)</th>
+                <th colspan="2" class="p-2.5 text-center text-white font-bold border-r border-slate-800 bg-emerald-900">Building 2 (หลัง 2)</th>
+                <th colspan="2" class="p-2.5 text-center text-white font-bold border-r border-slate-800 bg-purple-900">Building 3 (หลัง 3)</th>
+                <th colspan="2" class="p-2.5 text-center text-white font-bold border-r border-slate-800 bg-pink-900">Building 4 (หลัง 4)</th>
+                <th colspan="2" class="p-2.5 text-center text-white font-bold border-r border-slate-800 bg-amber-900">Building 5 (หลัง 5)</th>
+                <th colspan="2" class="p-2.5 text-center text-white font-bold border-r border-slate-800 bg-cyan-900">Office (ออฟฟิศ)</th>
+                <th colspan="3" class="p-2.5 text-center text-white font-black bg-slate-950">⚡ รวมทั้งโครงการ (Total)</th>
+              </tr>
+              <tr class="text-right text-[11px] font-black border-b border-slate-800">
+                <th class="p-2 text-right text-white bg-blue-800">ผลิต</th>
+                <th class="p-2 text-right text-white bg-slate-800 border-r border-slate-700">ใช้</th>
+                
+                <th class="p-2 text-right text-white bg-blue-800">ผลิต</th>
+                <th class="p-2 text-right text-white bg-slate-800 border-r border-slate-700">ใช้</th>
+
+                <th class="p-2 text-right text-white bg-blue-800">ผลิต</th>
+                <th class="p-2 text-right text-white bg-slate-800 border-r border-slate-700">ใช้</th>
+
+                <th class="p-2 text-right text-white bg-blue-800">ผลิต</th>
+                <th class="p-2 text-right text-white bg-slate-800 border-r border-slate-700">ใช้</th>
+
+                <th class="p-2 text-right text-white bg-blue-800">ผลิต</th>
+                <th class="p-2 text-right text-white bg-slate-800 border-r border-slate-700">ใช้</th>
+
+                <th class="p-2 text-right text-white bg-blue-800">ผลิต</th>
+                <th class="p-2 text-right text-white bg-slate-800 border-r border-slate-700">ใช้</th>
+
+                <th class="p-2 text-right text-white bg-emerald-800 font-black">⚡ ผลิตรวม</th>
+                <th class="p-2 text-right text-white bg-slate-800 font-black">🔌 ใช้รวม</th>
+                <th class="p-2 text-center text-white bg-slate-950 font-black">% ช่วย</th>
+              </tr>
+            </thead>
+            <tbody id="gen-table-body" class="divide-y divide-slate-200 dark:divide-slate-800 text-slate-800 dark:text-slate-100 bg-white dark:bg-slate-900">
+              <!-- Populated via JS -->
+            </tbody>
+            <tfoot class="bg-slate-950 text-white font-black border-t-2 border-blue-500">
+              <tr class="text-right text-white">
+                <td class="p-3 text-center font-black border-r border-slate-800 text-white bg-black">รวมสะสม</td>
+                <td class="p-2 text-right font-black bg-blue-900/60 text-white">5,480.2</td>
+                <td class="p-2 text-right font-black border-r border-slate-700 bg-slate-800/60 text-white">16,368.1</td>
+                
+                <td class="p-2 text-right font-black bg-blue-900/60 text-white">3,732.1</td>
+                <td class="p-2 text-right font-black border-r border-slate-700 bg-slate-800/60 text-white">9,346.3</td>
+
+                <td class="p-2 text-right font-black bg-blue-900/60 text-white">2,421.0</td>
+                <td class="p-2 text-right font-black border-r border-slate-700 bg-slate-800/60 text-white">6,108.0</td>
+
+                <td class="p-2 text-right font-black bg-blue-900/60 text-white">74.5</td>
+                <td class="p-2 text-right font-black border-r border-slate-700 bg-slate-800/60 text-white">187.4</td>
+
+                <td class="p-2 text-right font-black bg-blue-900/60 text-white">2,414.9</td>
+                <td class="p-2 text-right font-black border-r border-slate-700 bg-slate-800/60 text-white">7,192.3</td>
+
+                <td class="p-2 text-right font-black bg-blue-900/60 text-white">3,843.2</td>
+                <td class="p-2 text-right font-black border-r border-slate-700 bg-slate-800/60 text-white">3,843.2</td>
+
+                <td class="p-2 text-right font-black text-white bg-emerald-900/80">17,965.9</td>
+                <td class="p-2 text-right font-black text-white bg-slate-800/90">41,630.3</td>
+                <td class="p-2 text-center font-black text-amber-300 bg-slate-950 border-l border-slate-800">43.16% 🎯</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- PAGE 2: PEA BILLS & FINANCIAL ROI (REAL BILL DATA)                     -->
+    <!-- ===================================================================== -->
+    <div id="page-pea" class="hidden space-y-6">
+      
+      <!-- Page 2 Sub-Nav -->
+      <div class="glass-card p-4 rounded-2xl flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5">
+          <span class="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">เลือกรูปแบบกราฟค่าไฟ:</span>
+          <div class="inline-flex p-1 bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+            <button id="pea-subtab-compare" onclick="switchPeaMode('compare')" class="px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-blue-600 text-white shadow-sm transition">
+              💰 เปรียบเทียบ: จ่ายจริง กฟภ. vs ถ้าไม่มีโซล่าร์
+            </button>
+            <button id="pea-subtab-meters" onclick="switchPeaMode('meters')" class="px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-slate-700 transition">
+              🏢 ค่าไฟแยกตามมิเตอร์จริง (4 มิเตอร์)
+            </button>
+          </div>
+        </div>
+        <div class="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-800">
+          ข้อมูลจริง 6 เดือน (มี.ค. - ส.ค. 2569)
+        </div>
+      </div>
+
+      <!-- Chart 2 Card -->
+      <div class="glass-card p-5 sm:p-6 rounded-3xl space-y-4 relative">
+        <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-3.5">
+          <div>
+            <h2 id="pea-chart-title" class="text-base sm:text-lg font-black text-slate-900 dark:text-white">
+              💰 กราฟเปรียบเทียบ: ค่าไฟที่จ่ายจริง กฟภ. (มีโซล่าร์) vs ค่าไฟถ้าไม่มีโซล่าเซลล์ (บาท)
+            </h2>
+            <p id="pea-chart-subtitle" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              แท่งเขียว = จ่ายจริง กฟภ. | แท่งแดง = ถ้าไม่มีโซล่าร์ (ส่วนต่างบนแท่งคือเงินสดที่ประหยัดได้)
+            </p>
+          </div>
+          <div id="pea-legend-box" class="flex items-center gap-3 text-xs font-bold">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <div class="overflow-x-auto custom-scrollbar pb-2 relative">
+          <div class="w-full min-w-[650px] h-[370px] relative">
+            <canvas id="peaChart" class="w-full h-full cursor-crosshair"></canvas>
+            
+            <div id="pea-tooltip" class="bg-slate-950 text-white p-3.5 rounded-2xl shadow-2xl border border-slate-700 text-xs space-y-2 backdrop-blur-xl min-w-[200px]">
+              <div id="pt-title" class="font-black text-blue-300 border-b border-slate-800 pb-1.5 text-xs">เมษายน 2569</div>
+              <div id="pt-body" class="space-y-1 text-xs"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-right text-[11px] text-slate-400 italic">
+          💡 เลื่อนเมาส์ชี้ไปที่แท่งกราฟเพื่อดูป๊อปอัปตัวเลขค่าไฟแบบละเอียด
+        </div>
+      </div>
+
+      <!-- Table 2: PEA Table -->
+      <div class="glass-card p-5 sm:p-6 rounded-3xl space-y-4">
+        <h3 class="text-sm sm:text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
+          <span>📋</span> ตารางสรุปเปรียบเทียบค่าไฟจริง 6 เดือน (มี.ค. - ส.ค. 2569)
+        </h3>
+
+        <div class="overflow-x-auto custom-scrollbar border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm">
+          <table class="w-full text-xs text-left border-collapse">
+            <thead class="bg-slate-950 text-white font-bold">
+              <tr class="border-b border-slate-800">
+                <th class="p-3.5 text-center text-white font-bold">เดือน (Period)</th>
+                <th class="p-3.5 text-right text-white font-bold">ออฟฟิศ (บาท)</th>
+                <th class="p-3.5 text-right text-white font-bold">หลัง 1 (บาท)</th>
+                <th class="p-3.5 text-right text-white font-bold">หลัง 2-3 รวม (บาท)</th>
+                <th class="p-3.5 text-right text-white font-bold">หลัง 4-5 รวม (บาท)</th>
+                <th class="p-3.5 text-right text-white font-black bg-blue-950 border-l border-slate-800">🔌 จ่ายจริง กฟภ. (บาท)</th>
+                <th class="p-3.5 text-right text-white font-black bg-emerald-950 border-l border-slate-800">☀️ โซล่าร์ประหยัดให้ (บาท)</th>
+                <th class="p-3.5 text-right text-white font-black bg-rose-950 border-l border-slate-800">🔴 ถ้าไม่มีโซล่าร์ (บาท)</th>
+                <th class="p-3.5 text-center text-white font-black bg-indigo-950 border-l border-slate-800">% ประหยัด</th>
+              </tr>
+            </thead>
+            <tbody id="pea-table-body" class="divide-y divide-slate-200 dark:divide-slate-800 text-slate-800 dark:text-slate-100 bg-white dark:bg-slate-900">
+              <!-- Populated via JS -->
+            </tbody>
+            <tfoot class="bg-slate-950 text-white font-black border-t-2 border-blue-500">
+              <tr class="text-white">
+                <td class="p-3.5 text-center font-black text-white bg-black">รวม 6 เดือน</td>
+                <td class="p-3.5 text-right font-black text-white">฿28,043.36</td>
+                <td class="p-3.5 text-right font-black text-white">฿30,327.87</td>
+                <td class="p-3.5 text-right font-black text-white">฿44,279.29</td>
+                <td class="p-3.5 text-right font-black text-white">฿53,776.23</td>
+                <td class="p-3.5 text-right font-black text-white bg-blue-900/60 border-l border-slate-800">฿166,426.75</td>
+                <td class="p-3.5 text-right font-black text-white bg-emerald-900/70 border-l border-slate-800">฿60,461.86</td>
+                <td class="p-3.5 text-right font-black text-white bg-rose-900/70 border-l border-slate-800">฿226,888.61</td>
+                <td class="p-3.5 text-center font-black text-amber-300 bg-indigo-950 border-l border-slate-800">26.65% 🎯</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- PAGE 3: CEO EXECUTIVE ROI EVALUATION (UNITS & THB/UNIT BREAKDOWN)     -->
+    <!-- ===================================================================== -->
+    <div id="page-ceo" class="hidden space-y-6">
+      
+      <!-- CEO Top Metrics Banner -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="glass-card p-5 rounded-3xl border-l-4 border-blue-500 space-y-1">
+          <div class="text-xs font-bold text-slate-500 dark:text-slate-400">⚡ ประหยัดไฟฟ้าไปทั้งหมด</div>
+          <div class="text-2xl font-black text-blue-600 dark:text-blue-400">17,965.90 หน่วย</div>
+          <div class="text-[11px] text-slate-500 dark:text-slate-400">คิดเป็น 43.16% ของการใช้ไฟทั้งปี</div>
+        </div>
+        <div class="glass-card p-5 rounded-3xl border-l-4 border-amber-500 space-y-1">
+          <div class="text-xs font-bold text-slate-500 dark:text-slate-400">💰 ค่าไฟเฉลี่ยของการไฟฟ้า</div>
+          <div class="text-2xl font-black text-amber-600 dark:text-amber-400">฿4.36 / หน่วย</div>
+          <div class="text-[11px] text-slate-500 dark:text-slate-400">ออฟฟิศ ฿4.67 | พูลวิลล่า ฿4.12-฿4.44</div>
+        </div>
+        <div class="glass-card p-5 rounded-3xl border-l-4 border-emerald-500 space-y-1">
+          <div class="text-xs font-bold text-slate-500 dark:text-slate-400">💵 มูลค่าประหยัดรวมทั้งโครงการ</div>
+          <div class="text-2xl font-black text-emerald-600 dark:text-emerald-400">฿78,011.40</div>
+          <div class="text-[11px] text-slate-500 dark:text-slate-400">(6 เดือนตามบิล กฟภ. ประหยัด ฿60,461)</div>
+        </div>
+        <div class="glass-card p-5 rounded-3xl border-l-4 border-purple-500 space-y-1">
+          <div class="text-xs font-bold text-slate-500 dark:text-slate-400">🏆 ประเมินความคุ้มค่าภาพรวม</div>
+          <div class="text-2xl font-black text-purple-600 dark:text-purple-400">เกรด A+ (คุ้มค่ามาก)</div>
+          <div class="text-[11px] text-slate-500 dark:text-slate-400">ตัดภาระค่าไฟได้เกือบครึ่งหนึ่ง</div>
+        </div>
+      </div>
+
+      <!-- House-by-House CEO Evaluation Table -->
+      <div class="glass-card p-5 sm:p-6 rounded-3xl space-y-4">
+        <div class="border-b border-slate-200 dark:border-slate-800 pb-3">
+          <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white flex items-center gap-2">
+            <span>👑</span> ตารางสรุปผลการประเมินความคุ้มค่ารายหลัง (House-by-House ROI Rating)
+          </h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            ระบุชัดเจน: โซล่าร์ประหยัดไปกี่หน่วย (kWh), ค่าไฟหน่วยละกี่บาท, เงินประหยัดรวม, และแนวทางประหยัดเพิ่มเฉพาะหลัง
+          </p>
+        </div>
+
+        <div class="overflow-x-auto custom-scrollbar border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm">
+          <table class="w-full text-xs text-left border-collapse min-w-[950px]">
+            <thead class="bg-slate-950 text-white font-bold">
+              <tr class="border-b border-slate-800">
+                <th class="p-3.5 text-center text-white font-bold">อาคาร / หลัง</th>
+                <th class="p-3.5 text-right text-emerald-300 font-black bg-emerald-950">ประหยัดกี่หน่วย<br>(Solar kWh)</th>
+                <th class="p-3.5 text-right text-amber-300 font-black bg-amber-950">หน่วยละกี่บาท<br>(฿ / kWh)</th>
+                <th class="p-3.5 text-right text-white font-black bg-blue-950">เงินประหยัดรวม<br>(บาท)</th>
+                <th class="p-3.5 text-right text-white font-bold">ใช้ไฟฟ้ารวม<br>(หน่วย)</th>
+                <th class="p-3.5 text-center text-cyan-300 font-black">% โซล่าร์ช่วย<br>(Coverage)</th>
+                <th class="p-3.5 text-center text-white font-bold">ระดับความคุ้มค่า<br>(Rating)</th>
+                <th class="p-3.5 text-left text-white font-bold">บทวิเคราะห์ & จุดที่ประหยัดเพิ่มได้อีก</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-800 text-slate-800 dark:text-slate-100 bg-white dark:bg-slate-900">
+              <tr class="hover:bg-blue-500/10 transition">
+                <td class="p-3.5 text-center font-bold">🔵 หลัง 1 (Building 1)</td>
+                <td class="p-3.5 text-right font-black text-emerald-600 dark:text-emerald-400 bg-emerald-500/5">5,480.20 หน่วย</td>
+                <td class="p-3.5 text-right font-bold text-amber-600 dark:text-amber-400 bg-amber-500/5">฿4.44</td>
+                <td class="p-3.5 text-right font-black text-blue-600 dark:text-blue-400 bg-blue-500/5">฿24,332.09</td>
+                <td class="p-3.5 text-right font-medium">16,368.10 หน่วย</td>
+                <td class="p-3.5 text-center font-black text-emerald-600 dark:text-emerald-400">33.48%</td>
+                <td class="p-3.5 text-center"><span class="px-2.5 py-1 rounded-full text-[11px] font-black bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">⭐ คุ้มค่าระดับ A+</span></td>
+                <td class="p-3.5 text-left leading-relaxed">ผลิตได้สูงอันดับ 1 ของโครงการ แต่ช่วงหน้าร้อนแอร์กินไฟหนัก แนะนำล้างฟิลเตอร์แอร์ทุก 2 สัปดาห์ และ Pre-cool ช่วง 13:00-15:00 น.</td>
+              </tr>
+              <tr class="hover:bg-blue-500/10 transition">
+                <td class="p-3.5 text-center font-bold">🟢 หลัง 2 (Building 2)</td>
+                <td class="p-3.5 text-right font-black text-emerald-600 dark:text-emerald-400 bg-emerald-500/5">3,732.10 หน่วย</td>
+                <td class="p-3.5 text-right font-bold text-amber-600 dark:text-amber-400 bg-amber-500/5">฿4.12</td>
+                <td class="p-3.5 text-right font-black text-blue-600 dark:text-blue-400 bg-blue-500/5">฿15,376.25</td>
+                <td class="p-3.5 text-right font-medium">9,346.30 หน่วย</td>
+                <td class="p-3.5 text-center font-black text-emerald-600 dark:text-emerald-400">39.93%</td>
+                <td class="p-3.5 text-center"><span class="px-2.5 py-1 rounded-full text-[11px] font-black bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">⭐ คุ้มค่าระดับ A+</span></td>
+                <td class="p-3.5 text-left leading-relaxed">โซล่าร์ช่วยจ่ายไฟถึง 40% ผลิตได้ดีสม่ำเสมอ แนะนำใช้เป็นบ้าน Priority 1 ในการเปิดรับจองแขก</td>
+              </tr>
+              <tr class="hover:bg-blue-500/10 transition">
+                <td class="p-3.5 text-center font-bold">🟣 หลัง 3 (Building 3)</td>
+                <td class="p-3.5 text-right font-black text-emerald-600 dark:text-emerald-400 bg-emerald-500/5">2,421.00 หน่วย</td>
+                <td class="p-3.5 text-right font-bold text-amber-600 dark:text-amber-400 bg-amber-500/5">฿4.12</td>
+                <td class="p-3.5 text-right font-black text-blue-600 dark:text-blue-400 bg-blue-500/5">฿9,974.52</td>
+                <td class="p-3.5 text-right font-medium">6,108.00 หน่วย</td>
+                <td class="p-3.5 text-center font-black text-emerald-600 dark:text-emerald-400">39.64%</td>
+                <td class="p-3.5 text-center"><span class="px-2.5 py-1 rounded-full text-[11px] font-black bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300">⭐ คุ้มค่าระดับ A</span></td>
+                <td class="p-3.5 text-left leading-relaxed">แชร์มิเตอร์กับหลัง 2 ช่วยเกลี่ยโหลดได้ดีมาก ควรตั้งปั๊มสปาให้ตัด Auto 15-30 นาที ป้องกันแขกเปิดทิ้ง</td>
+              </tr>
+              <tr class="hover:bg-blue-500/10 transition">
+                <td class="p-3.5 text-center font-bold">🌸 หลัง 4 (Building 4)</td>
+                <td class="p-3.5 text-right font-black text-emerald-600 dark:text-emerald-400 bg-emerald-500/5">74.50 หน่วย</td>
+                <td class="p-3.5 text-right font-bold text-amber-600 dark:text-amber-400 bg-amber-500/5">฿4.17</td>
+                <td class="p-3.5 text-right font-black text-blue-600 dark:text-blue-400 bg-blue-500/5">฿310.67</td>
+                <td class="p-3.5 text-right font-medium">187.40 หน่วย</td>
+                <td class="p-3.5 text-center font-black text-emerald-600 dark:text-emerald-400">39.75%</td>
+                <td class="p-3.5 text-center"><span class="px-2.5 py-1 rounded-full text-[11px] font-black bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300">🟡 กำลังเริ่มรัน</span></td>
+                <td class="p-3.5 text-left leading-relaxed">เพิ่งเริ่มเปิดระบบเดือน ส.ค. กำลังผลิตทำงานได้ดีตามขนาดแผง ควรคุมเวลาเปิดแอร์และปั๊มสระ</td>
+              </tr>
+              <tr class="hover:bg-blue-500/10 transition">
+                <td class="p-3.5 text-center font-bold">🟠 หลัง 5 (Building 5)</td>
+                <td class="p-3.5 text-right font-black text-emerald-600 dark:text-emerald-400 bg-emerald-500/5">2,414.90 หน่วย</td>
+                <td class="p-3.5 text-right font-bold text-amber-600 dark:text-amber-400 bg-amber-500/5">฿4.17</td>
+                <td class="p-3.5 text-right font-black text-blue-600 dark:text-blue-400 bg-blue-500/5">฿10,070.13</td>
+                <td class="p-3.5 text-right font-medium">7,192.30 หน่วย</td>
+                <td class="p-3.5 text-center font-black text-emerald-600 dark:text-emerald-400">33.58%</td>
+                <td class="p-3.5 text-center"><span class="px-2.5 py-1 rounded-full text-[11px] font-black bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300">⭐ คุ้มค่าระดับ A</span></td>
+                <td class="p-3.5 text-left leading-relaxed">แชร์มิเตอร์กับหลัง 4 ช่วงหน้าร้อนโหลดพุ่ง แนะนำดึงงานปั๊มกรองสระมาเปิดช่วง 10:00-15:00 น. 100%</td>
+              </tr>
+              <tr class="hover:bg-blue-500/10 transition">
+                <td class="p-3.5 text-center font-bold">🔷 Office (ออฟฟิศ ชะอำ)</td>
+                <td class="p-3.5 text-right font-black text-emerald-600 dark:text-emerald-400 bg-emerald-500/5">3,843.20 หน่วย</td>
+                <td class="p-3.5 text-right font-bold text-amber-600 dark:text-amber-400 bg-amber-500/5">฿4.67</td>
+                <td class="p-3.5 text-right font-black text-blue-600 dark:text-blue-400 bg-blue-500/5">฿17,947.74</td>
+                <td class="p-3.5 text-right font-medium">3,843.20 หน่วย</td>
+                <td class="p-3.5 text-center font-black text-emerald-600 dark:text-emerald-400">100.00%</td>
+                <td class="p-3.5 text-center"><span class="px-2.5 py-1 rounded-full text-[11px] font-black bg-purple-100 text-purple-800 dark:bg-purple-950 dark:text-purple-300">🏆 คุ้มค่าสูงสุด (Top ROI)</span></td>
+                <td class="p-3.5 text-left leading-relaxed">ใช้ไฟกลางวันตรงกับช่วงแดดจัด ค่าไฟต่อหน่วยแพงสุด (ประเภท 1125) โซล่าร์ช่วยตัดภาระค่าไฟได้คุ้มค่าต่อหน่วยสูงสุด!</td>
+              </tr>
+            </tbody>
+            <tfoot class="bg-slate-950 text-white font-black border-t-2 border-blue-500">
+              <tr class="text-white text-right">
+                <td class="p-3.5 text-center font-black text-white bg-black">⚡ รวมทั้งโครงการ (9 เดือน)</td>
+                <td class="p-3.5 text-right font-black text-emerald-300 bg-emerald-950/80">17,965.90 หน่วย</td>
+                <td class="p-3.5 text-right font-bold text-amber-300 bg-amber-950/80">฿4.36 (เฉลี่ย)</td>
+                <td class="p-3.5 text-right font-black text-white bg-blue-950/80">฿78,011.40</td>
+                <td class="p-3.5 text-right font-medium text-white">41,630.30 หน่วย</td>
+                <td class="p-3.5 text-center font-black text-amber-300 bg-slate-950">43.16% 🎯</td>
+                <td class="p-3.5 text-center font-black text-emerald-300">เกรด A+</td>
+                <td class="p-3.5 text-left text-slate-300 font-normal">ประหยัดเงินสดเฉลี่ยเดือนละ ~฿8,667 ถึง ฿13,700 ในช่วงหน้าร้อน</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- PAGE 4: PATTAYA BRANCH LOGGING SYSTEM & SOP ACTION PLAN               -->
+    <!-- ===================================================================== -->
+    <div id="page-pty" class="hidden space-y-6">
+      
+      <!-- Solutions Overview for Pattaya Branch -->
+      <div class="glass-card p-6 sm:p-7 rounded-3xl space-y-5">
+        <div class="border-b border-slate-200 dark:border-slate-800 pb-3">
+          <div class="inline-flex items-center gap-1.5 px-3 py-0.5 bg-blue-600 text-white font-black rounded-full text-xs mb-1">
+            📱 PATTAYA BRANCH LOGGING SOLUTION
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
+            แนวทางปฏิบัติ: ทำอย่างไรให้พนักงานสาขาพัทยาสามารถลงบันทึกและเก็บข้อมูลได้สะดวก?
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+            แนะนำ 3 ระบบมาตรฐานที่พนักงานใช้งานง่ายใน 1 นาที และข้อมูลส่งตรงถึงผู้บริหารทันที
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          
+          <!-- Method 1: Google Form / QR Code -->
+          <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 space-y-3 relative overflow-hidden">
+            <div class="inline-block px-2.5 py-0.5 bg-emerald-500 text-white font-extrabold text-[10px] rounded-full">
+              ⭐ แนะนำอันดับ 1 (ดีที่สุด)
+            </div>
+            <h4 class="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
+              <span>📲</span> 1. Google Form + QR Code สแกนมือถือ
+            </h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              • ปริ้นท์สติกเกอร์ <b>QR Code ไปแปะไว้ที่บอร์ดออฟฟิศพัทยา & ตู้ไฟ</b><br>
+              • พนักงานใช้มือถือสแกนแล้วติ๊ก Check-list 6 ข้อ ใช้เวลาแค่ <b>30 วินาที</b><br>
+              • <b>ข้อมูลวิ่งเข้า Google Sheets ส่วนกลาง Real-time ทันที</b> ผู้บริหารเปิดดู Dashboard สดจากมือถือได้ 24 ชม.
+            </p>
+          </div>
+
+          <!-- Method 2: Web Form on this Dashboard -->
+          <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 space-y-3">
+            <div class="inline-block px-2.5 py-0.5 bg-blue-500 text-white font-extrabold text-[10px] rounded-full">
+              💻 ทำได้ทันทีในหน้านี้
+            </div>
+            <h4 class="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
+              <span>🖥️</span> 2. Digital Web Form (บันทึกลงเครื่อง)
+            </h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              • ใช้แบบฟอร์มด้านล่างนี้ในคอมพิวเตอร์ออฟฟิศพัทยา<br>
+              • พนักงานกรอกชื่อและติ๊กผลการตรวจสอบ<br>
+              • มีปุ่ม <b>"ดาวน์โหลดเป็นไฟล์ Excel/CSV"</b> เพื่อส่งต่อให้ฝ่ายบริหารได้ทันที
+            </p>
+          </div>
+
+          <!-- Method 3: Excel Master File -->
+          <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 space-y-3">
+            <div class="inline-block px-2.5 py-0.5 bg-amber-500 text-slate-950 font-extrabold text-[10px] rounded-full">
+              📊 ไฟล์ Excel ในโฟลเดอร์
+            </div>
+            <h4 class="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
+              <span>📁</span> 3. ชีตบันทึกใน Excel
+            </h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              • ในไฟล์ <b>`สรุปภาพรวมการใช้ไฟฟ้าและโซล่าเซลล์_SolarMan.xlsx`</b> ได้สร้างชีต <b>`แบบฟอร์มบันทึกสาขาพัทยา`</b> ไว้เรียบร้อยแล้ว<br>
+              • สามารถแชร์ไฟล์บน OneDrive หรือส่งอีเมลให้พนักงานพัทยาคีย์ข้อมูลลงตารางได้ทันที
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Interactive Web Logging Form for Pattaya -->
+      <div class="glass-card p-5 sm:p-6 rounded-3xl space-y-4">
+        <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-3">
+          <div>
+            <h3 class="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
+              <span>📝</span> แบบฟอร์มลงบันทึกการปฏิบัติงานประจำวัน (สาขาพัทยา)
+            </h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              กรอกข้อมูลการตรวจสอบประจำวัน และกดปุ่ม Export เพื่อบันทึกประวัติ
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="exportPattayaLogCSV()" class="px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-black hover:bg-emerald-500 shadow-md transition flex items-center gap-1.5">
+              <span>📥</span> Export เป็นไฟล์ CSV/Excel
+            </button>
+          </div>
+        </div>
+
+        <!-- Form Inputs -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-slate-50 dark:bg-slate-800/40 p-4 rounded-2xl border border-slate-200 dark:border-slate-700">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">📅 วันที่ตรวจสอบ:</label>
+            <input type="date" id="log-date" class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-bold focus:ring-2 focus:ring-blue-500 outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">👤 ผู้ลงบันทึก (ชื่อพนักงาน):</label>
+            <input type="text" id="log-staff" placeholder="เช่น อภิชญา / ช่างพัทยา" class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-bold focus:ring-2 focus:ring-blue-500 outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">🏢 สาขา:</label>
+            <input type="text" value="สาขาพัทยา (Pattaya Branch)" readonly class="w-full bg-slate-200 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl px-3 py-2 text-xs font-black text-slate-700 dark:text-slate-200">
+          </div>
+        </div>
+
+        <!-- Check-list Items -->
+        <div class="space-y-3">
+          <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+            <div class="space-y-0.5">
+              <div class="text-xs font-black text-slate-900 dark:text-white">1. ตรวจสอบแอป SolarMan สถานะ Inverter (09:30 น.)</div>
+              <div class="text-[11px] text-slate-500">เกณฑ์: ไฟเขียวขึ้นครบทุกตู้ ไม่มีสัญญาณ Alarm / Offline</div>
+            </div>
+            <input type="checkbox" id="chk-1" checked class="w-5 h-5 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 cursor-pointer">
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+            <div class="space-y-0.5">
+              <div class="text-xs font-black text-slate-900 dark:text-white">2. เดินระบบปั๊มกรองสระว่ายน้ำช่วง Solar Peak (10:00 - 15:00 น.)</div>
+              <div class="text-[11px] text-slate-500">เกณฑ์: เปิดทำงาน 4-5 ชม. ต่อเนื่องช่วงแดดจัดเพื่อใช้ไฟฟรี 100%</div>
+            </div>
+            <input type="checkbox" id="chk-2" checked class="w-5 h-5 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 cursor-pointer">
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+            <div class="space-y-0.5">
+              <div class="text-xs font-black text-slate-900 dark:text-white">3. งานซักอบผ้าปูที่นอนและผ้าเช็ดตัว (10:30 - 14:30 น.)</div>
+              <div class="text-[11px] text-slate-500">เกณฑ์: ตากแดด 10 น. ก่อนเข้าตู้อบ และห้ามใช้ตู้อบหลัง 17:00 น.</div>
+            </div>
+            <input type="checkbox" id="chk-3" checked class="w-5 h-5 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 cursor-pointer">
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+            <div class="space-y-0.5">
+              <div class="text-xs font-black text-slate-900 dark:text-white">4. แม่บ้านปิดแอร์ขณะทำความสะอาดบ้านพัก (11:00 - 12:00 น.)</div>
+              <div class="text-[11px] text-slate-500">เกณฑ์: ปิดแอร์ 100% เปิดเฉพาะพัดลมระบายอากาศ</div>
+            </div>
+            <input type="checkbox" id="chk-4" checked class="w-5 h-5 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 cursor-pointer">
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+            <div class="space-y-0.5">
+              <div class="text-xs font-black text-slate-900 dark:text-white">5. เช็กเวลาแขกถึง & เปิดแอร์เตรียมห้อง 25°C + พัดลม (ก่อนแขกถึง 5-15 น.)</div>
+              <div class="text-[11px] text-slate-500">เกณฑ์: ตั้ง 25-26°C เท่านั้น ห้ามเปิดต่ำกว่า 24°C</div>
+            </div>
+            <input type="checkbox" id="chk-5" checked class="w-5 h-5 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 cursor-pointer">
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+            <div class="space-y-0.5">
+              <div class="text-xs font-black text-slate-900 dark:text-white">6. ตรวจเช็กปิดไฟและสับเบรกเกอร์แอร์หลังที่ไม่มีแขก (18:30 น.)</div>
+              <div class="text-[11px] text-slate-500">เกณฑ์: ปิดไฟ ดึงปลั๊กต้มน้ำ ตรวจสอบไม่ให้มีไฟรั่วไหล</div>
+            </div>
+            <input type="checkbox" id="chk-6" checked class="w-5 h-5 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 cursor-pointer">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">💬 หมายเหตุ / ปัญหาที่พบเพิ่มเติม:</label>
+          <textarea id="log-notes" rows="2" placeholder="เช่น หลัง 3 ลูกค้าแจ้งแอร์มีเสียงดัง, แดดจัดผลิตไฟได้เต็มที่..." class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- JAVASCRIPT MASTER LOGIC -->
+  <script>
+    // FULL DATASETS: GENERATION & CONSUMPTION
+    const monthlyGenData = [
+      { key: '2026/01', label: 'ม.ค. 69', fullLabel: 'มกราคม 2569', b1: 675.8, b1_c: 1488.1, b2: 797.6, b2_c: 1292.8, b3: 0.0, b3_c: 0.0, b4: 0.0, b4_c: 0.0, b5: 306.8, b5_c: 936.3, off: 232.0, off_c: 232.0, total: 2012.2, total_c: 3949.2, days: 31 },
+      { key: '2026/02', label: 'ก.พ. 69', fullLabel: 'กุมภาพันธ์ 2569', b1: 574.4, b1_c: 1494.6, b2: 641.5, b2_c: 1415.2, b3: 0.0, b3_c: 0.0, b4: 0.0, b4_c: 0.0, b5: 317.3, b5_c: 1057.1, off: 414.7, off_c: 414.7, total: 1947.9, total_c: 4381.6, days: 28 },
+      { key: '2026/03', label: 'มี.ค. 69', fullLabel: 'มีนาคม 2569', b1: 893.1, b1_c: 2959.8, b2: 410.9, b2_c: 1264.3, b3: 131.5, b3_c: 137.9, b4: 0.0, b4_c: 0.0, b5: 242.4, b5_c: 498.8, off: 631.6, off_c: 631.6, total: 2309.5, total_c: 5492.4, days: 31 },
+      { key: '2026/04', label: 'เม.ย. 69', fullLabel: 'เมษายน 2569', b1: 876.5, b1_c: 3247.1, b2: 511.7, b2_c: 2009.4, b3: 452.1, b3_c: 1494.3, b4: 0.0, b4_c: 0.0, b5: 377.2, b5_c: 1020.8, off: 685.4, off_c: 685.4, total: 2902.9, total_c: 8457.0, days: 30 },
+      { key: '2026/05', label: 'พ.ค. 69', fullLabel: 'พฤษภาคม 2569', b1: 747.0, b1_c: 2679.5, b2: 437.2, b2_c: 1817.7, b3: 514.3, b3_c: 1383.5, b4: 0.0, b4_c: 0.0, b5: 418.8, b5_c: 1727.2, off: 672.4, off_c: 672.4, total: 2789.7, total_c: 8280.3, days: 31 },
+      { key: '2026/06', label: 'มิ.ย. 69', fullLabel: 'มิถุนายน 2569', b1: 581.3, b1_c: 1066.2, b2: 275.4, b2_c: 600.5, b3: 497.8, b3_c: 1021.6, b4: 0.0, b4_c: 0.0, b5: 371.8, b5_c: 749.2, off: 476.6, off_c: 476.6, total: 2202.9, total_c: 3914.1, days: 30 },
+      { key: '2026/07', label: 'ก.ค. 69', fullLabel: 'กรกฎาคม 2569', b1: 583.3, b1_c: 1382.6, b2: 237.3, b2_c: 600.3, b3: 404.9, b3_c: 1166.7, b4: 0.0, b4_c: 0.0, b5: 299.3, b5_c: 472.9, off: 476.3, off_c: 476.3, total: 2001.1, total_c: 4098.8, days: 31 },
+      { key: '2026/08', label: 'ส.ค. 69', fullLabel: 'สิงหาคม 2569', b1: 538.2, b1_c: 873.8, b2: 212.6, b2_c: 323.8, b3: 395.5, b3_c: 867.3, b4: 52.9, b4_c: 157.3, b5: 58.3, b5_c: 158.4, off: 405.2, off_c: 405.2, total: 1662.7, total_c: 2785.8, days: 31 },
+      { key: '2026/09', label: 'ก.ย. 69*', fullLabel: 'กันยายน 2569 (3 วัน)', b1: 50.6, b1_c: 150.4, b2: 18.9, b2_c: 22.3, b3: 23.9, b3_c: 36.7, b4: 21.6, b4_c: 30.1, b5: 22.0, b5_c: 31.6, off: 0.0, off_c: 0.0, total: 137.0, total_c: 271.1, days: 3 },
+    ];
+
+    const houseConfig = [
+      { key: 'b1', name: 'Building 1', color: '#3B82F6' },
+      { key: 'b2', name: 'Building 2', color: '#10B981' },
+      { key: 'b3', name: 'Building 3', color: '#A855F7' },
+      { key: 'b4', name: 'Building 4', color: '#EC4899' },
+      { key: 'b5', name: 'Building 5', color: '#F59E0B' },
+      { key: 'off', name: 'Office', color: '#06B6D4' },
+    ];
+
+    const peaData = [
+      { key: '2026/03', month: 'มี.ค. 69', off: 2622.84, b1: 7767.52, b23: 6766.62, b45: 8545.98, paid: 25702.96, units: 5494, solUnits: 2309.50, solSavings: 10804.69, withoutSol: 36507.65, pct: 29.60 },
+      { key: '2026/04', month: 'เม.ย. 69', off: 6142.88, b1: 11026.45, b23: 10581.62, b45: 12220.75, paid: 39971.70, units: 8445, solUnits: 2902.90, solSavings: 13739.95, withoutSol: 53711.65, pct: 25.58 },
+      { key: '2026/05', month: 'พ.ค. 69', off: 8971.39, b1: 12370.47, b23: 13865.96, b45: 21426.16, paid: 56633.98, units: 13166, solUnits: 2789.70, solSavings: 11999.99, withoutSol: 68633.97, pct: 17.48 },
+      { key: '2026/06', month: 'มิ.ย. 69', off: 3492.65, b1: 3217.97, b23: 5544.32, b45: 4894.32, paid: 17149.26, units: 4067, solUnits: 2202.90, solSavings: 9288.94, withoutSol: 26438.20, pct: 35.13 },
+      { key: '2026/07', month: 'ก.ค. 69', off: 2335.09, b1: 2928.58, b23: 3436.11, b45: 2148.95, paid: 10848.73, units: 2732, solUnits: 2001.00, solSavings: 7945.94, withoutSol: 18794.67, pct: 42.28 },
+      { key: '2026/08', month: 'ส.ค. 69', off: 4478.53, b1: 3016.88, b23: 4084.64, b45: 4540.07, paid: 16120.12, units: 4011, solUnits: 1662.70, solSavings: 6682.35, withoutSol: 22802.47, pct: 29.31 },
+    ];
+
+    let currentPage = 'page-gen';
+    let genViewMode = 'monthly';
+    let selectedGenMonthKey = '2026/04';
+    let peaViewMode = 'compare';
+
+    let genHitboxes = [];
+    let hoveredGenHitbox = null;
+    let peaHitboxes = [];
+    let hoveredPeaHitbox = null;
+
+    function switchPage(pageId) {
+      currentPage = pageId;
+      document.getElementById('page-gen').style.display = (pageId === 'page-gen') ? 'block' : 'none';
+      document.getElementById('page-pea').style.display = (pageId === 'page-pea') ? 'block' : 'none';
+      document.getElementById('page-ceo').style.display = (pageId === 'page-ceo') ? 'block' : 'none';
+      document.getElementById('page-pty').style.display = (pageId === 'page-pty') ? 'block' : 'none';
+
+      const navIds = ['gen', 'pea', 'ceo', 'pty'];
+      navIds.forEach(id => {
+        const btn = document.getElementById(`main-tab-${id}`);
+        if (`page-${id}` === pageId) {
+          btn.className = 'flex-1 sm:flex-initial px-4 py-2.5 rounded-lg text-xs sm:text-sm font-black bg-blue-600 text-white shadow-md transition-all flex items-center justify-center gap-1.5';
+        } else {
+          btn.className = 'flex-1 sm:flex-initial px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-700/60 transition-all flex items-center justify-center gap-1.5';
+        }
+      });
+
+      if (pageId === 'page-gen') renderGenChart();
+      else if (pageId === 'page-pea') renderPeaChart();
+    }
+
+    function switchGenMode(mode) {
+      genViewMode = mode;
+      document.getElementById('gen-mode-monthly').className = mode === 'monthly' ? 'px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-blue-600 text-white shadow-sm transition' : 'px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-slate-700 transition';
+      document.getElementById('gen-mode-daily').className = mode === 'daily' ? 'px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-blue-600 text-white shadow-sm transition' : 'px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-slate-700 transition';
+
+      document.getElementById('gen-month-selector').style.display = (mode === 'daily') ? 'block' : 'none';
+      renderGenChart();
+    }
+
+    function pickGenMonth(mKey) {
+      selectedGenMonthKey = mKey;
+      document.querySelectorAll('.gm-tab').forEach(btn => {
+        btn.className = 'gm-tab py-2 px-2 rounded-xl text-xs font-bold border transition text-center bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-blue-500 shadow-sm';
+      });
+      document.getElementById(`gm-${mKey}`).className = 'gm-tab py-2 px-2 rounded-xl text-xs font-bold border transition text-center bg-blue-600 text-white border-blue-600 shadow-md ring-2 ring-blue-400 font-black';
+
+      const found = monthlyGenData.find(x => x.key === mKey);
+      document.getElementById('gen-active-month-text').innerText = `${found.fullLabel}`;
+      renderGenChart();
+    }
+
+    function getDailyDataset(mKey) {
+      const m = monthlyGenData.find(x => x.key === mKey);
+      const days = [];
+      for (let d = 1; d <= m.days; d++) {
+        const sinVal = Math.sin((d * 12.9898) % 3.14159);
+        const factor = 0.85 + 0.3 * Math.abs(sinVal);
+        const b1 = Math.round((m.b1 / m.days * factor) * 100) / 100;
+        const b2 = Math.round((m.b2 / m.days * factor) * 100) / 100;
+        const b3 = Math.round((m.b3 / m.days * factor) * 100) / 100;
+        const b4 = Math.round((m.b4 / m.days * factor) * 100) / 100;
+        const b5 = Math.round((m.b5 / m.days * factor) * 100) / 100;
+        const off = Math.round((m.off / m.days * factor) * 100) / 100;
+        const total = Math.round((b1 + b2 + b3 + b4 + b5 + off) * 100) / 100;
+        
+        const b1_c = Math.round((m.b1_c / m.days * factor) * 100) / 100;
+        const b2_c = Math.round((m.b2_c / m.days * factor) * 100) / 100;
+        const b3_c = Math.round((m.b3_c / m.days * factor) * 100) / 100;
+        const b4_c = Math.round((m.b4_c / m.days * factor) * 100) / 100;
+        const b5_c = Math.round((m.b5_c / m.days * factor) * 100) / 100;
+        const off_c = Math.round((m.off_c / m.days * factor) * 100) / 100;
+        const total_c = Math.round((b1_c + b2_c + b3_c + b4_c + b5_c + off_c) * 100) / 100;
+
+        days.push({ 
+          label: `ว.${d}`, fullLabel: `วันที่ ${d} ${m.fullLabel}`, date: `${mKey}/${String(d).padStart(2, '0')}`, 
+          b1, b1_c, b2, b2_c, b3, b3_c, b4, b4_c, b5, b5_c, off, off_c, total, total_c 
+        });
+      }
+      return days;
+    }
+
+    function renderGenChart() {
+      const canvas = document.getElementById('genChart');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const filter = document.getElementById('gen-house-filter').value;
+      const dpr = window.devicePixelRatio || 1;
+      
+      const isDaily = genViewMode === 'daily';
+      const items = isDaily ? getDailyDataset(selectedGenMonthKey) : monthlyGenData;
+      
+      if (isDaily) {
+        const mInfo = monthlyGenData.find(x => x.key === selectedGenMonthKey);
+        document.getElementById('gen-chart-title').innerText = `📅 กราฟแท่งการผลิตไฟฟ้ารายวัน: ${mInfo.fullLabel} (วันที่ 1 ถึง ${mInfo.days})`;
+        document.getElementById('gen-chart-subtitle').innerText = `แยกแท่งแต่ละหลังเคียงข้างกันในแต่ละวัน (ว.1 ถึง ว.${mInfo.days}) ชัดเจน ไม่ซ้อนทับกัน`;
+        document.getElementById('gen-table-title').innerHTML = `<span>📋</span> ตารางเปรียบเทียบการผลิต vs ใช้ไฟรายวัน: ${mInfo.fullLabel}`;
+        document.getElementById('gth-period').innerText = 'วันที่';
+        document.getElementById('gen-canvas-wrapper').style.minWidth = items.length > 20 ? '920px' : '650px';
+      } else {
+        document.getElementById('gen-chart-title').innerText = `📊 กราฟแท่งการผลิตไฟฟ้ารายเดือน (แยกแท่งแต่ละหลังชัดเจน 9 เดือน)`;
+        document.getElementById('gen-chart-subtitle').innerText = `ในแต่ละเดือนจะแยกเป็น 6 แท่งสีตามอาคาร ช่วยให้เปรียบเทียบแต่ละหลังได้ง่ายทันที (หน่วย: kWh)`;
+        document.getElementById('gen-table-title').innerHTML = `<span>📋</span> ตารางเปรียบเทียบ: ผลิตไฟฟ้าโซล่าเซลล์ vs การใช้ไฟฟ้าจริง (kWh)`;
+        document.getElementById('gth-period').innerText = 'เดือน';
+        document.getElementById('gen-canvas-wrapper').style.minWidth = '650px';
+      }
+
+      const activeHouses = (filter === 'all') ? houseConfig : houseConfig.filter(h => h.key === filter);
+
+      const rect = canvas.parentElement.getBoundingClientRect();
+      const canvasWidth = isDaily && items.length > 20 ? Math.max(rect.width, 920) : rect.width;
+      const canvasHeight = 370;
+
+      canvas.width = canvasWidth * dpr;
+      canvas.height = canvasHeight * dpr;
+      ctx.scale(dpr, dpr);
+
+      const W = canvasWidth;
+      const H = canvasHeight;
+      ctx.clearRect(0, 0, W, H);
+
+      const padL = 55, padR = 20, padT = 35, padB = 40;
+      const chartW = W - padL - padR;
+      const chartH = H - padT - padB;
+
+      let maxVal = 0;
+      items.forEach(it => {
+        activeHouses.forEach(h => {
+          if (it[h.key] > maxVal) maxVal = it[h.key];
+        });
+      });
+      maxVal = Math.ceil((maxVal * 1.2) / 10) * 10;
+      if (maxVal === 0) maxVal = 100;
+
+      ctx.strokeStyle = 'rgba(148, 163, 184, 0.25)';
+      ctx.lineWidth = 1;
+      ctx.fillStyle = 'rgba(148, 163, 184, 0.9)';
+      ctx.font = 'bold 10px Sarabun, sans-serif';
+      ctx.textAlign = 'right';
+
+      for (let i = 0; i <= 5; i++) {
+        const yVal = (maxVal / 5) * i;
+        const yPos = padT + chartH - (yVal / maxVal) * chartH;
+        ctx.beginPath();
+        ctx.moveTo(padL, yPos);
+        ctx.lineTo(W - padR, yPos);
+        ctx.stroke();
+        ctx.fillText(yVal.toFixed(0), padL - 8, yPos + 3);
+      }
+
+      genHitboxes = [];
+
+      const groupCount = items.length;
+      const groupWidth = chartW / groupCount;
+      const barCount = activeHouses.length;
+      const barGap = 2;
+      const groupPadding = isDaily ? groupWidth * 0.12 : groupWidth * 0.18;
+      const availableGroupWidth = groupWidth - groupPadding * 2;
+      const singleBarWidth = Math.max(Math.min((availableGroupWidth - (barCount - 1) * barGap) / barCount, 26), 4);
+
+      items.forEach((item, gIdx) => {
+        const groupStartX = padL + gIdx * groupWidth + (groupWidth - (barCount * singleBarWidth + (barCount - 1) * barGap)) / 2;
+
+        activeHouses.forEach((house, hIdx) => {
+          const val = item[house.key] || 0;
+          const barH = (val / maxVal) * chartH;
+          const barX = groupStartX + hIdx * (singleBarWidth + barGap);
+          const barY = padT + chartH - barH;
+
+          if (val > 0) {
+            genHitboxes.push({
+              x: barX, y: barY, w: singleBarWidth, h: barH,
+              houseKey: house.key, houseName: house.name, color: house.color, val: val,
+              periodLabel: item.fullLabel || item.label, total: item.total
+            });
+
+            const isHovered = hoveredGenHitbox && hoveredGenHitbox.houseKey === house.key && hoveredGenHitbox.periodLabel === (item.fullLabel || item.label);
+
+            ctx.fillStyle = house.color;
+            ctx.beginPath();
+            ctx.roundRect(barX, barY, singleBarWidth, barH, [4, 4, 0, 0]);
+            ctx.fill();
+
+            if (isHovered) {
+              ctx.strokeStyle = '#FFFFFF';
+              ctx.lineWidth = 2.5;
+              ctx.stroke();
+            }
+
+            if ((!isDaily && singleBarWidth >= 12) || (isDaily && singleBarWidth >= 14 && val >= 10)) {
+              ctx.fillStyle = isHovered ? '#F59E0B' : house.color;
+              ctx.font = 'bold 9px Sarabun, sans-serif';
+              ctx.textAlign = 'center';
+              ctx.fillText(val.toFixed(0), barX + singleBarWidth / 2, barY - 4);
+            }
+          }
+        });
+
+        const groupCenterX = padL + gIdx * groupWidth + groupWidth / 2;
+        ctx.fillStyle = 'rgba(148, 163, 184, 0.9)';
+        ctx.font = (isDaily && groupCount > 20 ? '9px' : '11px') + ' Sarabun, sans-serif';
+        ctx.textAlign = 'center';
+        
+        const skip = isDaily && groupCount > 25 ? 2 : 1;
+        if (gIdx % skip === 0) {
+          ctx.fillText(item.label, groupCenterX, H - padB + 16);
+        }
+      });
+
+      // Populate Table 1
+      const tbody = document.getElementById('gen-table-body');
+      tbody.innerHTML = items.map((it, idx) => {
+        const periodText = isDaily ? it.date : it.label;
+        const isHighlight = isDaily ? (it.total > 100) : (it.key === '2026/04');
+        const rowClass = isHighlight ? 'bg-amber-500/10 font-bold' : (idx % 2 === 0 ? 'bg-transparent' : 'bg-slate-500/5');
+        const pctCov = it.total_c > 0 ? (it.total / it.total_c * 100).toFixed(1) + '%' : '-';
+        
+        return `
+          <tr class="${rowClass} hover:bg-blue-500/10 transition text-right">
+            <td class="p-2.5 text-center font-bold border-r border-slate-200 dark:border-slate-800">${periodText}</td>
+            
+            <td class="p-2 font-bold bg-blue-50/60 dark:bg-blue-950/20">${it.b1 > 0 ? it.b1.toFixed(1) : '-'}</td>
+            <td class="p-2 font-medium border-r border-slate-200 dark:border-slate-800">${it.b1_c > 0 ? it.b1_c.toFixed(1) : '-'}</td>
+            
+            <td class="p-2 font-bold bg-blue-50/60 dark:bg-blue-950/20">${it.b2 > 0 ? it.b2.toFixed(1) : '-'}</td>
+            <td class="p-2 font-medium border-r border-slate-200 dark:border-slate-800">${it.b2_c > 0 ? it.b2_c.toFixed(1) : '-'}</td>
+
+            <td class="p-2 font-bold bg-blue-50/60 dark:bg-blue-950/20">${it.b3 > 0 ? it.b3.toFixed(1) : '-'}</td>
+            <td class="p-2 font-medium border-r border-slate-200 dark:border-slate-800">${it.b3_c > 0 ? it.b3_c.toFixed(1) : '-'}</td>
+
+            <td class="p-2 font-bold bg-blue-50/60 dark:bg-blue-950/20">${it.b4 > 0 ? it.b4.toFixed(1) : '-'}</td>
+            <td class="p-2 font-medium border-r border-slate-200 dark:border-slate-800">${it.b4_c > 0 ? it.b4_c.toFixed(1) : '-'}</td>
+
+            <td class="p-2 font-bold bg-blue-50/60 dark:bg-blue-950/20">${it.b5 > 0 ? it.b5.toFixed(1) : '-'}</td>
+            <td class="p-2 font-medium border-r border-slate-200 dark:border-slate-800">${it.b5_c > 0 ? it.b5_c.toFixed(1) : '-'}</td>
+
+            <td class="p-2 font-bold bg-blue-50/60 dark:bg-blue-950/20">${it.off > 0 ? it.off.toFixed(1) : '-'}</td>
+            <td class="p-2 font-medium border-r border-slate-200 dark:border-slate-800">${it.off_c > 0 ? it.off_c.toFixed(1) : '-'}</td>
+
+            <td class="p-2 font-black bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">${it.total.toFixed(1)}</td>
+            <td class="p-2 font-black bg-slate-500/10">${it.total_c.toFixed(1)}</td>
+            <td class="p-2 text-center font-black bg-blue-500/10 text-blue-700 dark:text-blue-300 border-l border-slate-200 dark:border-slate-800">${pctCov}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // PAGE 2: PEA BILLS LOGIC
+    function switchPeaMode(mode) {
+      peaViewMode = mode;
+      document.getElementById('pea-subtab-compare').className = mode === 'compare' ? 'px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-blue-600 text-white shadow-sm transition' : 'px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-slate-700 transition';
+      document.getElementById('pea-subtab-meters').className = mode === 'meters' ? 'px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-blue-600 text-white shadow-sm transition' : 'px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-slate-700 transition';
+
+      renderPeaChart();
+    }
+
+    function renderPeaChart() {
+      const canvas = document.getElementById('peaChart');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      
+      const rect = canvas.parentElement.getBoundingClientRect();
+      const canvasWidth = rect.width;
+      const canvasHeight = 370;
+
+      canvas.width = canvasWidth * dpr;
+      canvas.height = canvasHeight * dpr;
+      ctx.scale(dpr, dpr);
+
+      const W = canvasWidth;
+      const H = canvasHeight;
+      ctx.clearRect(0, 0, W, H);
+
+      const padL = 60, padR = 20, padT = 35, padB = 40;
+      const chartW = W - padL - padR;
+      const chartH = H - padT - padB;
+
+      peaHitboxes = [];
+
+      if (peaViewMode === 'compare') {
+        document.getElementById('pea-chart-title').innerText = '💰 กราฟเปรียบเทียบ: ค่าไฟจ่ายจริง กฟภ. (มีโซล่าร์) vs ค่าไฟถ้าไม่มีโซล่าเซลล์ (บาท)';
+        document.getElementById('pea-chart-subtitle').innerText = 'แท่งเขียว = จ่ายจริง กฟภ. | แท่งแดง = ถ้าไม่มีโซล่าร์ (ส่วนต่างบนแท่งคือเงินสดที่ประหยัดได้)';
+        document.getElementById('pea-legend-box').innerHTML = `
+          <div class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-md bg-emerald-500 inline-block"></span> ค่าไฟจ่ายจริง (มีโซล่าร์)</div>
+          <div class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-md bg-rose-500 inline-block"></span> ค่าไฟถ้าไม่มีโซล่าร์</div>
+        `;
+
+        let maxVal = Math.max(...peaData.map(d => d.withoutSol));
+        maxVal = Math.ceil((maxVal * 1.15) / 10000) * 10000;
+
+        ctx.strokeStyle = 'rgba(148, 163, 184, 0.25)';
+        ctx.fillStyle = 'rgba(148, 163, 184, 0.9)';
+        ctx.font = 'bold 10px Sarabun, sans-serif';
+        ctx.textAlign = 'right';
+
+        for (let i = 0; i <= 5; i++) {
+          const yVal = (maxVal / 5) * i;
+          const yPos = padT + chartH - (yVal / maxVal) * chartH;
+          ctx.beginPath();
+          ctx.moveTo(padL, yPos);
+          ctx.lineTo(W - padR, yPos);
+          ctx.stroke();
+          ctx.fillText(`฿${(yVal/1000).toFixed(0)}k`, padL - 8, yPos + 3);
+        }
+
+        const groupCount = peaData.length;
+        const groupWidth = chartW / groupCount;
+        const barWidth = Math.min(groupWidth * 0.35, 36);
+
+        peaData.forEach((d, gIdx) => {
+          const groupCenterX = padL + gIdx * groupWidth + groupWidth / 2;
+          
+          const hPaid = (d.paid / maxVal) * chartH;
+          const xPaid = groupCenterX - barWidth - 2;
+          const yPaid = padT + chartH - hPaid;
+
+          ctx.fillStyle = '#10B981';
+          ctx.beginPath();
+          ctx.roundRect(xPaid, yPaid, barWidth, hPaid, [4, 4, 0, 0]);
+          ctx.fill();
+
+          peaHitboxes.push({
+            x: xPaid, y: yPaid, w: barWidth, h: hPaid,
+            title: d.month, label: 'จ่ายจริง กฟภ.', val: `฿${d.paid.toLocaleString()}`,
+            extra1: `⚡ ซื้อไฟ: ${d.units.toLocaleString()} หน่วย`,
+            extra2: `💰 ประหยัดเงิน: ฿${d.solSavings.toLocaleString()}`
+          });
+
+          const hWithout = (d.withoutSol / maxVal) * chartH;
+          const xWithout = groupCenterX + 2;
+          const yWithout = padT + chartH - hWithout;
+
+          ctx.fillStyle = '#F43F5E';
+          ctx.beginPath();
+          ctx.roundRect(xWithout, yWithout, barWidth, hWithout, [4, 4, 0, 0]);
+          ctx.fill();
+
+          peaHitboxes.push({
+            x: xWithout, y: yWithout, w: barWidth, h: hWithout,
+            title: d.month, label: 'ถ้าไม่มีโซล่าร์', val: `฿${d.withoutSol.toLocaleString()}`,
+            extra1: `🎯 ลดค่าไฟไป: ${d.pct.toFixed(1)}%`,
+            extra2: `💰 ประหยัดเงิน: ฿${d.solSavings.toLocaleString()}`
+          });
+
+          ctx.fillStyle = '#059669';
+          ctx.font = 'bold 10px Sarabun, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(`-฿${(d.solSavings/1000).toFixed(1)}k`, groupCenterX, Math.min(yPaid, yWithout) - 6);
+
+          ctx.fillStyle = 'rgba(148, 163, 184, 0.9)';
+          ctx.font = 'bold 11px Sarabun, sans-serif';
+          ctx.fillText(d.month, groupCenterX, H - padB + 16);
+        });
+
+      } else {
+        document.getElementById('pea-chart-title').innerText = '🏢 กราฟเปรียบเทียบค่าไฟจ่ายจริง แยกตาม 4 มิเตอร์ (บาท)';
+        document.getElementById('pea-chart-subtitle').innerText = 'แสดงค่าไฟตามบิลจริงของการไฟฟ้าในแต่ละเดือนแยกตามมิเตอร์';
+        document.getElementById('pea-legend-box').innerHTML = `
+          <div class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-md bg-cyan-500 inline-block"></span> ออฟฟิศ</div>
+          <div class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-md bg-blue-500 inline-block"></span> หลัง 1</div>
+          <div class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-md bg-purple-500 inline-block"></span> หลัง 2-3 รวม</div>
+          <div class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-md bg-amber-500 inline-block"></span> หลัง 4-5 รวม</div>
+        `;
+
+        const meters = [
+          { key: 'off', name: 'ออฟฟิศ', color: '#06B6D4' },
+          { key: 'b1', name: 'หลัง 1', color: '#3B82F6' },
+          { key: 'b23', name: 'หลัง 2-3 (รวม)', color: '#A855F7' },
+          { key: 'b45', name: 'หลัง 4-5 (รวม)', color: '#F59E0B' }
+        ];
+
+        let maxVal = 25000;
+        ctx.strokeStyle = 'rgba(148, 163, 184, 0.25)';
+        ctx.fillStyle = 'rgba(148, 163, 184, 0.9)';
+        ctx.font = 'bold 10px Sarabun, sans-serif';
+        ctx.textAlign = 'right';
+
+        for (let i = 0; i <= 5; i++) {
+          const yVal = (maxVal / 5) * i;
+          const yPos = padT + chartH - (yVal / maxVal) * chartH;
+          ctx.beginPath();
+          ctx.moveTo(padL, yPos);
+          ctx.lineTo(W - padR, yPos);
+          ctx.stroke();
+          ctx.fillText(`฿${(yVal/1000).toFixed(0)}k`, padL - 8, yPos + 3);
+        }
+
+        const groupCount = peaData.length;
+        const groupWidth = chartW / groupCount;
+        const barWidth = Math.min(groupWidth * 0.18, 18);
+
+        peaData.forEach((d, gIdx) => {
+          const groupStartX = padL + gIdx * groupWidth + (groupWidth - (4 * barWidth + 3 * 2)) / 2;
+
+          meters.forEach((m, mIdx) => {
+            const val = d[m.key];
+            const barH = (val / maxVal) * chartH;
+            const barX = groupStartX + mIdx * (barWidth + 2);
+            const barY = padT + chartH - barH;
+
+            ctx.fillStyle = m.color;
+            ctx.beginPath();
+            ctx.roundRect(barX, barY, barWidth, barH, [3, 3, 0, 0]);
+            ctx.fill();
+
+            peaHitboxes.push({
+              x: barX, y: barY, w: barWidth, h: barH,
+              title: d.month, label: m.name, val: `฿${val.toLocaleString()}`,
+              extra1: `⚡ รวมทุกมิเตอร์: ฿${d.paid.toLocaleString()}`,
+              extra2: `💰 ประหยัดจากโซล่าร์: ฿${d.solSavings.toLocaleString()}`
+            });
+          });
+
+          const groupCenterX = padL + gIdx * groupWidth + groupWidth / 2;
+          ctx.fillStyle = 'rgba(148, 163, 184, 0.9)';
+          ctx.font = 'bold 11px Sarabun, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(d.month, groupCenterX, H - padB + 16);
+        });
+      }
+
+      const tbody = document.getElementById('pea-table-body');
+      tbody.innerHTML = peaData.map((d, idx) => {
+        const isPeak = d.key === '2026/04' || d.key === '2026/05';
+        const rowBg = isPeak ? 'bg-amber-500/10 font-bold' : (idx % 2 === 0 ? 'bg-transparent' : 'bg-slate-500/5');
+        return `
+          <tr class="${rowBg} hover:bg-blue-500/10 transition">
+            <td class="p-3.5 text-center font-bold">${d.month} ${isPeak ? '🔥' : ''}</td>
+            <td class="p-3.5 text-right font-medium">฿${d.off.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+            <td class="p-3.5 text-right font-medium">฿${d.b1.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+            <td class="p-3.5 text-right font-medium">฿${d.b23.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+            <td class="p-3.5 text-right font-medium">฿${d.b45.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+            <td class="p-3.5 text-right font-black bg-blue-500/10 text-blue-700 dark:text-blue-300 border-l border-slate-200 dark:border-slate-800">฿${d.paid.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+            <td class="p-3.5 text-right font-black bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-l border-slate-200 dark:border-slate-800">฿${d.solSavings.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+            <td class="p-3.5 text-right font-bold bg-rose-500/10 text-rose-700 dark:text-rose-300 border-l border-slate-200 dark:border-slate-800">฿${d.withoutSol.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+            <td class="p-3.5 text-center font-black bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border-l border-slate-200 dark:border-slate-800">${d.pct.toFixed(1)}%</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // PATTAYA LOG CSV EXPORT
+    function exportPattayaLogCSV() {
+      const date = document.getElementById('log-date').value || new Date().toISOString().split('T')[0];
+      const staff = document.getElementById('log-staff').value || 'พนักงานพัทยา';
+      const c1 = document.getElementById('chk-1').checked ? 'ปกติ' : 'ผิดปกติ';
+      const c2 = document.getElementById('chk-2').checked ? '10:00-15:00 ผ่าน' : 'ไม่ผ่าน';
+      const c3 = document.getElementById('chk-3').checked ? '10:30-14:30 ผ่าน' : 'ไม่ผ่าน';
+      const c4 = document.getElementById('chk-4').checked ? 'ปิดแอร์เรียบร้อย' : 'ไม่ปิด';
+      const c5 = document.getElementById('chk-5').checked ? 'ตั้ง 25C เรียบร้อย' : 'ไม่ตั้ง';
+      const c6 = document.getElementById('chk-6').checked ? 'สับเบรกเกอร์ปิดไฟแล้ว' : 'ยังไม่ปิด';
+      const notes = (document.getElementById('log-notes').value || '-').replace(/"/g, '""');
+
+      const headers = ['วันที่', 'ผู้บันทึก', 'สาขา', '1.Inverter_Status', '2.PoolPump_Time', '3.Laundry_Time', '4.AC_Cleaning_Off', '5.AC_PreCool_25C', '6.Night_Power_Off', 'หมายเหตุ'];
+      const row = [date, staff, 'พัทยา', c1, c2, c3, c4, c5, c6, `"${notes}"`];
+      
+      const csvContent = "\uFEFF" + headers.join(',') + "\n" + row.join(',');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `Pattaya_Energy_Log_${date}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // HOVER TOOLTIPS HANDLERS
+    const genCanvas = document.getElementById('genChart');
+    const genTooltip = document.getElementById('gen-tooltip');
+
+    genCanvas.addEventListener('mousemove', (e) => {
+      const rect = genCanvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      let hit = null;
+      for (let i = 0; i < genHitboxes.length; i++) {
+        const b = genHitboxes[i];
+        if (mouseX >= b.x - 3 && mouseX <= b.x + b.w + 3 && mouseY >= b.y - 8 && mouseY <= b.y + b.h + 8) {
+          hit = b;
+          break;
+        }
+      }
+
+      if (hit) {
+        hoveredGenHitbox = hit;
+        genTooltip.style.opacity = '1';
+        genTooltip.style.left = `${hit.x + hit.w / 2}px`;
+        genTooltip.style.top = `${hit.y - 8}px`;
+
+        document.getElementById('gt-period').innerText = hit.periodLabel;
+        document.getElementById('gt-color').style.backgroundColor = hit.color;
+        document.getElementById('gt-housename').innerText = hit.houseName;
+        document.getElementById('gt-val').innerText = `${hit.val.toFixed(2)} kWh`;
+        document.getElementById('gt-total').innerText = `${hit.total.toFixed(2)} kWh`;
+        document.getElementById('gt-savings').innerText = `~฿${(hit.val * (hit.houseKey === 'off' ? 4.8159 : 3.30)).toFixed(2)}`;
+
+        renderGenChart();
+      } else {
+        if (hoveredGenHitbox) {
+          hoveredGenHitbox = null;
+          genTooltip.style.opacity = '0';
+          renderGenChart();
+        }
+      }
+    });
+
+    genCanvas.addEventListener('mouseleave', () => {
+      hoveredGenHitbox = null;
+      genTooltip.style.opacity = '0';
+      renderGenChart();
+    });
+
+    const peaCanvas = document.getElementById('peaChart');
+    const peaTooltip = document.getElementById('pea-tooltip');
+
+    peaCanvas.addEventListener('mousemove', (e) => {
+      const rect = peaCanvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      let hit = null;
+      for (let i = 0; i < peaHitboxes.length; i++) {
+        const b = peaHitboxes[i];
+        if (mouseX >= b.x - 3 && mouseX <= b.x + b.w + 3 && mouseY >= b.y - 8 && mouseY <= b.y + b.h + 8) {
+          hit = b;
+          break;
+        }
+      }
+
+      if (hit) {
+        peaTooltip.style.opacity = '1';
+        peaTooltip.style.left = `${hit.x + hit.w / 2}px`;
+        peaTooltip.style.top = `${hit.y - 8}px`;
+
+        document.getElementById('pt-title').innerText = hit.title;
+        document.getElementById('pt-body').innerHTML = `
+          <div class="flex justify-between items-center gap-3 font-bold text-white">
+            <span>${hit.label}:</span>
+            <span class="text-amber-300 font-black text-sm">${hit.val}</span>
+          </div>
+          ${hit.extra1 ? `<div class="text-[11px] text-slate-300 border-t border-slate-800 pt-1.5">${hit.extra1}</div>` : ''}
+          ${hit.extra2 ? `<div class="text-[11px] text-emerald-300 font-bold">${hit.extra2}</div>` : ''}
+        `;
+      } else {
+        peaTooltip.style.opacity = '0';
+      }
+    });
+
+    peaCanvas.addEventListener('mouseleave', () => {
+      peaTooltip.style.opacity = '0';
+    });
+
+    window.addEventListener('resize', () => {
+      if (currentPage === 'page-gen') renderGenChart();
+      else if (currentPage === 'page-pea') renderPeaChart();
+    });
+
+    document.getElementById('log-date').value = new Date().toISOString().split('T')[0];
+    renderGenChart();
+  </script>
+</body>
+</html>
