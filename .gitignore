@@ -1,0 +1,26 @@
+# Excel temporary lock files
+~$*.xlsx
+~$*.xls
+~$*.xlsm
+
+# Windows thumbnail and desktop files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+desktop.ini
+
+# macOS files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor and IDE configurations
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Log files and crash dumps
+*.log
+*.tmp
