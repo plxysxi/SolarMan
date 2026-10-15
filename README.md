@@ -5,6 +5,11 @@
 
 ---
 
+🌐 **ลิงก์เข้าใช้งานออนไลน์ (Live Web Dashboard)**: [https://plxysxi.github.io/SolarMan/](https://plxysxi.github.io/SolarMan/)  
+📦 **GitHub Repository**: [https://github.com/plxysxi/SolarMan](https://github.com/plxysxi/SolarMan)
+
+---
+
 ## 📌 ภาพรวมระบบและหน้าแสดงผล (4 โหมดหลัก)
 
 1. **หน้า 1: สถิติการผลิต & ใช้ไฟ (Solar Generation & Consumption)**
