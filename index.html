@@ -562,7 +562,7 @@
               </h3>
             </div>
             <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
-              ใช้สำหรับบันทึกบัญชีต้นทุนขาย/ค่าสาธารณูปโภคแยกตามวิลล่า (Cost Center 101 - 107) และกระทบยอดบิล กฟภ.
+              ใช้สำหรับบันทึกบัญชีต้นทุนขาย/ค่าสาธารณูปโภคแยกตามวิลล่า และกระทบยอดบิล กฟภ.
             </p>
           </div>
           <button onclick="exportAccountingCSV()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-md transition cursor-pointer self-start sm:self-center">
@@ -584,7 +584,6 @@
                 <th class="py-3 px-3 text-right text-rose-600 dark:text-rose-400">ถ้าไม่มีโซล่า (บาท)</th>
                 <th class="py-3 px-3 text-right text-emerald-600 dark:text-emerald-400 font-black">ประหยัดได้ (บาท)</th>
                 <th class="py-3 px-2 text-center">% ประหยัด</th>
-                <th class="py-3 px-3 text-center">รหัส Cost Center</th>
               </tr>
             </thead>
             <tbody id="p2-accounting-tbody" class="divide-y divide-sky-100 dark:divide-sky-900/40 font-medium">
@@ -1252,7 +1251,7 @@
             <div class="text-xs sm:text-sm text-indigo-950 dark:text-indigo-200 space-y-1">
               <strong class="font-extrabold text-indigo-900 dark:text-white">ภารกิจหลักของแผนกบัญชีและการเงิน:</strong>
               <p class="text-slate-600 dark:text-slate-400">
-                1) กระทบยอดบิลค่าไฟ กฟภ. ประจำเดือน &bull; 2) ปันส่วนต้นทุนค่าไฟแยกวิลล่าเพื่อลงบัญชี Cost Center 101–107 &bull; 3) รายงานตัวเลขเงินสดที่ประหยัดได้จากโซล่าให้ผู้บริหาร
+                1) กระทบยอดบิลค่าไฟ กฟภ. ประจำเดือน &bull; 2) ปันส่วนต้นทุนค่าไฟแยกวิลล่าเพื่อลงบัญชีต้นทุนขาย &bull; 3) รายงานตัวเลขเงินสดที่ประหยัดได้จากโซล่าให้ผู้บริหาร
               </p>
             </div>
           </div>
@@ -1273,12 +1272,12 @@
             </ol>
           </div>
 
-          <!-- Step 2: Cost Center Allocation -->
+          <!-- Step 2: Cost Allocation -->
           <div class="ocean-card p-5 border-l-4 border-l-emerald-500 space-y-3">
             <div class="flex items-center justify-between">
               <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
                 <span class="w-6 h-6 rounded-full bg-emerald-600 text-white inline-flex items-center justify-center text-xs font-black">2</span>
-                วิธีนำค่าไฟรายหลังไปบันทึกบัญชีต้นทุนแยกวิลล่า (Cost Center Allocation)
+                วิธีนำค่าไฟรายหลังไปบันทึกบัญชีต้นทุนแยกวิลล่า (Cost Allocation)
               </h3>
               <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200">ดาวน์โหลด CSV ได้</span>
             </div>
@@ -1290,17 +1289,16 @@
                 <table class="w-full text-left bg-white dark:bg-slate-800">
                   <thead class="bg-sky-50 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-bold">
                     <tr>
-                      <th class="p-2">Cost Center</th>
-                      <th class="p-2">ชื่อหน่วยงาน</th>
+                      <th class="p-2">ชื่ออาคาร / พูลวิลล่า</th>
                       <th class="p-2">ลักษณะต้นทุน</th>
                       <th class="p-2 text-right">ยอดที่นำไปลงบัญชี</th>
                     </tr>
                   </thead>
                   <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
-                    <tr><td class="p-2 font-mono font-bold text-sky-600">CC-101</td><td class="p-2">พูลวิลล่า หลัง 1</td><td class="p-2">ต้นทุนขาย/บริการ (มีหักไฟโซล่า)</td><td class="p-2 text-right font-bold">ช่อง "จ่ายจริง กฟภ."</td></tr>
-                    <tr><td class="p-2 font-mono font-bold text-sky-600">CC-102 – CC-105</td><td class="p-2">พูลวิลล่า หลัง 2 ถึง 5</td><td class="p-2">ต้นทุนขาย/บริการ (มีหักไฟโซล่า)</td><td class="p-2 text-right font-bold">ช่อง "จ่ายจริง กฟภ."</td></tr>
-                    <tr><td class="p-2 font-mono font-bold text-amber-600">CC-106</td><td class="p-2">พูลวิลล่า หลัง 9</td><td class="p-2 text-rose-600 dark:text-rose-400 font-semibold">ต้นทุนขาย (จ่ายไฟหลวง 100% ไม่มีหักโซล่า)</td><td class="p-2 text-right font-bold text-rose-600">ยอดจ่ายเต็ม</td></tr>
-                    <tr><td class="p-2 font-mono font-bold text-sky-600">CC-107</td><td class="p-2">ออฟฟิศชะอำ</td><td class="p-2">ค่าใช้จ่ายในการบริหาร (Admin Overhead)</td><td class="p-2 text-right font-bold">ช่อง "จ่ายจริง กฟภ."</td></tr>
+                    <tr><td class="p-2 font-bold text-sky-900 dark:text-white">พูลวิลล่า หลัง 1</td><td class="p-2">ต้นทุนขาย/บริการ (มีหักไฟโซล่า)</td><td class="p-2 text-right font-bold">ช่อง "จ่ายจริง กฟภ."</td></tr>
+                    <tr><td class="p-2 font-bold text-sky-900 dark:text-white">พูลวิลล่า หลัง 2 ถึง 5</td><td class="p-2">ต้นทุนขาย/บริการ (มีหักไฟโซล่า)</td><td class="p-2 text-right font-bold">ช่อง "จ่ายจริง กฟภ."</td></tr>
+                    <tr><td class="p-2 font-bold text-amber-600">พูลวิลล่า หลัง 9</td><td class="p-2 text-rose-600 dark:text-rose-400 font-semibold">ต้นทุนขาย (จ่ายไฟหลวง 100% ไม่มีหักโซล่า)</td><td class="p-2 text-right font-bold text-rose-600">ยอดจ่ายเต็ม</td></tr>
+                    <tr><td class="p-2 font-bold text-sky-900 dark:text-white">ออฟฟิศชะอำ</td><td class="p-2">ค่าใช้จ่ายในการบริหาร (Admin Overhead)</td><td class="p-2 text-right font-bold">ช่อง "จ่ายจริง กฟภ."</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -2799,16 +2797,6 @@
       });
     }
 
-    const costCenterMap = {
-      b1: 'CC-101',
-      b2: 'CC-102',
-      b3: 'CC-103',
-      b4: 'CC-104',
-      b5: 'CC-105',
-      b9: 'CC-106',
-      off: 'CC-107'
-    };
-
     function renderP2AccountingTable(monthData, rateInput) {
       const tbody = document.getElementById('p2-accounting-tbody');
       const tfoot = document.getElementById('p2-accounting-tfoot');
@@ -2864,9 +2852,6 @@
               ${h.hasSolar ? `-${pct}%` : '0%'}
             </span>
           </td>
-          <td class="py-3 px-3 text-center font-mono font-bold text-xs ${h.key === 'b9' ? 'text-amber-700 dark:text-amber-400' : 'text-sky-700 dark:text-sky-300'}">
-            ${costCenterMap[h.key]}
-          </td>
         `;
         tbody.appendChild(tr);
       });
@@ -2884,7 +2869,6 @@
           <td class="py-3.5 px-3 text-right text-rose-700 dark:text-rose-300">฿${sumWithoutCost.toLocaleString()}</td>
           <td class="py-3.5 px-3 text-right text-base text-emerald-700 dark:text-emerald-300">฿${sumSavings.toLocaleString()}</td>
           <td class="py-3.5 px-2 text-center text-emerald-700 dark:text-emerald-300">-${totalPct}%</td>
-          <td class="py-3.5 px-3 text-center text-xs text-slate-500">7 Cost Centers</td>
         </tr>
       `;
     }
@@ -3012,7 +2996,7 @@
       let csvContent = '\uFEFF'; // UTF-8 BOM
       csvContent += `รายงานการจัดสรรต้นทุนค่าไฟฟ้าแยกหน่วยงาน (Cost Allocation Report) - HuaHinHub Plus สาขาชะอำ\n`;
       csvContent += `รอบบิลเดือน: ${monthData.fullLabel}, อัตราค่าไฟเฉลี่ย: ฿${rateInput} บาท/หน่วย\n\n`;
-      csvContent += `"รหัส Cost Center","อาคาร / พูลวิลล่า","สถานะระบบโซล่า","ใช้ไฟจริง (kWh)","โซล่าผลิต (kWh)","หน่วยจ่าย กฟภ. (kWh)","จ่ายจริง กฟภ. (บาท)","ถ้าไม่มีโซล่า (บาท)","ประหยัดได้ (บาท)","สัดส่วนประหยัด (%)"\n`;
+      csvContent += `"อาคาร / พูลวิลล่า","สถานะระบบโซล่า","ใช้ไฟจริง (kWh)","โซล่าผลิต (kWh)","หน่วยจ่าย กฟภ. (kWh)","จ่ายจริง กฟภ. (บาท)","ถ้าไม่มีโซล่า (บาท)","ประหยัดได้ (บาท)","สัดส่วนประหยัด (%)"\n`;
 
       let sumCons = 0, sumGen = 0, sumPea = 0, sumActual = 0, sumWithout = 0, sumSaved = 0;
 
@@ -3032,11 +3016,11 @@
         sumWithout += withoutCost;
         sumSaved += savings;
 
-        csvContent += `"${costCenterMap[h.key]}","${h.name}","${h.hasSolar ? 'มีโซล่าเซลล์' : 'บ้านเช่าไม่มีโซล่า'}","${cons}","${gen}","${peaUnits}","${actualCost}","${withoutCost}","${savings}","${pct}%"\n`;
+        csvContent += `"${h.name}","${h.hasSolar ? 'มีโซล่าเซลล์' : 'บ้านเช่าไม่มีโซล่า'}","${cons}","${gen}","${peaUnits}","${actualCost}","${withoutCost}","${savings}","${pct}%"\n`;
       });
 
       const totalPct = sumWithout > 0 ? ((sumSaved / sumWithout) * 100).toFixed(1) : '0.0';
-      csvContent += `"TOTAL","รวมทั้งสาขาชะอำ (7 อาคาร)","-","${sumCons}","${sumGen}","${sumPea}","${sumActual}","${sumWithout}","${sumSaved}","${totalPct}%"\n`;
+      csvContent += `"รวมทั้งสาขาชะอำ (7 อาคาร)","-","${sumCons}","${sumGen}","${sumPea}","${sumActual}","${sumWithout}","${sumSaved}","${totalPct}%"\n`;
 
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       const link = document.createElement('a');
