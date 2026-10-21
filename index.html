@@ -176,9 +176,9 @@
 
         <!-- Tab 2 -->
         <button id="nav-btn-2" onclick="switchPage(2)" class="flex items-center justify-center gap-2 py-3 px-2 sm:px-3 rounded-xl text-xs sm:text-sm font-semibold transition cursor-pointer text-slate-700 dark:text-slate-200 hover:bg-sky-50 dark:hover:bg-slate-800">
-          <span class="text-base">💰</span>
+          <span class="text-base">🧾</span>
           <span class="hidden xl:inline">หน้า 2:</span>
-          <span>ค่าไฟรายหลัง & คุ้มค่า</span>
+          <span>ค่าไฟที่จ่ายจริง & รายหลัง</span>
         </button>
 
         <!-- Tab 3 -->
@@ -327,8 +327,8 @@
               </button>
             </div>
 
-            <!-- High Contrast Visual Legends -->
-            <div class="flex flex-wrap items-center gap-2 text-xs font-bold">
+            <!-- High Contrast Visual Legends (Standard for single house or total) -->
+            <div id="p1-legend-standard" class="flex flex-wrap items-center gap-2 text-xs font-bold">
               <div class="flex items-center gap-1.5 bg-amber-50 dark:bg-amber-950/40 px-2.5 py-1 rounded-lg border border-amber-200 dark:border-amber-800 shadow-sm">
                 <span class="w-3.5 h-3.5 rounded-full bg-amber-500 inline-block ring-2 ring-amber-400"></span>
                 <span class="text-amber-900 dark:text-amber-200 font-black">☀️ ผลิตได้ (สีทองโซล่า)</span>
@@ -341,6 +341,25 @@
                 <span class="w-3.5 h-3.5 rounded-full bg-orange-600 inline-block ring-2 ring-orange-400"></span>
                 <span class="text-orange-900 dark:text-orange-200 font-black">🏠 หลัง 9 (บ้านเช่า)</span>
               </div>
+            </div>
+
+            <!-- Matrix Multi-House Controls & Legends (Shown only when 'matrix' is selected) -->
+            <div id="p1-matrix-controls" class="hidden flex-wrap items-center gap-2.5 text-xs">
+              <!-- Metric Switcher -->
+              <div class="inline-flex p-1 bg-sky-100 dark:bg-sky-900/60 rounded-xl shadow-inner border border-sky-200 dark:border-sky-800 font-bold">
+                <button id="p1-mmetric-cons" onclick="setMatrixMetric('cons')" class="px-2.5 py-1 rounded-lg text-xs font-black bg-sky-600 text-white shadow-sm transition cursor-pointer flex items-center gap-1">
+                  <span>🔌</span> เทียบใช้ไฟ (kWh)
+                </button>
+                <button id="p1-mmetric-gen" onclick="setMatrixMetric('gen')" class="px-2.5 py-1 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition cursor-pointer flex items-center gap-1">
+                  <span>☀️</span> เทียบผลิตโซล่า (kWh)
+                </button>
+                <button id="p1-mmetric-cost" onclick="setMatrixMetric('cost')" class="px-2.5 py-1 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition cursor-pointer flex items-center gap-1">
+                  <span>🧾</span> เทียบราคาจริง (฿)
+                </button>
+              </div>
+
+              <!-- Matrix House Chips (7 Houses toggleable) -->
+              <div id="p1-matrix-house-chips" class="flex flex-wrap items-center gap-1.5"></div>
             </div>
           </div>
         </div>
@@ -420,27 +439,27 @@
     <!-- ================================================================= -->
     <main id="page-2" class="space-y-6 hidden">
 
-      <!-- Interactive Calculator Top Header -->
+      <!-- Interactive Calculator Top Header: Super Clear 3-Step Summary -->
       <section class="ocean-card p-5 sm:p-7 space-y-5">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-sky-100 dark:border-sky-900/40 pb-4">
           <div>
             <div class="flex items-center gap-2">
-              <span class="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300">
-                เครื่องคิดเลขความคุ้มค่า
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-200">
+                สรุปค่าไฟจริง & ผลประหยัด
               </span>
               <h2 class="text-lg sm:text-xl font-black text-slate-900 dark:text-white">
-                คำนวณและเปรียบเทียบค่าไฟฟ้า (HuaHinHub Plus)
+                🧾 สรุปค่าไฟฟ้าที่จ่ายจริง & เงินที่เซฟได้ (สาขาชะอำ)
               </h2>
             </div>
             <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
-              คำนวณผลประหยัดเงินสดจริง: ค่าไฟที่จ่ายจริง กฟภ. vs ค่าไฟถ้าไม่มีระบบโซล่าเซลล์
+              เห็นยอดเงินจริงชัดเจน: ค่าไฟถ้าไม่มีโซล่า - เงินที่โซล่าช่วยประหยัด = ยอดที่ต้องจ่ายจริงให้การไฟฟ้า
             </p>
           </div>
 
           <!-- Rate Control Input -->
           <div class="flex items-center gap-3 bg-sky-50 dark:bg-sky-950/60 p-2.5 rounded-xl border border-sky-200 dark:border-sky-800 self-start md:self-center">
             <label for="calc-rate-input" class="text-xs font-bold text-sky-900 dark:text-sky-200">
-              อัตราค่าไฟเฉลี่ย (บาท/หน่วย):
+              อัตราค่าไฟ กฟภ. (บาท/หน่วย):
             </label>
             <div class="flex items-center gap-1">
               <input id="calc-rate-input" type="number" step="0.01" value="4.36" oninput="updateCalculatorResults()" class="w-20 px-2 py-1 text-center font-black rounded-lg border border-sky-300 bg-white dark:bg-slate-800 text-sky-950 dark:text-white text-xs">
@@ -451,51 +470,87 @@
 
         <!-- Month Filter for Page 2 -->
         <div class="flex flex-wrap items-center gap-2">
-          <span class="text-xs font-bold text-slate-600 dark:text-slate-300">เลือกรอบบิล:</span>
+          <span class="text-xs font-bold text-slate-600 dark:text-slate-300">เลือกรอบบิลค่าไฟ:</span>
           <div id="p2-month-selector" class="flex flex-wrap gap-1.5">
             <!-- Dynamically populated buttons -->
           </div>
         </div>
 
-        <!-- 3 Big Comparison Cards -->
+        <!-- 3 Crystal-Clear Equation Cards (เข้าใจใน 3 วินาที) -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-          <!-- Card 1: จ่ายจริง -->
-          <div class="p-5 rounded-2xl bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800/60 space-y-2">
+          <!-- Card 1: ค่าไฟถ้าไม่มีโซล่า -->
+          <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-2 relative">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-sky-800 dark:text-sky-300 uppercase">ค่าไฟจ่ายจริงจากการไฟฟ้า</span>
-              <span class="text-lg">🧾</span>
+              <span class="text-xs font-bold text-slate-600 dark:text-slate-400">1. ค่าไฟปกติ (ถ้าไม่มีโซล่า)</span>
+              <span class="text-base">⚡</span>
             </div>
             <div class="flex items-baseline gap-2">
-              <span id="p2-paid-actual" class="text-3xl font-black text-sky-950 dark:text-white">฿25,702</span>
-              <span class="text-xs text-slate-500">บาท/เดือน</span>
+              <span id="p2-paid-without" class="text-3xl font-black text-slate-700 dark:text-slate-200">฿36,507</span>
+              <span class="text-xs text-slate-500">บาท</span>
             </div>
-            <p class="text-xs text-slate-600 dark:text-slate-400">ยอดที่ต้องจ่ายให้ กฟภ. หลังหักไฟฟรีจากโซล่าเซลล์</p>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400">คำนวณจากหน่วยใช้ไฟฟ้าจริงทั้งหมด</p>
           </div>
 
-          <!-- Card 2: ถ้าไม่มีโซล่าเซลล์ -->
-          <div class="p-5 rounded-2xl bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/60 space-y-2">
+          <!-- Card 2: เงินที่โซล่าช่วยประหยัดได้ -->
+          <div class="p-5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/80 space-y-2 shadow-sm relative">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-rose-800 dark:text-rose-300 uppercase">ถ้าไม่มีโซล่าเซลล์ ต้องจ่าย</span>
-              <span class="text-lg">⚡</span>
+              <span class="text-xs font-black text-emerald-800 dark:text-emerald-300">2. โซล่าเซลล์ช่วยประหยัดเงิน</span>
+              <span class="text-base">🌱</span>
             </div>
             <div class="flex items-baseline gap-2">
-              <span id="p2-paid-without" class="text-3xl font-black text-rose-700 dark:text-rose-400">฿36,507</span>
-              <span class="text-xs text-slate-500">บาท/เดือน</span>
+              <span id="p2-net-savings" class="text-3xl font-black text-emerald-600 dark:text-emerald-400">฿10,805</span>
+              <span class="text-xs text-emerald-700 dark:text-emerald-300">บาท</span>
             </div>
-            <p class="text-xs text-slate-600 dark:text-slate-400">คำนวณจากหน่วยไฟที่ใช้จริงทั้งหมดเต็มจำนวน</p>
+            <p id="p2-savings-pct" class="text-[11px] text-emerald-700 dark:text-emerald-300 font-bold">🎉 ลดภาระค่าไฟลงได้ 29.6%</p>
           </div>
 
-          <!-- Card 3: เงินที่ประหยัดได้ -->
-          <div class="p-5 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-700 text-white space-y-2 shadow-lg shadow-emerald-500/20">
+          <!-- Card 3: ยอดที่ต้องจ่ายจริง กฟภ. (พระเอก เด่นที่สุด) -->
+          <div class="p-5 rounded-2xl bg-gradient-to-br from-sky-600 to-blue-800 text-white space-y-2 shadow-lg shadow-sky-600/25 ring-2 ring-sky-400 relative">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-extrabold uppercase text-emerald-100">เงินสดที่ประหยัดได้จริง!</span>
-              <span class="text-xl">🎉</span>
+              <span class="text-xs font-black uppercase text-sky-100">3. ยอดที่ต้องจ่ายจริง กฟภ. (สุทธิ)</span>
+              <span class="text-xl">🧾</span>
             </div>
             <div class="flex items-baseline gap-2">
-              <span id="p2-net-savings" class="text-3xl sm:text-4xl font-black text-white">฿10,805</span>
-              <span class="text-xs text-emerald-100">บาท/เดือน</span>
+              <span id="p2-paid-actual" class="text-3xl sm:text-4xl font-black text-white">฿25,702</span>
+              <span class="text-xs text-sky-200">บาท</span>
             </div>
-            <p id="p2-savings-pct" class="text-xs text-emerald-100 font-medium">ลดภาระค่าไฟลงได้ทันที 29.6% ต่อเดือน</p>
+            <p class="text-[11px] text-sky-100 font-medium">ยอดเงินจริงตามใบเสร็จเรียกเก็บของ กฟภ.</p>
+          </div>
+        </div>
+
+        <!-- Plain Language Executive Summary Banner & Ratio Bar -->
+        <div class="p-4 rounded-2xl bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800/70 space-y-3">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 text-xs">
+            <div class="flex items-start sm:items-center gap-2">
+              <span class="text-lg">💡</span>
+              <span class="font-bold text-slate-800 dark:text-slate-100">
+                <strong id="p2-summary-sentence" class="text-sky-900 dark:text-sky-200">
+                  สรุปรอบนี้: ค่าไฟเต็ม ฿36,507 หักโซล่าเซลล์ช่วยเซฟฟรี ฿10,805 ทำให้กิจการจ่ายจริงให้ กฟภ. เพียง ฿25,702 เท่านั้น
+                </strong>
+              </span>
+            </div>
+            <div class="flex items-center gap-2 self-start md:self-center font-bold text-xs whitespace-nowrap">
+              <span class="text-slate-500">เซฟไปได้:</span>
+              <span id="p2-summary-badge" class="px-2.5 py-0.5 rounded-full bg-emerald-600 text-white font-black text-xs">29.6%</span>
+            </div>
+          </div>
+
+          <!-- Visual Ratio Bar (จ่าย กฟภ. vs โซล่าช่วย) -->
+          <div class="space-y-1">
+            <div class="flex justify-between text-[11px] font-bold">
+              <span class="text-sky-700 dark:text-sky-300 flex items-center gap-1">
+                <span class="w-2.5 h-2.5 rounded-full bg-sky-600 inline-block"></span>
+                <span>จ่ายจริง กฟภ.: <span id="p2-bar-paid-pct">70.4%</span></span>
+              </span>
+              <span class="text-emerald-700 dark:text-emerald-400 flex items-center gap-1">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span>
+                <span>โซล่าช่วยจ่ายฟรี: <span id="p2-bar-save-pct">29.6%</span></span>
+              </span>
+            </div>
+            <div class="w-full h-3 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden flex shadow-inner">
+              <div id="p2-ratio-bar-paid" style="width: 70.4%" class="h-full bg-sky-600 transition-all duration-300"></div>
+              <div id="p2-ratio-bar-saved" style="width: 29.6%" class="h-full bg-emerald-500 transition-all duration-300"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -508,18 +563,18 @@
           <div>
             <div class="flex items-center gap-2">
               <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-200">
-                รายหลัง 7 อาคาร
+                รายหลัง 7 แห่ง
               </span>
               <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white flex items-center gap-2">
-                <span>🏘️</span> ค่าไฟจริงแยกรายหลัง (แต่ละหลังจ่ายกี่บาท / ประหยัดกี่บาท)
+                <span>🏘️</span> ค่าไฟจริงแยกรายหลัง (แต่ละหลังจ่ายจริงกี่บาท)
               </h3>
             </div>
             <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
-              คำนวณตามการใช้ไฟจริงและพลังงานโซล่าเซลล์ที่ช่วยจ่ายในแต่ละหลัง ประจำรอบบิล: <strong id="p2-selected-month-label" class="text-sky-600 dark:text-sky-400 font-bold">มีนาคม 2569</strong>
+              สรุปยอดค่าไฟที่แต่ละหลังต้องจ่าย กฟภ. และยอดเงินที่โซล่าช่วยประหยัด ประจำรอบบิล: <strong id="p2-selected-month-label" class="text-sky-600 dark:text-sky-400 font-bold">มีนาคม 2569</strong>
             </p>
           </div>
           <div class="flex items-center gap-2 self-start md:self-center">
-            <span class="text-xs text-slate-500">อัตราคำนวณ:</span>
+            <span class="text-xs text-slate-500">อัตรา กฟภ.:</span>
             <span id="p2-active-rate-badge" class="px-2.5 py-1 rounded-lg bg-sky-100 dark:bg-sky-900/60 font-black text-xs text-sky-900 dark:text-sky-200">฿4.36 / หน่วย</span>
           </div>
         </div>
@@ -529,16 +584,15 @@
           <!-- Dynamically populated via JS: 7 Cards (Villa 1-5, Villa 9, Office) -->
         </div>
 
-        <!-- Visual Comparison Chart for Buildings -->
+        <!-- Visual Comparison Chart for Buildings: Simple 2-Bar Comparison -->
         <div class="pt-4 border-t border-sky-100 dark:border-sky-900/40 space-y-3">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <h4 class="text-xs sm:text-sm font-black text-slate-900 dark:text-white flex items-center gap-2">
-              <span>📊</span> เปรียบเทียบค่าไฟรายหลัง: จ่ายจริง กฟภ. vs ถ้าไม่มีโซล่าเซลล์
+              <span>📊</span> เปรียบเทียบชัดเจน: ยอดจ่ายจริง กฟภ. vs เงินที่โซล่าช่วยเซฟ (รายหลัง)
             </h4>
-            <div class="flex flex-wrap items-center gap-4 text-xs font-semibold">
-              <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-sky-600 inline-block"></span> จ่ายจริง กฟภ. (บาท)</span>
-              <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-rose-400/70 inline-block"></span> ถ้าไม่มีโซล่า (บาท)</span>
-              <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-emerald-500 inline-block"></span> เงินที่ประหยัดได้</span>
+            <div class="flex flex-wrap items-center gap-4 text-xs font-bold">
+              <span class="inline-flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded bg-sky-600 inline-block shadow-sm"></span> 🧾 จ่ายจริง กฟภ. (บาท)</span>
+              <span class="inline-flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded bg-emerald-500 inline-block shadow-sm"></span> 🌱 โซล่าช่วยเซฟ (บาท)</span>
             </div>
           </div>
           <div class="relative w-full h-[280px] bg-slate-50/50 dark:bg-slate-900/30 rounded-2xl p-3 border border-sky-100 dark:border-sky-900/40 overflow-hidden">
@@ -565,26 +619,28 @@
               ใช้สำหรับบันทึกบัญชีต้นทุนขาย/ค่าสาธารณูปโภคแยกตามวิลล่า และกระทบยอดบิล กฟภ.
             </p>
           </div>
-          <button onclick="exportAccountingCSV()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-md transition cursor-pointer self-start sm:self-center">
-            <span>📥</span>
-            <span>ส่งออกตารางบัญชี (CSV)</span>
-          </button>
+          <div class="flex flex-wrap items-center gap-2 self-start sm:self-center">
+            <!-- Table View Toggle: Simple Money vs Detailed Units -->
+            <div class="inline-flex p-1 bg-sky-100 dark:bg-sky-900/60 rounded-xl text-xs font-bold">
+              <button id="p2-table-mode-money" onclick="setP2TableMode('money')" class="px-3 py-1.5 rounded-lg bg-sky-600 text-white shadow-sm transition cursor-pointer">
+                💰 ดูสรุปยอดเงิน (บาท)
+              </button>
+              <button id="p2-table-mode-detail" onclick="setP2TableMode('detail')" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition cursor-pointer">
+                🔬 ดูหน่วยไฟละเอียด (kWh)
+              </button>
+            </div>
+
+            <button onclick="exportAccountingCSV()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-md transition cursor-pointer">
+              <span>📥</span>
+              <span>ส่งออก CSV</span>
+            </button>
+          </div>
         </div>
 
         <div class="overflow-x-auto custom-scroll rounded-xl border border-sky-100 dark:border-sky-900/40">
           <table class="w-full text-left border-collapse text-xs sm:text-sm">
-            <thead>
-              <tr class="bg-sky-50 dark:bg-sky-950 text-sky-900 dark:text-sky-200 border-b border-sky-200 dark:border-sky-900 font-extrabold text-[12px]">
-                <th class="py-3 px-3">อาคาร / พูลวิลล่า</th>
-                <th class="py-3 px-2 text-center">ระบบโซล่า</th>
-                <th class="py-3 px-3 text-right">ใช้ไฟจริง (kWh)</th>
-                <th class="py-3 px-3 text-right">โซล่าผลิต (kWh)</th>
-                <th class="py-3 px-3 text-right">หน่วยจ่าย กฟภ. (kWh)</th>
-                <th class="py-3 px-3 text-right text-sky-950 dark:text-sky-200 font-black">จ่ายจริง กฟภ. (บาท)</th>
-                <th class="py-3 px-3 text-right text-rose-600 dark:text-rose-400">ถ้าไม่มีโซล่า (บาท)</th>
-                <th class="py-3 px-3 text-right text-emerald-600 dark:text-emerald-400 font-black">ประหยัดได้ (บาท)</th>
-                <th class="py-3 px-2 text-center">% ประหยัด</th>
-              </tr>
+            <thead id="p2-accounting-thead">
+              <!-- Dynamically populated via JS depending on p2TableMode -->
             </thead>
             <tbody id="p2-accounting-tbody" class="divide-y divide-sky-100 dark:divide-sky-900/40 font-medium">
               <!-- Dynamically populated via JS -->
@@ -1543,6 +1599,64 @@
     let p1ViewMode = 'monthly'; // 'monthly' or 'daily'
     let p1DailyHouse = 'all'; // 'all', 'b1', 'b2', 'b3', 'b4', 'b5', 'b9', 'off', 'matrix'
     let p1ChartType = 'line'; // 'line' or 'bar'
+    let p1MatrixMetric = 'cons'; // 'cons' (การใช้ไฟ), 'gen' (การผลิตโซล่า), 'cost' (ราคาจริง)
+    let p1MatrixVisibleHouses = { b1: true, b2: true, b3: true, b4: true, b5: true, b9: true, off: true };
+
+    const matrixHouseConfig = [
+      { key: 'b1', name: 'หลัง 1', color: '#0284c7', border: '#0369a1' },
+      { key: 'b2', name: 'หลัง 2', color: '#8b5cf6', border: '#7c3aed' },
+      { key: 'b3', name: 'หลัง 3', color: '#10b981', border: '#059669' },
+      { key: 'b4', name: 'หลัง 4', color: '#f59e0b', border: '#d97706' },
+      { key: 'b5', name: 'หลัง 5', color: '#ec4899', border: '#db2777' },
+      { key: 'b9', name: 'หลัง 9 (เช่า)', color: '#ea580c', border: '#c2410c' },
+      { key: 'off', name: 'ออฟฟิศ', color: '#06b6d4', border: '#0891b2' }
+    ];
+
+    function setMatrixMetric(metric) {
+      p1MatrixMetric = metric;
+      ['cons', 'gen', 'cost'].forEach(m => {
+        const btn = document.getElementById(`p1-mmetric-${m}`);
+        if (btn) {
+          if (m === metric) {
+            btn.className = 'px-2.5 py-1 rounded-lg text-xs font-black bg-sky-600 text-white shadow-sm transition cursor-pointer flex items-center gap-1';
+          } else {
+            btn.className = 'px-2.5 py-1 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition cursor-pointer flex items-center gap-1';
+          }
+        }
+      });
+      renderPage1Chart();
+    }
+
+    function toggleMatrixHouse(hKey) {
+      p1MatrixVisibleHouses[hKey] = !p1MatrixVisibleHouses[hKey];
+      const hasAny = Object.values(p1MatrixVisibleHouses).some(v => v);
+      if (!hasAny) p1MatrixVisibleHouses[hKey] = true;
+      renderMatrixHouseChips();
+      renderPage1Chart();
+    }
+
+    function renderMatrixHouseChips() {
+      const container = document.getElementById('p1-matrix-house-chips');
+      if (!container) return;
+      container.innerHTML = '';
+
+      matrixHouseConfig.forEach(h => {
+        const isVis = p1MatrixVisibleHouses[h.key];
+        const btn = document.createElement('button');
+        btn.onclick = () => toggleMatrixHouse(h.key);
+        btn.title = isVis ? `คลิกเพื่อซ่อน ${h.name}` : `คลิกเพื่อแสดง ${h.name}`;
+        btn.className = `inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer border ${
+          isVis 
+            ? 'bg-white dark:bg-slate-800 shadow-sm text-slate-800 dark:text-slate-100 border-sky-300 dark:border-sky-700 ring-1 ring-sky-400/40'
+            : 'bg-slate-100 dark:bg-slate-900 text-slate-400 dark:text-slate-500 border-transparent opacity-50 line-through'
+        }`;
+        btn.innerHTML = `
+          <span class="w-3 h-3 rounded-full inline-block" style="background-color: ${h.color};"></span>
+          <span>${h.name}</span>
+        `;
+        container.appendChild(btn);
+      });
+    }
 
     // --- 3. PAGE SWITCHING ---
     function switchPage(pageNumber) {
@@ -1626,9 +1740,15 @@
       if (badge) {
         if (p1ViewMode === 'monthly') {
           badge.innerText = (p1ChartType === 'line') ? 'กราฟเส้นเปรียบเทียบรายเดือน' : 'กราฟแท่งเปรียบเทียบรายเดือน';
+        } else if (p1DailyHouse === 'matrix') {
+          badge.innerText = (p1ChartType === 'line') ? '📈 กราฟเส้นเปรียบเทียบ 7 อาคาร' : '📊 กราฟแท่งเปรียบเทียบ 7 อาคาร';
         } else {
           badge.innerText = (p1ChartType === 'line') ? 'กราฟเส้นแนวโน้มรายวัน (ว.1 - ว.31)' : 'กราฟแท่งรายวัน (ว.1 - ว.31)';
         }
+      }
+      const canvasInner = document.getElementById('p1-canvas-inner');
+      if (canvasInner && p1DailyHouse === 'matrix') {
+        canvasInner.style.minWidth = (type === 'bar') ? '1350px' : '1100px';
       }
       renderPage1Chart();
     }
@@ -1653,8 +1773,10 @@
         btnMonthly.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition cursor-pointer';
         houseSelector.classList.remove('hidden');
         houseSelector.classList.add('flex');
-        canvasInner.style.minWidth = (p1DailyHouse === 'matrix') ? '1100px' : '850px';
-        document.getElementById('p1-chart-badge').innerText = (p1ChartType === 'line') ? 'กราฟเส้นแนวโน้มรายวัน (ว.1 - ว.31)' : 'กราฟแท่งรายวัน (ว.1 - ว.31)';
+        canvasInner.style.minWidth = (p1DailyHouse === 'matrix') ? (p1ChartType === 'bar' ? '1350px' : '1100px') : '850px';
+        document.getElementById('p1-chart-badge').innerText = (p1DailyHouse === 'matrix')
+          ? ((p1ChartType === 'line') ? '📈 กราฟเส้นเปรียบเทียบ 7 อาคาร' : '📊 กราฟแท่งเปรียบเทียบ 7 อาคาร')
+          : ((p1ChartType === 'line') ? 'กราฟเส้นแนวโน้มรายวัน (ว.1 - ว.31)' : 'กราฟแท่งรายวัน (ว.1 - ว.31)');
         initPage1DailyPills();
       }
 
@@ -1694,7 +1816,7 @@
       initPage1DailyPills();
       const canvasInner = document.getElementById('p1-canvas-inner');
       if (canvasInner) {
-        canvasInner.style.minWidth = (hKey === 'matrix') ? '1100px' : '850px';
+        canvasInner.style.minWidth = (hKey === 'matrix') ? (p1ChartType === 'bar' ? '1350px' : '1100px') : '850px';
       }
       updatePage1Data();
     }
@@ -2024,10 +2146,12 @@
         const dailyItems = getDailyDataset(currentSelectedMonthKey);
         const houseObj = houseConfig.find(x => x.key === p1DailyHouse);
         const isMatrix = (p1DailyHouse === 'matrix');
-        const houseLabel = isMatrix ? 'เปรียบเทียบทุกอาคารพร้อมกัน (Matrix)' : (p1DailyHouse === 'all' ? 'ภาพรวมทุกอาคาร (7 แห่ง)' : houseObj.name);
+        const houseLabel = isMatrix ? 'เปรียบเทียบครบ 7 อาคาร (Matrix)' : (p1DailyHouse === 'all' ? 'ภาพรวมทุกอาคาร (7 แห่ง)' : houseObj.name);
 
         document.getElementById('page1-chart-title').innerText = `📅 การผลิตไฟได้ vs การใช้ไฟไปรายวัน: ${monthData.fullLabel} (${houseLabel})`;
-        document.getElementById('page1-chart-subtitle').innerText = `สีเส้นแยกชัดเจน 100%: เส้นสีทอง ☀️ (ผลิตโซล่า) vs เส้นสีน้ำเงินเข้ม 🔌 (ใช้ไฟไปทั้งหมด) | ชี้ดูราคาจริงที่ต้องจ่ายและสถานะปกติ/ผิดปกติ`;
+        document.getElementById('page1-chart-subtitle').innerText = isMatrix
+          ? '📊 เปรียบเทียบครบทั้ง 7 อาคารแยกสีชัดเจน (หลัง 1-5, หลัง 9 เช่า, ออฟฟิศ): สลับดูเทียบใช้ไฟ / ผลิตโซล่า / ค่าไฟจริง เพื่อตรวจพฤติกรรมการใช้ไฟและความผิดปกติแต่ละวัน'
+          : 'สีเส้นแยกชัดเจน 100%: เส้นสีทอง ☀️ (ผลิตโซล่า) vs เส้นสีน้ำเงินเข้ม 🔌 (ใช้ไฟไปทั้งหมด) | ชี้ดูราคาจริงที่ต้องจ่ายและสถานะปกติ/ผิดปกติ';
         document.getElementById('p1-table-title').innerHTML = `<span>📅</span> ตารางบันทึกการผลิต vs ใช้ไฟรายวัน: ${monthData.fullLabel} (${houseLabel})`;
         document.getElementById('p1-table-subtitle').innerText = `วันที่แสดงแบบย่อ (เช่น 1 มี.ค.) แยกการผลิตและการใช้แต่ละหลังชัดเจน พร้อมระบุสถานะปกติ / ผิดปกติ`;
 
@@ -2231,7 +2355,7 @@
       renderPage1Chart();
     }
 
-    // Canvas Chart Rendering (Page 1 - High-Contrast Solar Gold vs Ocean Blue)
+    // Canvas Chart Rendering (Page 1 - High-Contrast Solar Gold vs Ocean Blue OR Multi-House Matrix)
     function renderPage1Chart() {
       const canvas = document.getElementById('canvas-page1');
       if (!canvas) return;
@@ -2241,6 +2365,24 @@
       const isDaily = (p1ViewMode === 'daily');
       const isMatrix = (isDaily && p1DailyHouse === 'matrix');
       const monthData = monthlyGenData.find(m => m.key === currentSelectedMonthKey) || monthlyGenData[2];
+
+      // Toggle Legend Views between Standard and Matrix
+      const stdLegend = document.getElementById('p1-legend-standard');
+      const matrixControls = document.getElementById('p1-matrix-controls');
+      if (stdLegend && matrixControls) {
+        if (isMatrix) {
+          stdLegend.classList.add('hidden');
+          stdLegend.classList.remove('flex');
+          matrixControls.classList.remove('hidden');
+          matrixControls.classList.add('flex');
+          renderMatrixHouseChips();
+        } else {
+          stdLegend.classList.remove('hidden');
+          stdLegend.classList.add('flex');
+          matrixControls.classList.add('hidden');
+          matrixControls.classList.remove('flex');
+        }
+      }
 
       const canvasWidth = isMatrix ? Math.max(rect.width, 1100) : (isDaily ? Math.max(rect.width, 850) : rect.width);
       const canvasHeight = 360;
@@ -2259,309 +2401,512 @@
       const textColor = isDark ? '#94a3b8' : '#64748b';
       const gridColor = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
 
-      let groups = [];
-
-      if (!isDaily) {
-        // Monthly: 7 Buildings
-        groups = [
-          { label: 'หลัง 1', fullLabel: 'หลัง 1 (พูลวิลล่า)', gen: monthData.b1, cons: monthData.b1_c, hasSolar: true },
-          { label: 'หลัง 2', fullLabel: 'หลัง 2 (พูลวิลล่า)', gen: monthData.b2, cons: monthData.b2_c, hasSolar: true },
-          { label: 'หลัง 3', fullLabel: 'หลัง 3 (พูลวิลล่า)', gen: monthData.b3, cons: monthData.b3_c, hasSolar: true },
-          { label: 'หลัง 4', fullLabel: 'หลัง 4 (พูลวิลล่า)', gen: monthData.b4, cons: monthData.b4_c, hasSolar: true },
-          { label: 'หลัง 5', fullLabel: 'หลัง 5 (พูลวิลล่า)', gen: monthData.b5, cons: monthData.b5_c, hasSolar: true },
-          { label: 'หลัง 9 (เช่า)', fullLabel: 'หลัง 9 (บ้านเช่า - ไม่ติดโซล่า)', gen: monthData.b9, cons: monthData.b9_c, hasSolar: false },
-          { label: 'ออฟฟิศ', fullLabel: 'ออฟฟิศชะอำ', gen: monthData.off, cons: monthData.off_c, hasSolar: true }
-        ];
-      } else {
-        // Daily: Days 1 to 28/30/31
-        const dailyItems = getDailyDataset(currentSelectedMonthKey);
-        groups = dailyItems.map(item => {
-          let gen = 0, cons = 0;
-          let hasSolar = true;
-          if (p1DailyHouse === 'all' || p1DailyHouse === 'matrix') {
-            gen = item.total;
-            cons = item.total_c;
-          } else {
-            gen = item[p1DailyHouse] || 0.0;
-            cons = item[`${p1DailyHouse}_c`] || 0.0;
-            if (p1DailyHouse === 'b9') hasSolar = false;
-          }
-          return {
-            label: item.shortDate,
-            fullLabel: `วันที่ ${item.shortDate} • ${p1DailyHouse === 'all' || p1DailyHouse === 'matrix' ? 'รวมทั้งสาขา' : houseConfig.find(x => x.key === p1DailyHouse).name}`,
-            gen,
-            cons,
-            hasSolar,
-            anomaly: item.dayAnomalyAlert,
-            item
-          };
-        });
-      }
-
-      let maxVal = 0;
-      groups.forEach(g => {
-        if (g.gen > maxVal) maxVal = g.gen;
-        if (g.cons > maxVal) maxVal = g.cons;
-      });
-      maxVal = Math.ceil((maxVal * 1.15) / 10) * 10;
-      if (maxVal === 0) maxVal = 100;
-
       const padL = 50, padR = 25, padT = 30, padB = 40;
       const chartW = W - padL - padR;
       const chartH = H - padT - padB;
-
-      // Draw Grid Lines
-      const gridSteps = 4;
-      ctx.textAlign = 'right';
-      ctx.textBaseline = 'middle';
-      ctx.font = '11px sans-serif';
-
-      for (let i = 0; i <= gridSteps; i++) {
-        const val = (maxVal / gridSteps) * i;
-        const y = padT + chartH - (val / maxVal) * chartH;
-
-        ctx.strokeStyle = gridColor;
-        ctx.lineWidth = 1;
-        ctx.setLineDash([]);
-        ctx.beginPath();
-        ctx.moveTo(padL, y);
-        ctx.lineTo(W - padR, y);
-        ctx.stroke();
-
-        ctx.fillStyle = textColor;
-        ctx.fillText(val >= 1000 ? (val / 1000).toFixed(1) + 'k' : Math.round(val), padL - 8, y);
-      }
-
-      const groupWidth = chartW / groups.length;
       canvas.chartBars = [];
       const hoveredIdx = (typeof canvas.hoveredIndex === 'number') ? canvas.hoveredIndex : -1;
 
-      if (p1ChartType === 'line' && groups.length > 1) {
-        // --- 1. SMOOTH HIGH-CONTRAST LINE / SPLINE CHART ---
-        const pointsGen = [];
-        const pointsCons = [];
+      // Helper: Draw smooth bezier curve through points
+      function buildSmoothPath(points) {
+        if (points.length < 2) return new Path2D();
+        const path = new Path2D();
+        path.moveTo(points[0].x, points[0].y);
+        for (let i = 0; i < points.length - 1; i++) {
+          const xc = (points[i].x + points[i + 1].x) / 2;
+          const yc = (points[i].y + points[i + 1].y) / 2;
+          path.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
+        }
+        path.lineTo(points[points.length - 1].x, points[points.length - 1].y);
+        return path;
+      }
 
-        groups.forEach((g, idx) => {
+      if (isMatrix) {
+        // ==========================================
+        // --- 1. MATRIX VIEW (COMPARE ALL 7 HOUSES) ---
+        // ==========================================
+        const dailyItems = getDailyDataset(currentSelectedMonthKey);
+        const visibleHouses = matrixHouseConfig.filter(h => p1MatrixVisibleHouses[h.key]);
+
+        // Helper to get value of house according to current metric
+        function getHouseVal(item, hKey) {
+          if (p1MatrixMetric === 'cons') return item[`${hKey}_c`] || 0;
+          if (p1MatrixMetric === 'gen') return item[hKey] || 0;
+          if (p1MatrixMetric === 'cost') {
+            const g = item[hKey] || 0;
+            const c = item[`${hKey}_c`] || 0;
+            return Math.round(Math.max(0, c - g) * 4.36);
+          }
+          return 0;
+        }
+
+        let maxVal = 0;
+        dailyItems.forEach(item => {
+          visibleHouses.forEach(h => {
+            const v = getHouseVal(item, h.key);
+            if (v > maxVal) maxVal = v;
+          });
+        });
+        maxVal = Math.ceil((maxVal * 1.15) / 5) * 5;
+        if (maxVal === 0) maxVal = 50;
+
+        // Draw Y-Axis Grid Lines
+        const gridSteps = 4;
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
+        ctx.font = '11px sans-serif';
+
+        for (let i = 0; i <= gridSteps; i++) {
+          const val = (maxVal / gridSteps) * i;
+          const y = padT + chartH - (val / maxVal) * chartH;
+
+          ctx.strokeStyle = gridColor;
+          ctx.lineWidth = 1;
+          ctx.setLineDash([]);
+          ctx.beginPath();
+          ctx.moveTo(padL, y);
+          ctx.lineTo(W - padR, y);
+          ctx.stroke();
+
+          ctx.fillStyle = textColor;
+          const unitPrefix = (p1MatrixMetric === 'cost') ? '฿' : '';
+          ctx.fillText(unitPrefix + (val >= 1000 ? (val / 1000).toFixed(1) + 'k' : Math.round(val)), padL - 8, y);
+        }
+
+        const groupWidth = chartW / dailyItems.length;
+
+        // Map daily points for each active house
+        const houseSeries = visibleHouses.map(h => {
+          const pts = dailyItems.map((item, idx) => {
+            const cx = padL + (idx + 0.5) * groupWidth;
+            const val = getHouseVal(item, h.key);
+            const cy = padT + chartH - (val / maxVal) * chartH;
+            return { x: cx, y: cy, val, item, idx, house: h };
+          });
+          return { house: h, points: pts };
+        });
+
+        // Store chartBar hitbox for each day
+        dailyItems.forEach((item, idx) => {
           const cx = padL + (idx + 0.5) * groupWidth;
-          const yGen = padT + chartH - (g.gen / maxVal) * chartH;
-          const yCons = padT + chartH - (g.cons / maxVal) * chartH;
-
-          pointsGen.push({ x: cx, y: yGen, g, idx });
-          pointsCons.push({ x: cx, y: yCons, g, idx });
-
           canvas.chartBars.push({
-            group: g,
+            isMatrix: true,
+            item,
             x: cx - groupWidth / 2,
             y: padT,
             w: groupWidth,
             h: chartH,
             cx,
-            yGen,
-            yCons,
-            idx
+            idx,
+            metric: p1MatrixMetric
           });
         });
 
-        // Helper: Draw smooth bezier curve through points
-        function buildSmoothPath(points) {
-          if (points.length < 2) return new Path2D();
-          const path = new Path2D();
-          path.moveTo(points[0].x, points[0].y);
-          for (let i = 0; i < points.length - 1; i++) {
-            const xc = (points[i].x + points[i + 1].x) / 2;
-            const yc = (points[i].y + points[i + 1].y) / 2;
-            path.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
+        if (p1ChartType === 'line') {
+          // --- Line Mode for Matrix: Draw smooth line for each visible house ---
+          houseSeries.forEach(series => {
+            const h = series.house;
+            const pts = series.points;
+            if (pts.length < 2) return;
+
+            const path = buildSmoothPath(pts);
+
+            // Light subtle gradient under line
+            const grad = ctx.createLinearGradient(0, padT, 0, padT + chartH);
+            grad.addColorStop(0, h.color + '22');
+            grad.addColorStop(1, h.color + '01');
+            const area = new Path2D(path);
+            area.lineTo(pts[pts.length - 1].x, padT + chartH);
+            area.lineTo(pts[0].x, padT + chartH);
+            area.closePath();
+            ctx.fillStyle = grad;
+            ctx.fill(area);
+
+            // Draw line
+            ctx.strokeStyle = h.color;
+            ctx.lineWidth = 2.5;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.setLineDash([]);
+            ctx.stroke(path);
+
+            // Draw points
+            pts.forEach(pt => {
+              ctx.fillStyle = h.color;
+              ctx.beginPath();
+              ctx.arc(pt.x, pt.y, 3, 0, Math.PI * 2);
+              ctx.fill();
+              ctx.strokeStyle = '#ffffff';
+              ctx.lineWidth = 1;
+              ctx.stroke();
+            });
+          });
+
+          // Hover guidelines & dots on all series
+          if (hoveredIdx >= 0 && hoveredIdx < dailyItems.length) {
+            const hit = canvas.chartBars[hoveredIdx];
+            if (hit) {
+              // Vertical guideline
+              ctx.strokeStyle = isDark ? '#38bdf8' : '#0284c7';
+              ctx.lineWidth = 1.5;
+              ctx.setLineDash([4, 4]);
+              ctx.beginPath();
+              ctx.moveTo(hit.cx, padT);
+              ctx.lineTo(hit.cx, padT + chartH);
+              ctx.stroke();
+              ctx.setLineDash([]);
+
+              // Large highlighted dots for all houses on this day
+              houseSeries.forEach(series => {
+                const pt = series.points[hoveredIdx];
+                if (pt) {
+                  ctx.fillStyle = series.house.color;
+                  ctx.beginPath();
+                  ctx.arc(pt.x, pt.y, 6.5, 0, Math.PI * 2);
+                  ctx.fill();
+                  ctx.strokeStyle = '#ffffff';
+                  ctx.lineWidth = 2;
+                  ctx.stroke();
+                }
+              });
+            }
           }
-          path.lineTo(points[points.length - 1].x, points[points.length - 1].y);
-          return path;
+
+        } else {
+          // --- Bar Mode for Matrix: Grouped Side-by-Side Bars for each house ---
+          const numH = visibleHouses.length;
+          const barGap = 1.5;
+          const maxGroupBarW = groupWidth - 6;
+          const barW = Math.max(2.5, Math.min(10, (maxGroupBarW - (numH - 1) * barGap) / numH));
+          const totalBarsW = numH * barW + (numH - 1) * barGap;
+
+          dailyItems.forEach((item, idx) => {
+            const cx = padL + (idx + 0.5) * groupWidth;
+            const startX = cx - totalBarsW / 2;
+
+            visibleHouses.forEach((h, hIdx) => {
+              const val = getHouseVal(item, h.key);
+              const barH = (val / maxVal) * chartH;
+              const barX = startX + hIdx * (barW + barGap);
+              const barY = padT + chartH - barH;
+
+              ctx.fillStyle = h.color;
+              ctx.beginPath();
+              if (ctx.roundRect) {
+                ctx.roundRect(barX, barY, barW, barH, [2, 2, 0, 0]);
+              } else {
+                ctx.rect(barX, barY, barW, barH);
+              }
+              ctx.fill();
+            });
+          });
+
+          // Hover highlight for the day's group
+          if (hoveredIdx >= 0 && hoveredIdx < dailyItems.length) {
+            const hit = canvas.chartBars[hoveredIdx];
+            if (hit) {
+              ctx.fillStyle = isDark ? 'rgba(56, 189, 248, 0.08)' : 'rgba(2, 132, 199, 0.08)';
+              ctx.fillRect(hit.x, padT, hit.w, chartH);
+            }
+          }
         }
 
-        // 1A. Consumption Area Gradient & Stroke (Deep Royal Blue: #1d4ed8)
-        const consPath = buildSmoothPath(pointsCons);
-        const consArea = new Path2D(consPath);
-        consArea.lineTo(pointsCons[pointsCons.length - 1].x, padT + chartH);
-        consArea.lineTo(pointsCons[0].x, padT + chartH);
-        consArea.closePath();
+        // Draw X-Axis Labels for Matrix (Dates)
+        ctx.fillStyle = textColor;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+        ctx.font = '10px sans-serif';
 
-        const gradCons = ctx.createLinearGradient(0, padT, 0, padT + chartH);
-        gradCons.addColorStop(0, 'rgba(29, 78, 216, 0.20)');
-        gradCons.addColorStop(1, 'rgba(29, 78, 216, 0.01)');
-        ctx.fillStyle = gradCons;
-        ctx.fill(consArea);
+        dailyItems.forEach((item, idx) => {
+          const cx = padL + (idx + 0.5) * groupWidth;
+          const dayNum = idx + 1;
+          if (dayNum === 1 || dayNum === dailyItems.length || dayNum % 5 === 0) {
+            ctx.fillText(item.shortDate, cx, padT + chartH + 8);
+          }
+        });
 
-        ctx.strokeStyle = '#1d4ed8';
-        ctx.lineWidth = 3.5;
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-        ctx.setLineDash([]);
-        ctx.stroke(consPath);
+      } else {
+        // ==========================================
+        // --- 2. STANDARD VIEW (ALL OR SINGLE HOUSE) ---
+        // ==========================================
+        let groups = [];
+        if (!isDaily) {
+          // Monthly: 7 Buildings
+          groups = [
+            { label: 'หลัง 1', fullLabel: 'หลัง 1 (พูลวิลล่า)', gen: monthData.b1, cons: monthData.b1_c, hasSolar: true },
+            { label: 'หลัง 2', fullLabel: 'หลัง 2 (พูลวิลล่า)', gen: monthData.b2, cons: monthData.b2_c, hasSolar: true },
+            { label: 'หลัง 3', fullLabel: 'หลัง 3 (พูลวิลล่า)', gen: monthData.b3, cons: monthData.b3_c, hasSolar: true },
+            { label: 'หลัง 4', fullLabel: 'หลัง 4 (พูลวิลล่า)', gen: monthData.b4, cons: monthData.b4_c, hasSolar: true },
+            { label: 'หลัง 5', fullLabel: 'หลัง 5 (พูลวิลล่า)', gen: monthData.b5, cons: monthData.b5_c, hasSolar: true },
+            { label: 'หลัง 9 (เช่า)', fullLabel: 'หลัง 9 (บ้านเช่า - ไม่ติดโซล่า)', gen: monthData.b9, cons: monthData.b9_c, hasSolar: false },
+            { label: 'ออฟฟิศ', fullLabel: 'ออฟฟิศชะอำ', gen: monthData.off, cons: monthData.off_c, hasSolar: true }
+          ];
+        } else {
+          // Daily: All combined or single house
+          const dailyItems = getDailyDataset(currentSelectedMonthKey);
+          groups = dailyItems.map(item => {
+            let gen = 0, cons = 0;
+            let hasSolar = true;
+            if (p1DailyHouse === 'all') {
+              gen = item.total;
+              cons = item.total_c;
+            } else {
+              gen = item[p1DailyHouse] || 0.0;
+              cons = item[`${p1DailyHouse}_c`] || 0.0;
+              if (p1DailyHouse === 'b9') hasSolar = false;
+            }
+            return {
+              label: item.shortDate,
+              fullLabel: `วันที่ ${item.shortDate} • ${p1DailyHouse === 'all' ? 'รวมทั้งสาขา' : houseConfig.find(x => x.key === p1DailyHouse).name}`,
+              gen,
+              cons,
+              hasSolar,
+              anomaly: item.dayAnomalyAlert,
+              item
+            };
+          });
+        }
 
-        // 1B. Solar Generation Area Gradient & Stroke (Vibrant Radiant Gold: #f59e0b)
-        const hasAnySolar = groups.some(g => g.hasSolar && g.gen > 0);
-        if (hasAnySolar) {
-          const genPath = buildSmoothPath(pointsGen);
-          const genArea = new Path2D(genPath);
-          genArea.lineTo(pointsGen[pointsGen.length - 1].x, padT + chartH);
-          genArea.lineTo(pointsGen[0].x, padT + chartH);
-          genArea.closePath();
+        let maxVal = 0;
+        groups.forEach(g => {
+          if (g.gen > maxVal) maxVal = g.gen;
+          if (g.cons > maxVal) maxVal = g.cons;
+        });
+        maxVal = Math.ceil((maxVal * 1.15) / 10) * 10;
+        if (maxVal === 0) maxVal = 100;
 
-          const gradGen = ctx.createLinearGradient(0, padT, 0, padT + chartH);
-          gradGen.addColorStop(0, 'rgba(245, 158, 11, 0.25)');
-          gradGen.addColorStop(1, 'rgba(245, 158, 11, 0.01)');
-          ctx.fillStyle = gradGen;
-          ctx.fill(genArea);
+        // Draw Grid Lines
+        const gridSteps = 4;
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
+        ctx.font = '11px sans-serif';
 
-          ctx.strokeStyle = '#f59e0b';
+        for (let i = 0; i <= gridSteps; i++) {
+          const val = (maxVal / gridSteps) * i;
+          const y = padT + chartH - (val / maxVal) * chartH;
+
+          ctx.strokeStyle = gridColor;
+          ctx.lineWidth = 1;
+          ctx.setLineDash([]);
+          ctx.beginPath();
+          ctx.moveTo(padL, y);
+          ctx.lineTo(W - padR, y);
+          ctx.stroke();
+
+          ctx.fillStyle = textColor;
+          ctx.fillText(val >= 1000 ? (val / 1000).toFixed(1) + 'k' : Math.round(val), padL - 8, y);
+        }
+
+        const groupWidth = chartW / groups.length;
+
+        if (p1ChartType === 'line' && groups.length > 1) {
+          // --- 2A. SMOOTH HIGH-CONTRAST LINE / SPLINE CHART ---
+          const pointsGen = [];
+          const pointsCons = [];
+
+          groups.forEach((g, idx) => {
+            const cx = padL + (idx + 0.5) * groupWidth;
+            const yGen = padT + chartH - (g.gen / maxVal) * chartH;
+            const yCons = padT + chartH - (g.cons / maxVal) * chartH;
+
+            pointsGen.push({ x: cx, y: yGen, g, idx });
+            pointsCons.push({ x: cx, y: yCons, g, idx });
+
+            canvas.chartBars.push({
+              isMatrix: false,
+              group: g,
+              x: cx - groupWidth / 2,
+              y: padT,
+              w: groupWidth,
+              h: chartH,
+              cx,
+              yGen,
+              yCons,
+              idx
+            });
+          });
+
+          // Consumption Area Gradient & Stroke (Deep Royal Blue: #1d4ed8)
+          const consPath = buildSmoothPath(pointsCons);
+          const consArea = new Path2D(consPath);
+          consArea.lineTo(pointsCons[pointsCons.length - 1].x, padT + chartH);
+          consArea.lineTo(pointsCons[0].x, padT + chartH);
+          consArea.closePath();
+
+          const gradCons = ctx.createLinearGradient(0, padT, 0, padT + chartH);
+          gradCons.addColorStop(0, 'rgba(29, 78, 216, 0.20)');
+          gradCons.addColorStop(1, 'rgba(29, 78, 216, 0.01)');
+          ctx.fillStyle = gradCons;
+          ctx.fill(consArea);
+
+          ctx.strokeStyle = '#1d4ed8';
           ctx.lineWidth = 3.5;
           ctx.lineCap = 'round';
           ctx.lineJoin = 'round';
           ctx.setLineDash([]);
-          ctx.stroke(genPath);
-        }
+          ctx.stroke(consPath);
 
-        // 1C. Point Markers (Dots)
-        pointsCons.forEach(pt => {
-          ctx.fillStyle = '#1d4ed8';
-          ctx.beginPath();
-          ctx.arc(pt.x, pt.y, isDaily ? 3.5 : 5, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.strokeStyle = '#ffffff';
-          ctx.lineWidth = 1.5;
-          ctx.stroke();
-        });
+          // Solar Generation Area Gradient & Stroke (Radiant Gold: #f59e0b)
+          const hasAnySolar = groups.some(g => g.hasSolar && g.gen > 0);
+          if (hasAnySolar) {
+            const genPath = buildSmoothPath(pointsGen);
+            const genArea = new Path2D(genPath);
+            genArea.lineTo(pointsGen[pointsGen.length - 1].x, padT + chartH);
+            genArea.lineTo(pointsGen[0].x, padT + chartH);
+            genArea.closePath();
 
-        if (hasAnySolar) {
-          pointsGen.forEach(pt => {
-            if (pt.g.hasSolar) {
-              ctx.fillStyle = '#f59e0b';
-              ctx.beginPath();
-              ctx.arc(pt.x, pt.y, isDaily ? 3.5 : 5, 0, Math.PI * 2);
-              ctx.fill();
-              ctx.strokeStyle = '#ffffff';
-              ctx.lineWidth = 1.5;
-              ctx.stroke();
-            }
-          });
-        }
+            const gradGen = ctx.createLinearGradient(0, padT, 0, padT + chartH);
+            gradGen.addColorStop(0, 'rgba(245, 158, 11, 0.25)');
+            gradGen.addColorStop(1, 'rgba(245, 158, 11, 0.01)');
+            ctx.fillStyle = gradGen;
+            ctx.fill(genArea);
 
-        // 1D. Hover guideline and highlight point
-        if (hoveredIdx >= 0 && hoveredIdx < groups.length) {
-          const hitBar = canvas.chartBars[hoveredIdx];
-          if (hitBar) {
-            // Vertical dashed guideline
-            ctx.strokeStyle = isDark ? '#38bdf8' : '#0284c7';
-            ctx.lineWidth = 1.5;
-            ctx.setLineDash([4, 4]);
-            ctx.beginPath();
-            ctx.moveTo(hitBar.cx, padT);
-            ctx.lineTo(hitBar.cx, padT + chartH);
-            ctx.stroke();
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 3.5;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
             ctx.setLineDash([]);
+            ctx.stroke(genPath);
+          }
 
-            // Highlight Cons Point
+          // Point Markers
+          pointsCons.forEach(pt => {
             ctx.fillStyle = '#1d4ed8';
             ctx.beginPath();
-            ctx.arc(hitBar.cx, hitBar.yCons, 7, 0, Math.PI * 2);
+            ctx.arc(pt.x, pt.y, isDaily ? 3.5 : 5, 0, Math.PI * 2);
             ctx.fill();
             ctx.strokeStyle = '#ffffff';
-            ctx.lineWidth = 2.5;
+            ctx.lineWidth = 1.5;
             ctx.stroke();
+          });
 
-            // Highlight Gen Point
-            if (hitBar.group.hasSolar) {
-              ctx.fillStyle = '#f59e0b';
+          if (hasAnySolar) {
+            pointsGen.forEach(pt => {
+              if (pt.g.hasSolar) {
+                ctx.fillStyle = '#f59e0b';
+                ctx.beginPath();
+                ctx.arc(pt.x, pt.y, isDaily ? 3.5 : 5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+              }
+            });
+          }
+
+          // Hover guideline and highlight point
+          if (hoveredIdx >= 0 && hoveredIdx < groups.length) {
+            const hitBar = canvas.chartBars[hoveredIdx];
+            if (hitBar) {
+              ctx.strokeStyle = isDark ? '#38bdf8' : '#0284c7';
+              ctx.lineWidth = 1.5;
+              ctx.setLineDash([4, 4]);
               ctx.beginPath();
-              ctx.arc(hitBar.cx, hitBar.yGen, 7, 0, Math.PI * 2);
+              ctx.moveTo(hitBar.cx, padT);
+              ctx.lineTo(hitBar.cx, padT + chartH);
+              ctx.stroke();
+              ctx.setLineDash([]);
+
+              ctx.fillStyle = '#1d4ed8';
+              ctx.beginPath();
+              ctx.arc(hitBar.cx, hitBar.yCons, 7, 0, Math.PI * 2);
               ctx.fill();
               ctx.strokeStyle = '#ffffff';
               ctx.lineWidth = 2.5;
               ctx.stroke();
+
+              if (hitBar.group.hasSolar) {
+                ctx.fillStyle = '#f59e0b';
+                ctx.beginPath();
+                ctx.arc(hitBar.cx, hitBar.yGen, 7, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2.5;
+                ctx.stroke();
+              }
             }
           }
+
+        } else {
+          // --- 2B. HIGH-CONTRAST DUAL BAR CHART ---
+          const barW = Math.max(isDaily ? Math.min(10, (groupWidth - 4) / 2) : Math.min(22, (groupWidth - 20) / 2), 3);
+
+          groups.forEach((g, idx) => {
+            const groupCenterX = padL + (idx + 0.5) * groupWidth;
+            const xGen = groupCenterX - barW - 1.5;
+            const xCons = groupCenterX + 1.5;
+
+            const hGen = (g.gen / maxVal) * chartH;
+            const yGen = padT + chartH - hGen;
+
+            const hCons = (g.cons / maxVal) * chartH;
+            const yCons = padT + chartH - hCons;
+
+            if (g.hasSolar && g.gen > 0) {
+              ctx.fillStyle = '#f59e0b';
+              ctx.beginPath();
+              ctx.roundRect ? ctx.roundRect(xGen, yGen, barW, hGen, [3, 3, 0, 0]) : ctx.rect(xGen, yGen, barW, hGen);
+              ctx.fill();
+              ctx.strokeStyle = '#b45309';
+              ctx.lineWidth = 1;
+              ctx.stroke();
+            } else if (!g.hasSolar) {
+              ctx.strokeStyle = '#ea580c';
+              ctx.lineWidth = 1.5;
+              ctx.strokeRect(xGen, padT + chartH - 3, barW, 3);
+            }
+
+            ctx.fillStyle = g.hasSolar ? '#1d4ed8' : '#ea580c';
+            ctx.beginPath();
+            ctx.roundRect ? ctx.roundRect(xCons, yCons, barW, hCons, [3, 3, 0, 0]) : ctx.rect(xCons, yCons, barW, hCons);
+            ctx.fill();
+            ctx.strokeStyle = g.hasSolar ? '#1e3a8a' : '#c2410c';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            canvas.chartBars.push({
+              isMatrix: false,
+              group: g,
+              x: groupCenterX - barW - 4,
+              y: Math.min(yGen, yCons),
+              w: barW * 2 + 8,
+              h: chartH,
+              cx: groupCenterX,
+              yGen,
+              yCons,
+              idx
+            });
+          });
         }
 
-      } else {
-        // --- 2. HIGH-CONTRAST DUAL BAR CHART ---
-        const barW = Math.max(isDaily ? Math.min(10, (groupWidth - 4) / 2) : Math.min(22, (groupWidth - 20) / 2), 3);
+        // Draw X-Axis Labels
+        ctx.fillStyle = textColor;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+        ctx.font = isDaily ? '10px sans-serif' : 'bold 11px sans-serif';
 
         groups.forEach((g, idx) => {
           const groupCenterX = padL + (idx + 0.5) * groupWidth;
-          const xGen = groupCenterX - barW - 1.5;
-          const xCons = groupCenterX + 1.5;
-
-          const hGen = (g.gen / maxVal) * chartH;
-          const yGen = padT + chartH - hGen;
-
-          const hCons = (g.cons / maxVal) * chartH;
-          const yCons = padT + chartH - hCons;
-
-          // Draw Gen Bar: VIVID SOLAR AMBER GOLD (#f59e0b) with border
-          if (g.hasSolar && g.gen > 0) {
-            ctx.fillStyle = '#f59e0b';
-            ctx.beginPath();
-            ctx.roundRect ? ctx.roundRect(xGen, yGen, barW, hGen, [3, 3, 0, 0]) : ctx.rect(xGen, yGen, barW, hGen);
-            ctx.fill();
-            ctx.strokeStyle = '#b45309';
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          } else if (!g.hasSolar) {
-            // Flat outline for House 9 (No Solar)
-            ctx.strokeStyle = '#ea580c';
-            ctx.lineWidth = 1.5;
-            ctx.strokeRect(xGen, padT + chartH - 3, barW, 3);
+          let shouldDraw = false;
+          if (!isDaily) {
+            shouldDraw = true;
+          } else if (groups.length <= 15) {
+            shouldDraw = true;
+          } else {
+            const dayNum = idx + 1;
+            if (dayNum === 1 || dayNum === groups.length || dayNum % 5 === 0) {
+              shouldDraw = true;
+            }
           }
 
-          // Draw Cons Bar: DEEP ROYAL BLUE (#1d4ed8) with border
-          ctx.fillStyle = g.hasSolar ? '#1d4ed8' : '#ea580c';
-          ctx.beginPath();
-          ctx.roundRect ? ctx.roundRect(xCons, yCons, barW, hCons, [3, 3, 0, 0]) : ctx.rect(xCons, yCons, barW, hCons);
-          ctx.fill();
-          ctx.strokeStyle = g.hasSolar ? '#1e3a8a' : '#c2410c';
-          ctx.lineWidth = 1;
-          ctx.stroke();
-
-          canvas.chartBars.push({
-            group: g,
-            x: groupCenterX - barW - 4,
-            y: Math.min(yGen, yCons),
-            w: barW * 2 + 8,
-            h: chartH,
-            cx: groupCenterX,
-            yGen,
-            yCons,
-            idx
-          });
+          if (shouldDraw) {
+            ctx.fillText(g.label, groupCenterX, padT + chartH + 8);
+          }
         });
       }
-
-      // Draw X-Axis Labels (Short Dates or Building Names)
-      ctx.fillStyle = textColor;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'top';
-      ctx.font = isDaily ? '10px sans-serif' : 'bold 11px sans-serif';
-
-      groups.forEach((g, idx) => {
-        const groupCenterX = padL + (idx + 0.5) * groupWidth;
-        let shouldDraw = false;
-        if (!isDaily) {
-          shouldDraw = true;
-        } else if (groups.length <= 15) {
-          shouldDraw = true;
-        } else {
-          // Draw intervals: 1st, 5th, 10th, 15th, 20th, 25th, last
-          const dayNum = idx + 1;
-          if (dayNum === 1 || dayNum === groups.length || dayNum % 5 === 0) {
-            shouldDraw = true;
-          }
-        }
-
-        if (shouldDraw) {
-          ctx.fillText(g.label, groupCenterX, padT + chartH + 8);
-        }
-      });
     }
 
-    // Canvas Tooltip Listeners (Includes ACTUAL COST & STATUS)
+    // Canvas Tooltip Listeners (Standard & Matrix Multi-House Views)
     const c1 = document.getElementById('canvas-page1');
     c1.addEventListener('mousemove', (e) => {
       const rect = c1.getBoundingClientRect();
@@ -2580,44 +2925,100 @@
           renderPage1Chart();
         }
 
-        const g = hit.group;
-        const cov = g.cons > 0 ? ((g.gen / g.cons) * 100).toFixed(1) : '0.0';
-        const peaUnits = Math.max(0, g.cons - g.gen);
-        const actualCost = Math.round(peaUnits * 4.36);
-        const sav = Math.round(g.gen * 4.36);
-        const titleText = g.fullLabel || g.label;
+        if (hit.isMatrix) {
+          // --- Matrix Multi-House Tooltip ---
+          const item = hit.item;
+          const metricTitles = {
+            cons: 'การใช้ไฟ (kWh)',
+            gen: 'การผลิตโซล่า (kWh)',
+            cost: 'ราคาจริงที่ต้องจ่าย (บาท)'
+          };
 
-        tooltip.innerHTML = `
-          <div class="font-bold text-cyan-300 text-xs border-b border-sky-400/30 pb-1">${titleText}</div>
-          <div class="mt-1.5 space-y-1 text-[11px]">
-            <div class="flex items-center justify-between gap-4">
-              <span class="text-amber-300 font-semibold">☀️ ผลิตได้ (โซล่า):</span>
-              <strong class="text-amber-400 font-black">${g.gen.toFixed(1)} kWh</strong>
+          const totalCost = Math.round(Math.max(0, item.total_c - item.total) * 4.36);
+
+          let rowsHtml = '';
+          matrixHouseConfig.forEach(h => {
+            const isVis = p1MatrixVisibleHouses[h.key];
+            const gen = item[h.key] || 0.0;
+            const cons = item[`${h.key}_c`] || 0.0;
+            const cost = Math.round(Math.max(0, cons - gen) * 4.36);
+            
+            let displayVal = `${cons.toFixed(1)} kWh`;
+            if (p1MatrixMetric === 'gen') displayVal = `${gen.toFixed(1)} kWh`;
+            if (p1MatrixMetric === 'cost') displayVal = `฿${cost.toLocaleString()}`;
+
+            rowsHtml += `
+              <div class="flex items-center justify-between gap-3 py-0.5 border-b border-sky-400/10 ${!isVis ? 'opacity-40' : ''}">
+                <div class="flex items-center gap-1.5 truncate">
+                  <span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background-color: ${h.color};"></span>
+                  <span class="text-slate-200 font-semibold text-[11px] truncate">${h.name}</span>
+                </div>
+                <div class="flex items-center gap-2 flex-shrink-0">
+                  <span class="text-white font-black text-[11px]">${displayVal}</span>
+                  <span class="text-[9px] text-slate-400">(☀️${gen.toFixed(1)} / 🔌${cons.toFixed(1)})</span>
+                </div>
+              </div>
+            `;
+          });
+
+          tooltip.innerHTML = `
+            <div class="font-bold text-cyan-300 text-xs border-b border-sky-400/30 pb-1 flex items-center justify-between">
+              <span>📅 วันที่ ${item.shortDate} (ว.${item.day})</span>
+              <span class="text-[10px] text-amber-300 font-normal">เทียบ 7 หลัง (${metricTitles[p1MatrixMetric]})</span>
             </div>
-            <div class="flex items-center justify-between gap-4">
-              <span class="text-sky-300 font-semibold">🔌 ใช้ไฟไปทั้งหมด:</span>
-              <strong class="text-white font-black">${g.cons.toFixed(1)} kWh</strong>
+            <div class="mt-1 space-y-0.5 max-w-[280px]">
+              ${rowsHtml}
             </div>
-            <div class="flex items-center justify-between gap-4">
-              <span class="text-slate-200">⚡ ซื้อไฟ กฟภ.:</span>
-              <strong class="text-sky-200 font-bold">${peaUnits.toFixed(1)} kWh</strong>
+            <div class="pt-1.5 mt-1 border-t border-sky-400/30 flex items-center justify-between text-[11px] bg-sky-900/30 px-1.5 py-1 rounded">
+              <span class="text-amber-300 font-black">รวมทั้ง 7 แห่ง:</span>
+              <span class="text-white font-extrabold">☀️ ${item.total.toFixed(1)} / 🔌 ${item.total_c.toFixed(1)} kWh <span class="text-amber-300 font-black">(฿${totalCost.toLocaleString()})</span></span>
             </div>
-            <div class="pt-1 mt-1 border-t border-sky-400/30 flex items-center justify-between gap-4 text-amber-200 bg-amber-500/10 px-1 py-0.5 rounded">
-              <span class="font-bold">🧾 ราคาจริงที่ต้องจ่าย:</span>
-              <strong class="text-amber-300 text-xs font-black">฿${actualCost.toLocaleString('th-TH')}</strong>
+            ${item.dayAnomalyAlert ? `<div class="mt-1 text-[10px] text-rose-300 font-bold bg-rose-950/60 p-1 rounded border border-rose-500/40">⚠️ ${item.dayAnomalyAlert}</div>` : ''}
+            <div class="text-[9px] text-slate-400 text-center pt-0.5">💡 คลิกชิปด้านบนเพื่อเปิด/ปิดหลังที่ต้องการเทียบ</div>
+          `;
+
+        } else {
+          // --- Standard Tooltip (Single House or Total) ---
+          const g = hit.group;
+          const cov = g.cons > 0 ? ((g.gen / g.cons) * 100).toFixed(1) : '0.0';
+          const peaUnits = Math.max(0, g.cons - g.gen);
+          const actualCost = Math.round(peaUnits * 4.36);
+          const sav = Math.round(g.gen * 4.36);
+          const titleText = g.fullLabel || g.label;
+
+          tooltip.innerHTML = `
+            <div class="font-bold text-cyan-300 text-xs border-b border-sky-400/30 pb-1">${titleText}</div>
+            <div class="mt-1.5 space-y-1 text-[11px]">
+              <div class="flex items-center justify-between gap-4">
+                <span class="text-amber-300 font-semibold">☀️ ผลิตได้ (โซล่า):</span>
+                <strong class="text-amber-400 font-black">${g.gen.toFixed(1)} kWh</strong>
+              </div>
+              <div class="flex items-center justify-between gap-4">
+                <span class="text-sky-300 font-semibold">🔌 ใช้ไฟไปทั้งหมด:</span>
+                <strong class="text-white font-black">${g.cons.toFixed(1)} kWh</strong>
+              </div>
+              <div class="flex items-center justify-between gap-4">
+                <span class="text-slate-200">⚡ ซื้อไฟ กฟภ.:</span>
+                <strong class="text-sky-200 font-bold">${peaUnits.toFixed(1)} kWh</strong>
+              </div>
+              <div class="pt-1 mt-1 border-t border-sky-400/30 flex items-center justify-between gap-4 text-amber-200 bg-amber-500/10 px-1 py-0.5 rounded">
+                <span class="font-bold">🧾 ราคาจริงที่ต้องจ่าย:</span>
+                <strong class="text-amber-300 text-xs font-black">฿${actualCost.toLocaleString('th-TH')}</strong>
+              </div>
+              <div class="flex items-center justify-between gap-4 text-emerald-300">
+                <span>💵 ประหยัดเงินได้:</span>
+                <strong class="font-black">฿${sav.toLocaleString('th-TH')}</strong>
+              </div>
+              <div class="flex items-center justify-between gap-4 text-slate-300 text-[10px]">
+                <span>🌱 โซล่าช่วยจ่าย:</span>
+                <strong class="${parseFloat(cov) > 0 ? 'text-emerald-400' : 'text-slate-400'} font-bold">${cov}%</strong>
+              </div>
+              ${!g.hasSolar ? '<div class="text-[10px] text-orange-400 font-bold text-center pt-0.5 border-t border-orange-500/30">🏠 หลัง 9 เป็นบ้านเช่า (ไม่ติดโซล่าเซลล์)</div>' : ''}
+              ${g.anomaly ? `<div class="text-[10px] text-rose-300 font-bold text-center pt-0.5 border-t border-rose-500/30">⚠️ ${g.anomaly}</div>` : ''}
             </div>
-            <div class="flex items-center justify-between gap-4 text-emerald-300">
-              <span>💵 ประหยัดเงินได้:</span>
-              <strong class="font-black">฿${sav.toLocaleString('th-TH')}</strong>
-            </div>
-            <div class="flex items-center justify-between gap-4 text-slate-300 text-[10px]">
-              <span>🌱 โซล่าช่วยจ่าย:</span>
-              <strong class="${parseFloat(cov) > 0 ? 'text-emerald-400' : 'text-slate-400'} font-bold">${cov}%</strong>
-            </div>
-            ${!g.hasSolar ? '<div class="text-[10px] text-orange-400 font-bold text-center pt-0.5 border-t border-orange-500/30">🏠 หลัง 9 เป็นบ้านเช่า (ไม่ติดโซล่าเซลล์)</div>' : ''}
-            ${g.anomaly ? `<div class="text-[10px] text-rose-300 font-bold text-center pt-0.5 border-t border-rose-500/30">⚠️ ${g.anomaly}</div>` : ''}
-          </div>
-        `;
+          `;
+        }
+
         tooltip.style.left = `${e.pageX}px`;
         tooltip.style.top = `${e.pageY - 12}px`;
         tooltip.style.opacity = '1';
@@ -2660,6 +3061,26 @@
       updateCalculatorResults();
     }
 
+    let p2TableMode = 'money'; // 'money' (default simple) or 'detail' (with kWh units)
+
+    function setP2TableMode(mode) {
+      p2TableMode = mode;
+      const btnMoney = document.getElementById('p2-table-mode-money');
+      const btnDetail = document.getElementById('p2-table-mode-detail');
+      if (btnMoney && btnDetail) {
+        if (mode === 'money') {
+          btnMoney.className = 'px-3 py-1.5 rounded-lg bg-sky-600 text-white shadow-sm transition cursor-pointer';
+          btnDetail.className = 'px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition cursor-pointer';
+        } else {
+          btnDetail.className = 'px-3 py-1.5 rounded-lg bg-sky-600 text-white shadow-sm transition cursor-pointer';
+          btnMoney.className = 'px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition cursor-pointer';
+        }
+      }
+      const monthData = monthlyGenData.find(m => m.key === currentP2MonthKey) || monthlyGenData[2];
+      const rateInput = parseFloat(document.getElementById('calc-rate-input').value) || 4.36;
+      renderP2AccountingTable(monthData, rateInput);
+    }
+
     function updateCalculatorResults() {
       const p = peaData.find(x => x.key === currentP2MonthKey) || peaData[0];
       const monthData = monthlyGenData.find(x => x.key === currentP2MonthKey) || monthlyGenData[2];
@@ -2669,11 +3090,29 @@
       const withoutSolar = Math.round(p.paid + (p.solUnits * rateInput));
       const netSavings = Math.round(p.solUnits * rateInput);
       const savingsPct = withoutSolar > 0 ? ((netSavings / withoutSolar) * 100).toFixed(1) : '0.0';
+      const paidPct = (100 - parseFloat(savingsPct)).toFixed(1);
 
       document.getElementById('p2-paid-actual').innerText = `฿${Math.round(paidActual).toLocaleString('th-TH')}`;
       document.getElementById('p2-paid-without').innerText = `฿${withoutSolar.toLocaleString('th-TH')}`;
       document.getElementById('p2-net-savings').innerText = `฿${netSavings.toLocaleString('th-TH')}`;
-      document.getElementById('p2-savings-pct').innerText = `ลดภาระค่าไฟลงได้ทันที ${savingsPct}% ต่อเดือน`;
+      document.getElementById('p2-savings-pct').innerText = `🎉 ลดภาระค่าไฟลงได้ ${savingsPct}% ต่อเดือน`;
+
+      const summarySentEl = document.getElementById('p2-summary-sentence');
+      if (summarySentEl) {
+        summarySentEl.innerText = `สรุปรอบนี้: ค่าไฟเต็ม ฿${withoutSolar.toLocaleString('th-TH')} หักโซล่าเซลล์ช่วยเซฟฟรี ฿${netSavings.toLocaleString('th-TH')} ทำให้กิจการจ่ายจริงให้ กฟภ. เพียง ฿${Math.round(paidActual).toLocaleString('th-TH')} เท่านั้น`;
+      }
+      const summaryBadgeEl = document.getElementById('p2-summary-badge');
+      if (summaryBadgeEl) summaryBadgeEl.innerText = `${savingsPct}%`;
+
+      const barPaidPctEl = document.getElementById('p2-bar-paid-pct');
+      if (barPaidPctEl) barPaidPctEl.innerText = `${paidPct}%`;
+      const barSavePctEl = document.getElementById('p2-bar-save-pct');
+      if (barSavePctEl) barSavePctEl.innerText = `${savingsPct}%`;
+
+      const ratioBarPaid = document.getElementById('p2-ratio-bar-paid');
+      if (ratioBarPaid) ratioBarPaid.style.width = `${paidPct}%`;
+      const ratioBarSaved = document.getElementById('p2-ratio-bar-saved');
+      if (ratioBarSaved) ratioBarSaved.style.width = `${savingsPct}%`;
 
       const monthLabelEl = document.getElementById('p2-selected-month-label');
       if (monthLabelEl) monthLabelEl.innerText = monthData.fullLabel;
@@ -2697,98 +3136,78 @@
         const gen = monthData[h.key] || 0;
         const peaUnits = Math.max(0, cons - gen);
         const actualCost = Math.round(peaUnits * rateInput);
-        const withoutCost = Math.round(cons * rateInput);
         const savings = Math.round(gen * rateInput);
-        const pct = withoutCost > 0 ? ((savings / withoutCost) * 100).toFixed(1) : '0.0';
+        const withoutCost = Math.round(cons * rateInput);
+        const pct = withoutCost > 0 ? ((savings / withoutCost) * 100).toFixed(0) : '0';
 
         const card = document.createElement('div');
         
         if (h.key === 'b9') {
           // Villa 9 (Rented - No Solar)
-          card.className = 'p-5 rounded-2xl bg-amber-50/80 dark:bg-amber-950/40 border-2 border-amber-400 dark:border-amber-700 space-y-3 relative overflow-hidden shadow-sm';
+          card.className = 'p-4 sm:p-5 rounded-2xl bg-amber-50/70 dark:bg-amber-950/30 border-2 border-amber-300 dark:border-amber-700 space-y-3 shadow-sm';
           card.innerHTML = `
             <div class="flex items-center justify-between">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-black bg-amber-500 text-white">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-black bg-amber-500 text-white">
                 🏠 ${h.name}
               </span>
-              <span class="text-[11px] font-bold text-amber-700 dark:text-amber-300">บ้านเช่า (ไม่ติดโซล่า)</span>
+              <span class="text-[11px] font-black text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950 px-2 py-0.5 rounded-full border border-rose-200 dark:border-rose-900">
+                จ่ายเต็ม 100%
+              </span>
             </div>
             
-            <div class="space-y-1">
-              <span class="text-[11px] font-bold text-slate-500 uppercase">ค่าไฟจ่ายจริง กฟภ. (จ่ายเต็ม 100%):</span>
+            <div class="space-y-0.5">
+              <span class="text-[11px] font-bold text-slate-500 uppercase block">ยอดค่าไฟที่จ่ายจริง กฟภ.:</span>
               <div class="flex items-baseline gap-1.5">
-                <span class="text-2xl font-black text-rose-600 dark:text-rose-400">฿${actualCost.toLocaleString()}</span>
+                <span class="text-3xl font-black text-slate-900 dark:text-white">฿${actualCost.toLocaleString()}</span>
                 <span class="text-xs text-slate-500">บาท</span>
               </div>
             </div>
 
-            <div class="p-2.5 rounded-xl bg-white/70 dark:bg-slate-800/70 border border-amber-200 dark:border-amber-900/60 text-xs space-y-1 text-slate-600 dark:text-slate-300">
-              <div class="flex justify-between">
-                <span>ใช้ไฟฟ้า:</span>
-                <strong>${cons.toLocaleString()} kWh</strong>
+            <div class="p-2.5 rounded-xl bg-white/80 dark:bg-slate-900/60 border border-amber-200 dark:border-amber-800 text-xs space-y-1">
+              <div class="flex justify-between items-center text-slate-500">
+                <span>🌱 โซล่าช่วยเซฟ:</span>
+                <strong class="text-slate-400">฿0 (ไม่มีโซล่า)</strong>
               </div>
-              <div class="flex justify-between text-slate-400">
-                <span>โซล่าเซลล์:</span>
-                <span>0.0 kWh (ไม่มีระบบ)</span>
-              </div>
-              <div class="flex justify-between pt-1 border-t border-slate-100 dark:border-slate-700 text-rose-600 dark:text-rose-400 font-bold">
-                <span>ประหยัดได้:</span>
-                <span>฿0 บาท (0%)</span>
+              <div class="flex justify-between items-center text-[11px] text-slate-400 pt-1 border-t border-slate-100 dark:border-slate-800">
+                <span>ใช้ไฟไปทั้งหมด:</span>
+                <span>${cons.toLocaleString()} kWh</span>
               </div>
             </div>
-
-            <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
-              <div class="bg-rose-500 h-full rounded-full" style="width: 100%"></div>
-            </div>
-            <p class="text-[10px] text-amber-700 dark:text-amber-400 font-medium">⚠️ จ่ายไฟหลวงเต็มทุกหน่วย ไม่มีส่วนลด</p>
+            <p class="text-[10px] text-amber-700 dark:text-amber-300 font-semibold text-center">🏠 บ้านเช่า จ่ายค่าไฟตามบิล กฟภ. เต็มจำนวน</p>
           `;
         } else {
           // Villas 1-5 & Office (With Solar)
           const isOffice = h.key === 'off';
           const icon = isOffice ? '🏢' : '🏡';
-          const isZero = (cons === 0 && gen === 0);
 
-          card.className = 'p-5 rounded-2xl bg-white dark:bg-slate-800/80 border border-sky-100 dark:border-sky-900/60 shadow-sm space-y-3 relative overflow-hidden';
-          
+          card.className = 'p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-850 border border-sky-100 dark:border-sky-900/60 shadow-sm space-y-3';
           card.innerHTML = `
             <div class="flex items-center justify-between">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-black ${isOffice ? 'bg-indigo-600' : 'bg-sky-600'} text-white">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-black ${isOffice ? 'bg-indigo-600' : 'bg-sky-600'} text-white">
                 ${icon} ${h.name}
               </span>
-              <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
-                ${isZero ? 'ปิดปรับปรุง' : `ลดได้ ${pct}%`}
+              <span class="text-[11px] font-black text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
+                เซฟได้ ${pct}%
               </span>
             </div>
             
-            <div class="space-y-1">
-              <span class="text-[11px] font-bold text-slate-500 uppercase">ค่าไฟจ่ายจริง กฟภ.:</span>
+            <div class="space-y-0.5">
+              <span class="text-[11px] font-bold text-slate-500 uppercase block">ยอดค่าไฟที่จ่ายจริง กฟภ.:</span>
               <div class="flex items-baseline gap-1.5">
-                <span class="text-2xl font-black text-sky-950 dark:text-white">฿${actualCost.toLocaleString()}</span>
+                <span class="text-3xl font-black text-sky-950 dark:text-white">฿${actualCost.toLocaleString()}</span>
                 <span class="text-xs text-slate-500">บาท</span>
               </div>
             </div>
 
-            <div class="p-2.5 rounded-xl bg-sky-50/60 dark:bg-slate-900/50 border border-sky-100 dark:border-sky-900/40 text-xs space-y-1 text-slate-600 dark:text-slate-300">
-              <div class="flex justify-between">
-                <span>ถ้าไม่มีโซล่า:</span>
-                <span class="line-through text-slate-400">฿${withoutCost.toLocaleString()}</span>
+            <div class="p-2.5 rounded-xl bg-sky-50/60 dark:bg-slate-900/60 border border-sky-100 dark:border-sky-900/40 text-xs space-y-1">
+              <div class="flex justify-between items-center text-emerald-700 dark:text-emerald-300 font-bold">
+                <span>🌱 โซล่าช่วยเซฟ:</span>
+                <span class="text-sm font-black">-฿${savings.toLocaleString()}</span>
               </div>
-              <div class="flex justify-between text-emerald-600 dark:text-emerald-400 font-bold">
-                <span>เซฟเงินได้จริง:</span>
-                <span>-฿${savings.toLocaleString()}</span>
+              <div class="flex justify-between items-center text-[11px] text-slate-500 dark:text-slate-400 pt-1 border-t border-sky-100 dark:border-sky-900/40">
+                <span>ถ้าไม่มีโซล่า: ฿${withoutCost.toLocaleString()}</span>
+                <span>(ใช้ ${cons.toLocaleString()} kWh)</span>
               </div>
-              <div class="flex justify-between pt-1 border-t border-sky-100 dark:border-sky-900/40 text-[11px]">
-                <span class="text-slate-500">ใช้ ${cons.toLocaleString()} | แดด ${gen.toLocaleString()} kWh</span>
-              </div>
-            </div>
-
-            <div class="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2 overflow-hidden flex">
-              <div class="bg-sky-600 h-full" style="width: ${withoutCost > 0 ? (actualCost / withoutCost * 100) : 0}%" title="จ่ายจริง กฟภ."></div>
-              <div class="bg-emerald-500 h-full" style="width: ${withoutCost > 0 ? (savings / withoutCost * 100) : 0}%" title="เซฟเงินได้"></div>
-            </div>
-            <div class="flex justify-between text-[10px] text-slate-500">
-              <span>จ่าย กฟภ. ${withoutCost > 0 ? (actualCost / withoutCost * 100).toFixed(0) : 0}%</span>
-              <span class="text-emerald-600 dark:text-emerald-400 font-bold">โซล่าเซฟ ${pct}%</span>
             </div>
           `;
         }
@@ -2798,10 +3217,40 @@
     }
 
     function renderP2AccountingTable(monthData, rateInput) {
+      const thead = document.getElementById('p2-accounting-thead');
       const tbody = document.getElementById('p2-accounting-tbody');
       const tfoot = document.getElementById('p2-accounting-tfoot');
       if (!tbody || !tfoot) return;
       tbody.innerHTML = '';
+
+      if (thead) {
+        if (p2TableMode === 'money') {
+          thead.innerHTML = `
+            <tr class="bg-sky-50 dark:bg-sky-950 text-sky-900 dark:text-sky-200 border-b border-sky-200 dark:border-sky-900 font-extrabold text-[12px]">
+              <th class="py-3 px-3">อาคาร / พูลวิลล่า</th>
+              <th class="py-3 px-2 text-center">ระบบโซล่า</th>
+              <th class="py-3 px-3 text-right text-sky-950 dark:text-white font-black bg-sky-100/60 dark:bg-sky-900/40">🧾 จ่ายจริง กฟภ. (บาท)</th>
+              <th class="py-3 px-3 text-right text-emerald-700 dark:text-emerald-300 font-black bg-emerald-100/60 dark:bg-emerald-950/40">🌱 โซล่าช่วยเซฟ (บาท)</th>
+              <th class="py-3 px-2 text-center">สัดส่วนประหยัด (%)</th>
+              <th class="py-3 px-3 text-right text-slate-500 dark:text-slate-400">ถ้าไม่มีโซล่า (บาท)</th>
+            </tr>
+          `;
+        } else {
+          thead.innerHTML = `
+            <tr class="bg-sky-50 dark:bg-sky-950 text-sky-900 dark:text-sky-200 border-b border-sky-200 dark:border-sky-900 font-extrabold text-[12px]">
+              <th class="py-3 px-3">อาคาร / พูลวิลล่า</th>
+              <th class="py-3 px-2 text-center">ระบบโซล่า</th>
+              <th class="py-3 px-3 text-right">ใช้ไฟจริง (kWh)</th>
+              <th class="py-3 px-3 text-right">โซล่าผลิต (kWh)</th>
+              <th class="py-3 px-3 text-right">หน่วยจ่าย กฟภ. (kWh)</th>
+              <th class="py-3 px-3 text-right text-sky-950 dark:text-white font-black bg-sky-100/60 dark:bg-sky-900/40">จ่ายจริง กฟภ. (บาท)</th>
+              <th class="py-3 px-3 text-right text-emerald-700 dark:text-emerald-300 font-black bg-emerald-100/60 dark:bg-emerald-950/40">ประหยัดได้ (บาท)</th>
+              <th class="py-3 px-2 text-center">% ประหยัด</th>
+              <th class="py-3 px-3 text-right text-slate-500 dark:text-slate-400">ถ้าไม่มีโซล่า (บาท)</th>
+            </tr>
+          `;
+        }
+      }
 
       let sumCons = 0;
       let sumGen = 0;
@@ -2828,55 +3277,91 @@
 
         const tr = document.createElement('tr');
         tr.className = (h.key === 'b9')
-          ? 'bg-amber-50/60 dark:bg-amber-950/20 hover:bg-amber-100/40 dark:hover:bg-amber-900/30'
-          : 'hover:bg-sky-50/50 dark:hover:bg-sky-950/20';
+          ? 'bg-amber-50/60 dark:bg-amber-950/20 hover:bg-amber-100/40 dark:hover:bg-amber-900/30 font-medium'
+          : 'hover:bg-sky-50/50 dark:hover:bg-sky-950/20 font-medium';
 
-        tr.innerHTML = `
-          <td class="py-3 px-3 font-bold text-slate-800 dark:text-slate-100">
-            ${h.key === 'b9' ? '🏠' : (h.key === 'off' ? '🏢' : '🏡')} ${h.name}
-          </td>
-          <td class="py-3 px-2 text-center">
-            ${h.hasSolar
-              ? '<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-800 dark:bg-emerald-900/70 dark:text-emerald-300">มีโซล่าเซลล์</span>'
-              : '<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-100 text-amber-900 dark:bg-amber-900/70 dark:text-amber-200">บ้านเช่า (ไม่มี)</span>'
-            }
-          </td>
-          <td class="py-3 px-3 text-right font-medium">${cons.toLocaleString()}</td>
-          <td class="py-3 px-3 text-right font-medium text-cyan-600 dark:text-cyan-400">${gen.toLocaleString()}</td>
-          <td class="py-3 px-3 text-right font-medium">${peaUnits.toLocaleString()}</td>
-          <td class="py-3 px-3 text-right font-black text-sky-950 dark:text-white">฿${actualCost.toLocaleString()}</td>
-          <td class="py-3 px-3 text-right text-rose-600 dark:text-rose-400">฿${withoutCost.toLocaleString()}</td>
-          <td class="py-3 px-3 text-right font-black text-emerald-600 dark:text-emerald-400">฿${savings.toLocaleString()}</td>
-          <td class="py-3 px-2 text-center">
-            <span class="inline-block px-1.5 py-0.5 rounded text-[11px] font-bold ${h.hasSolar ? 'bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300' : 'bg-slate-100 text-slate-500'}">
-              ${h.hasSolar ? `-${pct}%` : '0%'}
-            </span>
-          </td>
-        `;
+        if (p2TableMode === 'money') {
+          tr.innerHTML = `
+            <td class="py-3 px-3 font-bold text-slate-800 dark:text-slate-100">
+              ${h.key === 'b9' ? '🏠' : (h.key === 'off' ? '🏢' : '🏡')} ${h.name}
+            </td>
+            <td class="py-3 px-2 text-center">
+              ${h.hasSolar
+                ? '<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-800 dark:bg-emerald-900/70 dark:text-emerald-300">มีโซล่าเซลล์</span>'
+                : '<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-100 text-amber-900 dark:bg-amber-900/70 dark:text-amber-200">บ้านเช่า (ไม่มี)</span>'
+              }
+            </td>
+            <td class="py-3 px-3 text-right font-black text-sky-950 dark:text-white bg-sky-50/60 dark:bg-sky-900/20 text-sm">฿${actualCost.toLocaleString()}</td>
+            <td class="py-3 px-3 text-right font-black text-emerald-600 dark:text-emerald-400 bg-emerald-50/60 dark:bg-emerald-950/20 text-sm">${h.hasSolar ? '฿' + savings.toLocaleString() : '<span class="text-slate-400">฿0</span>'}</td>
+            <td class="py-3 px-2 text-center">
+              <span class="inline-block px-2 py-0.5 rounded text-[11px] font-bold ${h.hasSolar ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200' : 'bg-slate-100 text-slate-500'}">
+                ${h.hasSolar ? `เซฟ ${pct}%` : '0%'}
+              </span>
+            </td>
+            <td class="py-3 px-3 text-right text-slate-500 dark:text-slate-400">฿${withoutCost.toLocaleString()}</td>
+          `;
+        } else {
+          tr.innerHTML = `
+            <td class="py-3 px-3 font-bold text-slate-800 dark:text-slate-100">
+              ${h.key === 'b9' ? '🏠' : (h.key === 'off' ? '🏢' : '🏡')} ${h.name}
+            </td>
+            <td class="py-3 px-2 text-center">
+              ${h.hasSolar
+                ? '<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-800 dark:bg-emerald-900/70 dark:text-emerald-300">มีโซล่าเซลล์</span>'
+                : '<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-100 text-amber-900 dark:bg-amber-900/70 dark:text-amber-200">บ้านเช่า (ไม่มี)</span>'
+              }
+            </td>
+            <td class="py-3 px-3 text-right font-medium">${cons.toLocaleString()}</td>
+            <td class="py-3 px-3 text-right font-medium text-cyan-600 dark:text-cyan-400">${gen.toLocaleString()}</td>
+            <td class="py-3 px-3 text-right font-medium">${peaUnits.toLocaleString()}</td>
+            <td class="py-3 px-3 text-right font-black text-sky-950 dark:text-white bg-sky-50/50 dark:bg-sky-900/20">฿${actualCost.toLocaleString()}</td>
+            <td class="py-3 px-3 text-right font-black text-emerald-600 dark:text-emerald-400 bg-emerald-50/50 dark:bg-emerald-950/20">฿${savings.toLocaleString()}</td>
+            <td class="py-3 px-2 text-center">
+              <span class="inline-block px-1.5 py-0.5 rounded text-[11px] font-bold ${h.hasSolar ? 'bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300' : 'bg-slate-100 text-slate-500'}">
+                ${h.hasSolar ? `-${pct}%` : '0%'}
+              </span>
+            </td>
+            <td class="py-3 px-3 text-right text-slate-500 dark:text-slate-400">฿${withoutCost.toLocaleString()}</td>
+          `;
+        }
         tbody.appendChild(tr);
       });
 
       const totalPct = sumWithoutCost > 0 ? ((sumSavings / sumWithoutCost) * 100).toFixed(1) : '0.0';
-      tfoot.innerHTML = `
-        <tr>
-          <td class="py-3.5 px-3 font-black text-sky-950 dark:text-white" colspan="2">
-            รวมทั้งสาขาชะอำ (7 อาคาร)
-          </td>
-          <td class="py-3.5 px-3 text-right">${sumCons.toLocaleString()}</td>
-          <td class="py-3.5 px-3 text-right text-cyan-700 dark:text-cyan-300">${sumGen.toLocaleString()}</td>
-          <td class="py-3.5 px-3 text-right">${sumPeaUnits.toLocaleString()}</td>
-          <td class="py-3.5 px-3 text-right text-base text-sky-950 dark:text-white">฿${sumActualCost.toLocaleString()}</td>
-          <td class="py-3.5 px-3 text-right text-rose-700 dark:text-rose-300">฿${sumWithoutCost.toLocaleString()}</td>
-          <td class="py-3.5 px-3 text-right text-base text-emerald-700 dark:text-emerald-300">฿${sumSavings.toLocaleString()}</td>
-          <td class="py-3.5 px-2 text-center text-emerald-700 dark:text-emerald-300">-${totalPct}%</td>
-        </tr>
-      `;
+      if (p2TableMode === 'money') {
+        tfoot.innerHTML = `
+          <tr>
+            <td class="py-3.5 px-3 font-black text-sky-950 dark:text-white" colspan="2">
+              รวมทั้งสาขาชะอำ (7 อาคาร)
+            </td>
+            <td class="py-3.5 px-3 text-right text-base text-sky-950 dark:text-white font-black bg-sky-100/80 dark:bg-sky-900/60">฿${sumActualCost.toLocaleString()}</td>
+            <td class="py-3.5 px-3 text-right text-base text-emerald-700 dark:text-emerald-300 font-black bg-emerald-100/80 dark:bg-emerald-900/60">฿${sumSavings.toLocaleString()}</td>
+            <td class="py-3.5 px-2 text-center text-emerald-700 dark:text-emerald-300 font-black">เซฟ ${totalPct}%</td>
+            <td class="py-3.5 px-3 text-right text-slate-600 dark:text-slate-400 font-bold">฿${sumWithoutCost.toLocaleString()}</td>
+          </tr>
+        `;
+      } else {
+        tfoot.innerHTML = `
+          <tr>
+            <td class="py-3.5 px-3 font-black text-sky-950 dark:text-white" colspan="2">
+              รวมทั้งสาขาชะอำ (7 อาคาร)
+            </td>
+            <td class="py-3.5 px-3 text-right">${sumCons.toLocaleString()}</td>
+            <td class="py-3.5 px-3 text-right text-cyan-700 dark:text-cyan-300">${sumGen.toLocaleString()}</td>
+            <td class="py-3.5 px-3 text-right">${sumPeaUnits.toLocaleString()}</td>
+            <td class="py-3.5 px-3 text-right text-base text-sky-950 dark:text-white font-black bg-sky-100/70 dark:bg-sky-900/50">฿${sumActualCost.toLocaleString()}</td>
+            <td class="py-3.5 px-3 text-right text-base text-emerald-700 dark:text-emerald-300 font-black bg-emerald-100/70 dark:bg-emerald-900/50">฿${sumSavings.toLocaleString()}</td>
+            <td class="py-3.5 px-2 text-center text-emerald-700 dark:text-emerald-300 font-bold">-${totalPct}%</td>
+            <td class="py-3.5 px-3 text-right text-slate-600 dark:text-slate-400">฿${sumWithoutCost.toLocaleString()}</td>
+          </tr>
+        `;
+      }
     }
 
     function renderP2BuildingChart(monthData, rateInput) {
       const canvas = document.getElementById('p2-building-chart');
       if (!canvas) return;
-      const rect = canvas.getBoundingClientRect();
+      const rect = canvas.parentElement.getBoundingClientRect();
       if (rect.width === 0) return;
 
       const dpr = window.devicePixelRatio || 1;
@@ -2899,19 +3384,24 @@
         const gen = monthData[h.key] || 0;
         const peaUnits = Math.max(0, cons - gen);
         const actualCost = Math.round(peaUnits * rateInput);
-        const withoutCost = Math.round(cons * rateInput);
         const savings = Math.round(gen * rateInput);
+        const withoutCost = Math.round(cons * rateInput);
+        const pct = withoutCost > 0 ? ((savings / withoutCost) * 100).toFixed(0) : '0';
         return {
           name: h.name.split(' (')[0],
           fullName: h.name,
           actualCost,
-          withoutCost,
           savings,
+          withoutCost,
+          peaUnits,
+          cons,
+          gen,
+          pct,
           hasSolar: h.hasSolar
         };
       });
 
-      const maxVal = Math.max(...buildings.map(b => Math.max(b.actualCost, b.withoutCost)), 1000);
+      const maxVal = Math.max(...buildings.map(b => Math.max(b.actualCost, b.savings)), 1000) * 1.15;
       const padLeft = 65;
       const padRight = 20;
       const padTop = 30;
@@ -2919,11 +3409,14 @@
       const chartW = W - padLeft - padRight;
       const chartH = H - padTop - padBottom;
 
+      canvas._buildings = buildings;
+      canvas._chartMeta = { padLeft, padRight, padTop, padBottom, chartW, chartH, maxVal, W, H };
+
       // Draw Grid Lines
       const gridSteps = 4;
       ctx.textAlign = 'right';
       ctx.textBaseline = 'middle';
-      ctx.font = '10px Sarabun, sans-serif';
+      ctx.font = '10px sans-serif';
       ctx.fillStyle = textColor;
 
       for (let i = 0; i <= gridSteps; i++) {
@@ -2939,54 +3432,127 @@
         ctx.fillText(`฿${val.toLocaleString()}`, padLeft - 8, y);
       }
 
-      // Draw Building Bars
+      // Draw Simple 2-Bar Comparison: [ จ่ายจริง กฟภ. ] vs [ โซล่าช่วยเซฟ ]
       const groupW = chartW / buildings.length;
-      const barW = Math.min(22, groupW * 0.32);
+      const barW = Math.min(24, Math.max(10, groupW * 0.32));
+      canvas._chartMeta.groupW = groupW;
+      canvas._chartMeta.barW = barW;
 
       buildings.forEach((b, idx) => {
         const groupCenter = padLeft + idx * groupW + groupW / 2;
 
-        const hWithout = (b.withoutCost / maxVal) * chartH;
-        const yWithout = padTop + chartH - hWithout;
-
         const hActual = (b.actualCost / maxVal) * chartH;
         const yActual = padTop + chartH - hActual;
 
-        // Bar 1: Without Solar (Left / Light Rose/Slate)
-        ctx.fillStyle = isDark ? 'rgba(244, 63, 94, 0.35)' : 'rgba(244, 63, 94, 0.25)';
+        const hSavings = (b.savings / maxVal) * chartH;
+        const ySavings = padTop + chartH - hSavings;
+
+        // Bar 1: จ่ายจริง กฟภ. (สีน้ำเงินคราม)
+        ctx.fillStyle = isDark ? '#0284c7' : '#0369a1';
         ctx.beginPath();
         if (typeof ctx.roundRect === 'function') {
-          ctx.roundRect(groupCenter - barW - 2, yWithout, barW, hWithout, [4, 4, 0, 0]);
+          ctx.roundRect(groupCenter - barW - 2, yActual, barW, hActual, [4, 4, 0, 0]);
         } else {
-          ctx.rect(groupCenter - barW - 2, yWithout, barW, hWithout);
+          ctx.rect(groupCenter - barW - 2, yActual, barW, hActual);
         }
         ctx.fill();
 
-        // Bar 2: Actual Cost (Right / Ocean Sky Blue or Amber for B9)
-        ctx.fillStyle = b.hasSolar ? (isDark ? '#0284c7' : '#0369a1') : '#f59e0b';
-        ctx.beginPath();
-        if (typeof ctx.roundRect === 'function') {
-          ctx.roundRect(groupCenter + 2, yActual, barW, hActual, [4, 4, 0, 0]);
+        // Bar 2: โซล่าช่วยเซฟ (สีเขียวมรกต)
+        if (b.hasSolar && b.savings > 0) {
+          ctx.fillStyle = '#10b981';
+          ctx.beginPath();
+          if (typeof ctx.roundRect === 'function') {
+            ctx.roundRect(groupCenter + 2, ySavings, barW, hSavings, [4, 4, 0, 0]);
+          } else {
+            ctx.rect(groupCenter + 2, ySavings, barW, hSavings);
+          }
+          ctx.fill();
         } else {
-          ctx.rect(groupCenter + 2, yActual, barW, hActual);
+          // If no solar (e.g. Villa 9), draw zero baseline line
+          ctx.fillStyle = isDark ? '#475569' : '#cbd5e1';
+          ctx.fillRect(groupCenter + 2, padTop + chartH - 2, barW, 2);
         }
-        ctx.fill();
 
-        // Savings Badge on top if saved
+        // Values on top of bars
+        ctx.font = 'bold 9px sans-serif';
+        ctx.textAlign = 'center';
+        
+        // Value for Actual
+        ctx.fillStyle = isDark ? '#38bdf8' : '#0284c7';
+        ctx.fillText(`฿${b.actualCost >= 1000 ? (b.actualCost / 1000).toFixed(1) + 'k' : b.actualCost}`, groupCenter - barW / 2 - 2, yActual - 6);
+
+        // Value for Savings
         if (b.savings > 0) {
-          ctx.fillStyle = isDark ? '#34d399' : '#059669';
-          ctx.font = 'bold 9px Sarabun, sans-serif';
-          ctx.textAlign = 'center';
-          ctx.fillText(`-฿${b.savings.toLocaleString()}`, groupCenter, Math.min(yWithout, yActual) - 8);
+          ctx.fillStyle = '#10b981';
+          ctx.fillText(`+฿${b.savings >= 1000 ? (b.savings / 1000).toFixed(1) + 'k' : b.savings}`, groupCenter + barW / 2 + 2, ySavings - 6);
         }
 
-        // Label below
+        // Building Label below
         ctx.fillStyle = textColor;
-        ctx.font = 'bold 11px Sarabun, sans-serif';
+        ctx.font = 'bold 11px sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
         ctx.fillText(b.name, groupCenter, padTop + chartH + 10);
       });
+
+      // Hover Tooltip on Canvas
+      if (!canvas._hasTooltipHandler) {
+        canvas._hasTooltipHandler = true;
+        canvas.addEventListener('mousemove', (e) => {
+          const rect = canvas.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const meta = canvas._chartMeta;
+          const bList = canvas._buildings;
+          const tooltip = document.getElementById('chart-tooltip');
+          if (!meta || !bList || !tooltip) return;
+
+          if (x >= meta.padLeft && x <= meta.W - meta.padRight && y >= meta.padTop && y <= meta.padTop + meta.chartH) {
+            const relX = x - meta.padLeft;
+            const bIdx = Math.floor(relX / meta.groupW);
+            if (bIdx >= 0 && bIdx < bList.length) {
+              const b = bList[bIdx];
+              tooltip.innerHTML = `
+                <div class="font-extrabold text-sm border-b border-sky-400/30 pb-1 mb-1.5 flex items-center justify-between gap-3">
+                  <span>${b.fullName}</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded-full ${b.hasSolar ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-400/30' : 'bg-amber-500/20 text-amber-300 border border-amber-400/30'}">${b.hasSolar ? 'มีโซล่า' : 'บ้านเช่า (ไม่มี)'}</span>
+                </div>
+                <div class="space-y-1.5 text-xs">
+                  <div class="flex justify-between gap-4">
+                    <span class="text-sky-300 flex items-center gap-1">
+                      <span class="w-2 h-2 rounded-full bg-sky-500 inline-block"></span>
+                      <span>ยอดจ่ายจริง กฟภ.:</span>
+                    </span>
+                    <strong class="text-white text-sm">฿${b.actualCost.toLocaleString()} บาท</strong>
+                  </div>
+                  <div class="flex justify-between gap-4">
+                    <span class="text-emerald-400 flex items-center gap-1">
+                      <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+                      <span>โซล่าช่วยเซฟ:</span>
+                    </span>
+                    <strong class="text-emerald-300">${b.hasSolar ? '฿' + b.savings.toLocaleString() + ' บาท' : '<span class="text-slate-400">฿0 (ไม่มีโซล่า)</span>'}</strong>
+                  </div>
+                  <div class="flex justify-between gap-4 pt-1 border-t border-slate-700/60 text-slate-400 text-[11px]">
+                    <span>ถ้าไม่มีโซล่า:</span>
+                    <span>฿${b.withoutCost.toLocaleString()} บาท</span>
+                  </div>
+                  ${b.hasSolar ? `<div class="text-[11px] text-emerald-400 font-black text-right pt-0.5">🌱 ประหยัดค่าไฟลงได้ ${b.pct}%</div>` : '<div class="text-[11px] text-amber-400 font-bold text-right pt-0.5">⚠️ จ่ายเต็ม 100%</div>'}
+                </div>
+              `;
+              tooltip.style.left = `${e.pageX}px`;
+              tooltip.style.top = `${e.pageY - 12}px`;
+              tooltip.style.opacity = '1';
+              return;
+            }
+          }
+          tooltip.style.opacity = '0';
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+          const tooltip = document.getElementById('chart-tooltip');
+          if (tooltip) tooltip.style.opacity = '0';
+        });
+      }
     }
 
     function exportAccountingCSV() {
