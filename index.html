@@ -12,6 +12,9 @@
         theme: {
           extend: {
             colors: {
+              slate: {
+                850: '#0c213d'
+              },
               ocean: {
                 50: '#f0f9ff',
                 100: '#e0f2fe',
@@ -474,6 +477,9 @@
           <div id="p2-month-selector" class="flex flex-wrap gap-1.5">
             <!-- Dynamically populated buttons -->
           </div>
+          <span class="text-[11px] font-bold text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 px-2.5 py-1 rounded-lg border border-amber-200 dark:border-amber-800 flex items-center gap-1.5">
+            <span>ℹ️</span> รอบบิล ต.ค. 69 กำลังดำเนินอยู่ (ข้อมูล ณ 22 ต.ค. 69 ยังไม่สิ้นสุดรอบบิล กฟภ.)
+          </span>
         </div>
 
         <!-- 3 Crystal-Clear Equation Cards (เข้าใจใน 3 วินาที) -->
@@ -742,7 +748,7 @@
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white flex items-center gap-2">
-              <span>📊</span> สถิติบิลค่าไฟจริง กฟภ. ย้อนหลัง (6 เดือน)
+              <span>📊</span> สถิติบิลค่าไฟจริง กฟภ. ทุกรอบบิลที่บันทึก (มี.ค. - ก.ย. 2569)
             </h3>
             <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
               ข้อมูลบิลจริงจาก กฟภ. เปรียบเทียบยอดจ่ายจริง ยอดประหยัด และสัดส่วนส่วนลด
@@ -1520,8 +1526,7 @@
       { key: '2026/06', label: 'มิ.ย. 69', fullLabel: 'มิถุนายน 2569', b1: 581.3, b1_c: 1066.2, b2: 275.4, b2_c: 600.5, b3: 497.8, b3_c: 1021.6, b4: 0.0, b4_c: 0.0, b5: 371.8, b5_c: 749.2, b9: 0.0, b9_c: 1120.0, off: 476.6, off_c: 476.6, total: 2202.9, total_c: 5034.1, days: 30 },
       { key: '2026/07', label: 'ก.ค. 69', fullLabel: 'กรกฎาคม 2569', b1: 583.3, b1_c: 1382.6, b2: 237.3, b2_c: 600.3, b3: 404.9, b3_c: 1166.7, b4: 0.0, b4_c: 0.0, b5: 299.3, b5_c: 472.9, b9: 0.0, b9_c: 1260.0, off: 476.3, off_c: 476.3, total: 2001.1, total_c: 5358.8, days: 31 },
       { key: '2026/08', label: 'ส.ค. 69', fullLabel: 'สิงหาคม 2569', b1: 538.2, b1_c: 873.8, b2: 212.6, b2_c: 323.8, b3: 395.5, b3_c: 867.3, b4: 52.9, b4_c: 157.3, b5: 58.3, b5_c: 158.4, b9: 0.0, b9_c: 980.0, off: 405.2, off_c: 405.2, total: 1662.7, total_c: 3765.8, days: 31 },
-      { key: '2026/09', label: 'ก.ย. 69', fullLabel: 'กันยายน 2569', b1: 546.8, b1_c: 1263.9, b2: 113.8, b2_c: 223.2, b3: 315.0, b3_c: 857.0, b4: 329.1, b4_c: 819.9, b5: 220.0, b5_c: 580.0, b9: 0.0, b9_c: 1150.0, off: 0.0, off_c: 0.0, total: 1524.7, total_c: 4894.0, days: 30 },
-      { key: '2026/10', label: 'ต.ค. 69', fullLabel: 'ตุลาคม 2569', b1: 437.9, b1_c: 1448.3, b2: 127.2, b2_c: 479.2, b3: 296.2, b3_c: 914.2, b4: 282.9, b4_c: 824.3, b5: 240.0, b5_c: 620.0, b9: 0.0, b9_c: 1200.0, off: 251.6, off_c: 254.2, total: 1635.8, total_c: 5740.2, days: 31 }
+      { key: '2026/09', label: 'ก.ย. 69', fullLabel: 'กันยายน 2569', b1: 546.8, b1_c: 1263.9, b2: 113.8, b2_c: 223.2, b3: 315.0, b3_c: 857.0, b4: 329.1, b4_c: 819.9, b5: 220.0, b5_c: 580.0, b9: 0.0, b9_c: 1150.0, off: 0.0, off_c: 0.0, total: 1524.7, total_c: 4894.0, days: 30 }
     ];
 
     const houseConfig = [
@@ -1541,8 +1546,7 @@
       { key: '2026/06', month: 'มิ.ย. 69', paid: 17149.26, units: 4067, solUnits: 2202.90, solSavings: 9288.94, withoutSol: 26438.20, pct: 35.13 },
       { key: '2026/07', month: 'ก.ค. 69', paid: 10848.73, units: 2732, solUnits: 2001.00, solSavings: 7945.94, withoutSol: 18794.67, pct: 42.28 },
       { key: '2026/08', month: 'ส.ค. 69', paid: 16120.12, units: 4011, solUnits: 1662.70, solSavings: 6682.35, withoutSol: 22802.47, pct: 29.31 },
-      { key: '2026/09', month: 'ก.ย. 69', paid: 14668.00, units: 3369, solUnits: 1524.70, solSavings: 6647.69, withoutSol: 21315.69, pct: 31.19 },
-      { key: '2026/10', month: 'ต.ค. 69', paid: 17895.00, units: 4104, solUnits: 1635.80, solSavings: 7132.09, withoutSol: 25027.09, pct: 28.50 }
+      { key: '2026/09', month: 'ก.ย. 69', paid: 14668.00, units: 3369, solUnits: 1524.70, solSavings: 6647.69, withoutSol: 21315.69, pct: 31.19 }
     ];
 
     const bookingSchedule = {
@@ -3147,69 +3151,81 @@
         
         if (h.key === 'b9') {
           // Villa 9 (Rented - No Solar)
-          card.className = 'p-4 sm:p-5 rounded-2xl bg-amber-50/70 dark:bg-amber-950/30 border-2 border-amber-300 dark:border-amber-700 space-y-3 shadow-sm';
+          card.className = 'p-5 rounded-2xl bg-amber-50/80 dark:bg-amber-950/40 border-2 border-amber-300 dark:border-amber-700/80 shadow-sm space-y-3.5 hover:shadow-md transition-all duration-200 relative overflow-hidden';
           card.innerHTML = `
-            <div class="flex items-center justify-between">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-black bg-amber-500 text-white">
+            <div class="flex items-center justify-between gap-2">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-black bg-amber-600 text-white shadow-sm">
                 🏠 ${h.name}
               </span>
-              <span class="text-[11px] font-black text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950 px-2 py-0.5 rounded-full border border-rose-200 dark:border-rose-900">
+              <span class="text-[11px] font-black text-rose-700 dark:text-rose-300 bg-rose-100 dark:bg-rose-950/80 px-2.5 py-0.5 rounded-full border border-rose-300 dark:border-rose-800">
                 จ่ายเต็ม 100%
               </span>
             </div>
             
-            <div class="space-y-0.5">
-              <span class="text-[11px] font-bold text-slate-500 uppercase block">ยอดค่าไฟที่จ่ายจริง กฟภ.:</span>
+            <div class="space-y-1">
+              <span class="text-[11px] font-extrabold text-slate-600 dark:text-slate-300 uppercase tracking-wide flex items-center gap-1">
+                <span>🧾</span> ยอดค่าไฟที่จ่ายจริง กฟภ.:
+              </span>
               <div class="flex items-baseline gap-1.5">
-                <span class="text-3xl font-black text-slate-900 dark:text-white">฿${actualCost.toLocaleString()}</span>
-                <span class="text-xs text-slate-500">บาท</span>
+                <span class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">฿${actualCost.toLocaleString()}</span>
+                <span class="text-xs font-bold text-slate-500 dark:text-slate-400">บาท</span>
               </div>
             </div>
 
-            <div class="p-2.5 rounded-xl bg-white/80 dark:bg-slate-900/60 border border-amber-200 dark:border-amber-800 text-xs space-y-1">
-              <div class="flex justify-between items-center text-slate-500">
-                <span>🌱 โซล่าช่วยเซฟ:</span>
-                <strong class="text-slate-400">฿0 (ไม่มีโซล่า)</strong>
+            <div class="p-3 rounded-xl bg-white/90 dark:bg-slate-900/80 border border-amber-200 dark:border-amber-800/80 text-xs space-y-2 shadow-inner">
+              <div class="flex justify-between items-center text-slate-600 dark:text-slate-300">
+                <span class="font-bold flex items-center gap-1"><span>🌱</span> โซล่าช่วยเซฟ:</span>
+                <strong class="text-slate-400 dark:text-slate-400 font-extrabold">฿0 (ไม่มีโซล่า)</strong>
               </div>
-              <div class="flex justify-between items-center text-[11px] text-slate-400 pt-1 border-t border-slate-100 dark:border-slate-800">
+              <div class="flex justify-between items-center text-[11px] text-slate-600 dark:text-slate-300 pt-1.5 border-t border-amber-100 dark:border-amber-900/60">
                 <span>ใช้ไฟไปทั้งหมด:</span>
-                <span>${cons.toLocaleString()} kWh</span>
+                <span class="font-bold text-slate-800 dark:text-slate-200">${cons.toLocaleString()} kWh</span>
               </div>
             </div>
-            <p class="text-[10px] text-amber-700 dark:text-amber-300 font-semibold text-center">🏠 บ้านเช่า จ่ายค่าไฟตามบิล กฟภ. เต็มจำนวน</p>
+
+            <div class="p-2 rounded-lg bg-amber-100/70 dark:bg-amber-900/40 text-[10px] text-amber-900 dark:text-amber-200 font-bold text-center">
+              🏠 บ้านเช่า จ่ายตามบิล กฟภ. เต็มจำนวน (ไม่มีระบบโซล่า)
+            </div>
           `;
         } else {
           // Villas 1-5 & Office (With Solar)
           const isOffice = h.key === 'off';
           const icon = isOffice ? '🏢' : '🏡';
+          const badgeBg = isOffice ? 'bg-indigo-600' : 'bg-sky-600';
 
-          card.className = 'p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-850 border border-sky-100 dark:border-sky-900/60 shadow-sm space-y-3';
+          card.className = 'p-5 rounded-2xl bg-white dark:bg-[#0c213d] border border-sky-200 dark:border-sky-800/80 shadow-sm space-y-3.5 hover:shadow-md hover:border-sky-400 dark:hover:border-sky-600 transition-all duration-200 relative overflow-hidden';
           card.innerHTML = `
-            <div class="flex items-center justify-between">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-black ${isOffice ? 'bg-indigo-600' : 'bg-sky-600'} text-white">
+            <div class="flex items-center justify-between gap-2">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-black ${badgeBg} text-white shadow-sm">
                 ${icon} ${h.name}
               </span>
-              <span class="text-[11px] font-black text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
-                เซฟได้ ${pct}%
+              <span class="text-[11px] font-black ${pct > 0 ? 'text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/80 border-emerald-300 dark:border-emerald-800' : 'text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700'} px-2.5 py-0.5 rounded-full border">
+                ${pct > 0 ? `เซฟได้ ${pct}%` : 'เซฟได้ 0%'}
               </span>
             </div>
             
-            <div class="space-y-0.5">
-              <span class="text-[11px] font-bold text-slate-500 uppercase block">ยอดค่าไฟที่จ่ายจริง กฟภ.:</span>
+            <div class="space-y-1">
+              <span class="text-[11px] font-extrabold text-sky-800 dark:text-sky-300 uppercase tracking-wide flex items-center gap-1">
+                <span>🧾</span> ยอดค่าไฟที่จ่ายจริง กฟภ.:
+              </span>
               <div class="flex items-baseline gap-1.5">
-                <span class="text-3xl font-black text-sky-950 dark:text-white">฿${actualCost.toLocaleString()}</span>
-                <span class="text-xs text-slate-500">บาท</span>
+                <span class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">฿${actualCost.toLocaleString()}</span>
+                <span class="text-xs font-bold text-slate-500 dark:text-slate-400">บาท</span>
               </div>
             </div>
 
-            <div class="p-2.5 rounded-xl bg-sky-50/60 dark:bg-slate-900/60 border border-sky-100 dark:border-sky-900/40 text-xs space-y-1">
-              <div class="flex justify-between items-center text-emerald-700 dark:text-emerald-300 font-bold">
-                <span>🌱 โซล่าช่วยเซฟ:</span>
-                <span class="text-sm font-black">-฿${savings.toLocaleString()}</span>
+            <div class="p-3 rounded-xl bg-sky-50/80 dark:bg-slate-900/80 border border-sky-200/70 dark:border-sky-800/80 text-xs space-y-2 shadow-inner">
+              <div class="flex justify-between items-center text-emerald-700 dark:text-emerald-300 font-extrabold">
+                <span class="flex items-center gap-1"><span>🌱</span> โซล่าช่วยเซฟ:</span>
+                <span class="text-base font-black text-emerald-600 dark:text-emerald-400">-฿${savings.toLocaleString()}</span>
               </div>
-              <div class="flex justify-between items-center text-[11px] text-slate-500 dark:text-slate-400 pt-1 border-t border-sky-100 dark:border-sky-900/40">
-                <span>ถ้าไม่มีโซล่า: ฿${withoutCost.toLocaleString()}</span>
-                <span>(ใช้ ${cons.toLocaleString()} kWh)</span>
+              <div class="flex justify-between items-center text-[11px] text-slate-600 dark:text-slate-300 pt-1.5 border-t border-sky-200/60 dark:border-sky-800/60">
+                <span>ถ้าไม่มีโซล่า:</span>
+                <span class="font-bold text-slate-700 dark:text-slate-200">฿${withoutCost.toLocaleString()} บาท</span>
+              </div>
+              <div class="flex justify-between items-center text-[10px] text-slate-500 dark:text-slate-400">
+                <span>ใช้ไฟ ${cons.toLocaleString()} kWh</span>
+                <span class="text-cyan-600 dark:text-cyan-400 font-bold">โซล่าผลิต ${gen.toLocaleString()} kWh</span>
               </div>
             </div>
           `;
