@@ -569,14 +569,14 @@
           <div>
             <div class="flex items-center gap-2">
               <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-200">
-                รายหลัง 7 แห่ง
+                หม้อมิเตอร์ กฟภ. 6 บัญชี
               </span>
               <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white flex items-center gap-2">
-                <span>🏘️</span> ค่าไฟจริงแยกรายหลัง (แต่ละหลังจ่ายจริงกี่บาท)
+                <span>🏘️</span> ค่าไฟจริงแยกรายหม้อมิเตอร์ กฟภ. (แต่ละหลังจ่ายจริงกี่บาท)
               </h3>
             </div>
             <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
-              สรุปยอดค่าไฟที่แต่ละหลังต้องจ่าย กฟภ. และยอดเงินที่โซล่าช่วยประหยัด ประจำรอบบิล: <strong id="p2-selected-month-label" class="text-sky-600 dark:text-sky-400 font-bold">มีนาคม 2569</strong>
+              สรุปยอดค่าไฟที่แต่ละหลังต้องจ่าย กฟภ. ตรงตามใบแจ้งหนี้จริง PEA Smart Plus และยอดเงินที่โซล่าช่วยประหยัด ประจำรอบบิล: <strong id="p2-selected-month-label" class="text-sky-600 dark:text-sky-400 font-bold">กันยายน 2569</strong>
             </p>
           </div>
           <div class="flex items-center gap-2 self-start md:self-center">
@@ -585,8 +585,8 @@
           </div>
         </div>
 
-        <!-- 7 Building Cost Cards Grid -->
-        <div id="p2-building-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- 6 Meter Cost Cards Grid -->
+        <div id="p2-building-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <!-- Dynamically populated via JS: 7 Cards (Villa 1-5, Villa 9, Office) -->
         </div>
 
@@ -1518,26 +1518,99 @@
   <script>
     // --- 1. DATASETS ---
     const monthlyGenData = [
-      { key: '2026/01', label: 'ม.ค. 69', fullLabel: 'มกราคม 2569', b1: 675.8, b1_c: 1488.1, b2: 797.6, b2_c: 1292.8, b3: 0.0, b3_c: 0.0, b4: 0.0, b4_c: 0.0, b5: 306.8, b5_c: 936.3, b9: 0.0, b9_c: 1350.0, off: 232.0, off_c: 232.0, total: 2012.2, total_c: 5299.2, days: 31 },
-      { key: '2026/02', label: 'ก.พ. 69', fullLabel: 'กุมภาพันธ์ 2569', b1: 574.4, b1_c: 1494.6, b2: 641.5, b2_c: 1415.2, b3: 0.0, b3_c: 0.0, b4: 0.0, b4_c: 0.0, b5: 317.3, b5_c: 1057.1, b9: 0.0, b9_c: 1280.0, off: 414.7, off_c: 414.7, total: 1947.9, total_c: 5661.6, days: 28 },
-      { key: '2026/03', label: 'มี.ค. 69', fullLabel: 'มีนาคม 2569', b1: 893.1, b1_c: 2959.8, b2: 410.9, b2_c: 1264.3, b3: 131.5, b3_c: 137.9, b4: 0.0, b4_c: 0.0, b5: 242.4, b5_c: 498.8, b9: 0.0, b9_c: 1850.0, off: 631.6, off_c: 631.6, total: 2309.5, total_c: 7342.4, days: 31 },
-      { key: '2026/04', label: 'เม.ย. 69', fullLabel: 'เมษายน 2569', b1: 876.5, b1_c: 3247.1, b2: 511.7, b2_c: 2009.4, b3: 452.1, b3_c: 1494.3, b4: 0.0, b4_c: 0.0, b5: 377.2, b5_c: 1020.8, b9: 0.0, b9_c: 2420.0, off: 685.4, off_c: 685.4, total: 2902.9, total_c: 10877.0, days: 30 },
-      { key: '2026/05', label: 'พ.ค. 69', fullLabel: 'พฤษภาคม 2569', b1: 747.0, b1_c: 2679.5, b2: 437.2, b2_c: 1817.7, b3: 514.3, b3_c: 1383.5, b4: 0.0, b4_c: 0.0, b5: 418.8, b5_c: 1727.2, b9: 0.0, b9_c: 2150.0, off: 672.4, off_c: 672.4, total: 2789.7, total_c: 10430.3, days: 31 },
-      { key: '2026/06', label: 'มิ.ย. 69', fullLabel: 'มิถุนายน 2569', b1: 581.3, b1_c: 1066.2, b2: 275.4, b2_c: 600.5, b3: 497.8, b3_c: 1021.6, b4: 0.0, b4_c: 0.0, b5: 371.8, b5_c: 749.2, b9: 0.0, b9_c: 1120.0, off: 476.6, off_c: 476.6, total: 2202.9, total_c: 5034.1, days: 30 },
-      { key: '2026/07', label: 'ก.ค. 69', fullLabel: 'กรกฎาคม 2569', b1: 583.3, b1_c: 1382.6, b2: 237.3, b2_c: 600.3, b3: 404.9, b3_c: 1166.7, b4: 0.0, b4_c: 0.0, b5: 299.3, b5_c: 472.9, b9: 0.0, b9_c: 1260.0, off: 476.3, off_c: 476.3, total: 2001.1, total_c: 5358.8, days: 31 },
-      { key: '2026/08', label: 'ส.ค. 69', fullLabel: 'สิงหาคม 2569', b1: 538.2, b1_c: 873.8, b2: 212.6, b2_c: 323.8, b3: 395.5, b3_c: 867.3, b4: 52.9, b4_c: 157.3, b5: 58.3, b5_c: 158.4, b9: 0.0, b9_c: 980.0, off: 405.2, off_c: 405.2, total: 1662.7, total_c: 3765.8, days: 31 },
-      { key: '2026/09', label: 'ก.ย. 69', fullLabel: 'กันยายน 2569', b1: 546.8, b1_c: 1263.9, b2: 113.8, b2_c: 223.2, b3: 315.0, b3_c: 857.0, b4: 329.1, b4_c: 819.9, b5: 220.0, b5_c: 580.0, b9: 0.0, b9_c: 1150.0, off: 0.0, off_c: 0.0, total: 1524.7, total_c: 4894.0, days: 30 }
+      { key: '2026/01', label: 'ม.ค. 69', fullLabel: 'มกราคม 2569', b1: 675.8, b1_c: 1488.1, b2: 797.6, b2_c: 1292.8, b3: 0.0, b3_c: 0.0, b4: 0.0, b4_c: 0.0, b5: 306.8, b5_c: 936.3, b6: 0.0, b6_c: 0.0, b9: 0.0, b9_c: 1350.0, off: 232.0, off_c: 232.0, b2_3: 797.6, b2_3_c: 1292.8, b4_5: 306.8, b4_5_c: 936.3, total: 2012.2, total_c: 5299.2, days: 31 },
+      { key: '2026/02', label: 'ก.พ. 69', fullLabel: 'กุมภาพันธ์ 2569', b1: 574.4, b1_c: 1494.6, b2: 641.5, b2_c: 1415.2, b3: 0.0, b3_c: 0.0, b4: 0.0, b4_c: 0.0, b5: 317.3, b5_c: 1057.1, b6: 0.0, b6_c: 0.0, b9: 0.0, b9_c: 1280.0, off: 414.7, off_c: 414.7, b2_3: 641.5, b2_3_c: 1415.2, b4_5: 317.3, b4_5_c: 1057.1, total: 1947.9, total_c: 5661.6, days: 28 },
+      { key: '2026/03', label: 'มี.ค. 69', fullLabel: 'มีนาคม 2569', b1: 893.1, b1_c: 2959.8, b2: 410.9, b2_c: 1264.3, b3: 131.5, b3_c: 137.9, b4: 0.0, b4_c: 0.0, b5: 242.4, b5_c: 498.8, b6: 0.0, b6_c: 0.0, b9: 0.0, b9_c: 1850.0, off: 631.6, off_c: 631.6, b2_3: 542.4, b2_3_c: 1402.2, b4_5: 242.4, b4_5_c: 498.8, total: 2309.5, total_c: 7342.4, days: 31 },
+      { key: '2026/04', label: 'เม.ย. 69', fullLabel: 'เมษายน 2569', b1: 876.5, b1_c: 3247.1, b2: 511.7, b2_c: 2009.4, b3: 452.1, b3_c: 1494.3, b4: 0.0, b4_c: 0.0, b5: 377.2, b5_c: 1020.8, b6: 0.0, b6_c: 0.0, b9: 0.0, b9_c: 2420.0, off: 685.4, off_c: 685.4, b2_3: 963.8, b2_3_c: 3503.7, b4_5: 377.2, b4_5_c: 1020.8, total: 2902.9, total_c: 10877.0, days: 30 },
+      { key: '2026/05', label: 'พ.ค. 69', fullLabel: 'พฤษภาคม 2569', b1: 747.0, b1_c: 2679.5, b2: 437.2, b2_c: 1817.7, b3: 514.3, b3_c: 1383.5, b4: 0.0, b4_c: 0.0, b5: 418.8, b5_c: 1727.2, b6: 0.0, b6_c: 0.0, b9: 0.0, b9_c: 2150.0, off: 672.4, off_c: 672.4, b2_3: 951.5, b2_3_c: 3201.2, b4_5: 418.8, b4_5_c: 1727.2, total: 2789.7, total_c: 10430.3, days: 31 },
+      { key: '2026/06', label: 'มิ.ย. 69', fullLabel: 'มิถุนายน 2569', b1: 581.3, b1_c: 1066.2, b2: 275.4, b2_c: 600.5, b3: 497.8, b3_c: 1021.6, b4: 0.0, b4_c: 0.0, b5: 371.8, b5_c: 749.2, b6: 0.0, b6_c: 0.0, b9: 0.0, b9_c: 1120.0, off: 476.6, off_c: 476.6, b2_3: 773.2, b2_3_c: 1622.1, b4_5: 371.8, b4_5_c: 749.2, total: 2202.9, total_c: 5034.1, days: 30 },
+      { key: '2026/07', label: 'ก.ค. 69', fullLabel: 'กรกฎาคม 2569', b1: 583.3, b1_c: 1382.6, b2: 237.3, b2_c: 600.3, b3: 404.9, b3_c: 1166.7, b4: 0.0, b4_c: 0.0, b5: 299.3, b5_c: 472.9, b6: 0.0, b6_c: 0.0, b9: 0.0, b9_c: 1260.0, off: 476.3, off_c: 476.3, b2_3: 642.2, b2_3_c: 1767.0, b4_5: 299.3, b4_5_c: 472.9, total: 2001.1, total_c: 5358.8, days: 31 },
+      { key: '2026/08', label: 'ส.ค. 69', fullLabel: 'สิงหาคม 2569', b1: 538.2, b1_c: 1197.2, b2: 212.6, b2_c: 692.6, b3: 395.5, b3_c: 795.5, b4: 52.9, b4_c: 252.9, b5: 58.3, b5_c: 308.3, b6: 0.0, b6_c: 0.0, b9: 0.0, b9_c: 750.0, off: 405.2, off_c: 1362.2, b2_3: 608.1, b2_3_c: 1488.1, b4_5: 111.2, b4_5_c: 561.2, total: 1662.7, total_c: 5358.9, days: 31 },
+      { key: '2026/09', label: 'ก.ย. 69', fullLabel: 'กันยายน 2569', b1: 546.8, b1_c: 1124.8, b2: 113.8, b2_c: 313.8, b3: 315.0, b3_c: 840.0, b4: 329.1, b4_c: 929.1, b5: 220.0, b5_c: 879.1, b6: 0.0, b6_c: 56.0, b9: 0.0, b9_c: 230.0, off: 250.0, off_c: 1035.0, b2_3: 428.8, b2_3_c: 1153.8, b4_5: 549.1, b4_5_c: 1808.2, total: 1774.7, total_c: 5408.0, days: 30 },
+      { key: '2026/10', label: 'ต.ค. 69', fullLabel: 'ตุลาคม 2569', b1: 540.0, b1_c: 1145.0, b2: 180.0, b2_c: 680.0, b3: 270.0, b3_c: 1106.0, b4: 200.0, b4_c: 950.0, b5: 195.8, b5_c: 998.8, b6: 0.0, b6_c: 46.0, b9: 0.0, b9_c: 280.0, off: 250.0, off_c: 878.0, b2_3: 450.0, b2_3_c: 1786.0, b4_5: 395.8, b4_5_c: 1948.8, total: 1635.8, total_c: 6083.8, days: 31 }
     ];
 
+    // Individual Buildings (for technical & solar inverter monitoring in Page 1)
     const houseConfig = [
       { key: 'b1', name: 'หลัง 1 (Villa 1)', hasSolar: true, note: 'มีโซล่าเซลล์' },
       { key: 'b2', name: 'หลัง 2 (Villa 2)', hasSolar: true, note: 'มีโซล่าเซลล์' },
       { key: 'b3', name: 'หลัง 3 (Villa 3)', hasSolar: true, note: 'มีโซล่าเซลล์' },
       { key: 'b4', name: 'หลัง 4 (Villa 4)', hasSolar: true, note: 'มีโซล่าเซลล์' },
       { key: 'b5', name: 'หลัง 5 (Villa 5)', hasSolar: true, note: 'มีโซล่าเซลล์' },
+      { key: 'b6', name: 'หลัง 6 (Villa 6)', hasSolar: false, note: 'ไม่มีโซล่าเซลล์ (จ่ายบิล กฟภ.)' },
       { key: 'b9', name: 'หลัง 9 (Villa 9)', hasSolar: false, note: 'บ้านเช่า (ไม่ติดโซล่าเซลล์)' },
       { key: 'off', name: 'ออฟฟิศชะอำ', hasSolar: true, note: 'มีโซล่าเซลล์' }
     ];
+
+    // Real PEA Meter Accounts (for actual electricity bills & cost allocation in Page 2)
+    const meterConfig = [
+      { key: 'b1', name: 'หลัง 1 (Villa 1)', ca: '020024555362', peaNo: '6800444189', type: '1125', hasSolar: true, note: 'มีโซล่าเซลล์ (1 หม้อ)' },
+      { key: 'b2_3', name: 'หลัง 2-3 (หม้อรวม)', ca: '020024555361', peaNo: '6700044857', type: '2225', hasSolar: true, note: 'หม้อรวม หลัง 2 + 3 (มีโซล่า)' },
+      { key: 'b4_5', name: 'หลัง 4-5 (หม้อรวม)', ca: '020024555359', peaNo: '6700044869', type: '2225', hasSolar: true, note: 'หม้อรวม หลัง 4 + 5 (มีโซล่า)' },
+      { key: 'b6', name: 'หลัง 6 (Villa 6)', ca: '020028931064', peaNo: '6700792071', type: '1125', hasSolar: false, note: 'ไม่มีโซล่าเซลล์ (จ่ายบิล กฟภ.)' },
+      { key: 'b9', name: 'หลัง 9 (Villa 9)', ca: '-', peaNo: '-', type: '1125', hasSolar: false, note: 'บ้านเช่า (ไม่ติดโซล่าเซลล์)' },
+      { key: 'off', name: 'ออฟฟิศชะอำ', ca: '020020700687', peaNo: '6800444197', type: '1125', hasSolar: true, note: 'มีโซล่าเซลล์ (1 หม้อ)' }
+    ];
+
+    // Exact PEA invoices from PEA Smart Plus screenshots
+    const peaExactBills = {
+      '2026/08': {
+        b1: { units: 659, cost: 3016.88, status: 'Normal' },
+        b2_3: { units: 880, cost: 3820.00, status: 'Normal' },
+        b4_5: { units: 450, cost: 1680.00, status: 'Normal' },
+        b6: { units: 0, cost: 0.00, status: 'Normal' },
+        b9: { units: 750, cost: 3124.71, status: 'Normal' },
+        off: { units: 957, cost: 4478.53, status: 'Normal' }
+      },
+      '2026/09': {
+        b1: { units: 578, cost: 2488.70, status: 'Overdue' },
+        b2_3: { units: 725, cost: 2555.50, status: 'Overdue' },
+        b4_5: { units: 1259, cost: 4929.53, status: 'Overdue' },
+        b6: { units: 56, cost: 215.83, status: 'Overdue' },
+        b9: { units: 230, cost: 988.46, status: 'Overdue' },
+        off: { units: 785, cost: 3489.98, status: 'Overdue' }
+      },
+      '2026/10': {
+        b1: { units: 605, cost: 2659.00, status: 'Pending' },
+        b2_3: { units: 1336, cost: 5156.76, status: 'Overdue' },
+        b4_5: { units: 1553, cost: 5965.70, status: 'Overdue' },
+        b6: { units: 46, cost: 182.00, status: 'Overdue' },
+        b9: { units: 280, cost: 1201.00, status: 'Pending' },
+        off: { units: 628, cost: 2730.54, status: 'Overdue' }
+      }
+    };
+
+    function getMeterValues(monthData, mKey, rateInput) {
+      const exactMonth = peaExactBills[monthData.key];
+      const exact = exactMonth ? exactMonth[mKey] : null;
+
+      let gen = monthData[mKey] || 0;
+      let cons = monthData[mKey + '_c'] || 0;
+
+      if (mKey === 'b2_3' && monthData.b2_3 === undefined) {
+        gen = (monthData.b2 || 0) + (monthData.b3 || 0);
+        cons = (monthData.b2_c || 0) + (monthData.b3_c || 0);
+      } else if (mKey === 'b4_5' && monthData.b4_5 === undefined) {
+        gen = (monthData.b4 || 0) + (monthData.b5 || 0);
+        cons = (monthData.b4_c || 0) + (monthData.b5_c || 0);
+      }
+
+      let peaUnits = Math.max(0, cons - gen);
+      let actualCost = Math.round(peaUnits * rateInput);
+      let billStatus = 'Normal';
+
+      if (exact) {
+        actualCost = exact.cost;
+        peaUnits = exact.units;
+        billStatus = exact.status;
+      }
+
+      const savings = Math.round(gen * rateInput);
+      const withoutCost = Math.round(actualCost + savings);
+      const pct = withoutCost > 0 ? ((savings / withoutCost) * 100).toFixed(0) : '0';
+
+      return { gen, cons, peaUnits, actualCost, savings, withoutCost, pct, billStatus };
+    }
 
     const peaData = [
       { key: '2026/03', month: 'มี.ค. 69', paid: 25702.96, units: 5494, solUnits: 2309.50, solSavings: 10804.69, withoutSol: 36507.65, pct: 29.60 },
@@ -1546,7 +1619,8 @@
       { key: '2026/06', month: 'มิ.ย. 69', paid: 17149.26, units: 4067, solUnits: 2202.90, solSavings: 9288.94, withoutSol: 26438.20, pct: 35.13 },
       { key: '2026/07', month: 'ก.ค. 69', paid: 10848.73, units: 2732, solUnits: 2001.00, solSavings: 7945.94, withoutSol: 18794.67, pct: 42.28 },
       { key: '2026/08', month: 'ส.ค. 69', paid: 16120.12, units: 4011, solUnits: 1662.70, solSavings: 6682.35, withoutSol: 22802.47, pct: 29.31 },
-      { key: '2026/09', month: 'ก.ย. 69', paid: 14668.00, units: 3369, solUnits: 1524.70, solSavings: 6647.69, withoutSol: 21315.69, pct: 31.19 }
+      { key: '2026/09', month: 'ก.ย. 69', paid: 14668.00, units: 3633, solUnits: 1774.70, solSavings: 6647.69, withoutSol: 21315.69, pct: 31.19 },
+      { key: '2026/10', month: 'ต.ค. 69', paid: 17895.00, units: 4448, solUnits: 1635.80, solSavings: 7132.09, withoutSol: 25027.09, pct: 28.50 }
     ];
 
     const bookingSchedule = {
@@ -1604,10 +1678,10 @@
     let currentP2MonthKey = '2026/03';
     let currentBookingMonth = '2026/09';
     let p1ViewMode = 'monthly'; // 'monthly' or 'daily'
-    let p1DailyHouse = 'all'; // 'all', 'b1', 'b2', 'b3', 'b4', 'b5', 'b9', 'off', 'matrix'
+    let p1DailyHouse = 'all'; // 'all', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b9', 'off', 'matrix'
     let p1ChartType = 'line'; // 'line' or 'bar'
     let p1MatrixMetric = 'cons'; // 'cons' (การใช้ไฟ), 'gen' (การผลิตโซล่า), 'cost' (ราคาจริง)
-    let p1MatrixVisibleHouses = { b1: true, b2: true, b3: true, b4: true, b5: true, b9: true, off: true };
+    let p1MatrixVisibleHouses = { b1: true, b2: true, b3: true, b4: true, b5: true, b6: true, b9: true, off: true };
 
     const matrixHouseConfig = [
       { key: 'b1', name: 'หลัง 1', color: '#0284c7', border: '#0369a1' },
@@ -1615,6 +1689,7 @@
       { key: 'b3', name: 'หลัง 3', color: '#10b981', border: '#059669' },
       { key: 'b4', name: 'หลัง 4', color: '#f59e0b', border: '#d97706' },
       { key: 'b5', name: 'หลัง 5', color: '#ec4899', border: '#db2777' },
+      { key: 'b6', name: 'หลัง 6', color: '#14b8a6', border: '#0d9488' },
       { key: 'b9', name: 'หลัง 9 (เช่า)', color: '#ea580c', border: '#c2410c' },
       { key: 'off', name: 'ออฟฟิศ', color: '#06b6d4', border: '#0891b2' }
     ];
@@ -1802,6 +1877,7 @@
         { key: 'b3', label: 'หลัง 3' },
         { key: 'b4', label: 'หลัง 4' },
         { key: 'b5', label: 'หลัง 5' },
+        { key: 'b6', label: 'หลัง 6' },
         { key: 'b9', label: 'หลัง 9 (เช่า)' },
         { key: 'off', label: 'ออฟฟิศ' },
         { key: 'matrix', label: '📊 เทียบทุกหลัง (Matrix)' }
@@ -1871,6 +1947,7 @@
         let b3_gen = Math.round((m.b3 / m.days * sunFactor) * 10) / 10;
         let b4_gen = Math.round((m.b4 / m.days * sunFactor) * 10) / 10;
         let b5_gen = Math.round((m.b5 / m.days * sunFactor) * 10) / 10;
+        const b6_gen = 0.0; // Villa 6 has no solar
         const b9_gen = 0.0; // Villa 9 is rented house, NO solar!
         let off_gen = Math.round((m.off / m.days * sunFactor) * 10) / 10;
 
@@ -1890,6 +1967,7 @@
         const b3_c = getCons(m.b3_c, 3);
         const b4_c = getCons(m.b4_c, 4);
         let b5_c = getCons(m.b5_c, 5);
+        const b6_c = getCons(m.b6_c || 0, 6);
         let b9_c = getCons(m.b9_c, 9);
 
         // Inject realistic, actionable real-world anomalies for testing & staff alerts
@@ -1911,8 +1989,8 @@
         }
 
         const off_c = Math.round((m.off_c / m.days * (d % 7 === 0 ? 0.4 : 1.1)) * 10) / 10;
-        const total_gen = Math.round((b1_gen + b2_gen + b3_gen + b4_gen + b5_gen + b9_gen + off_gen) * 10) / 10;
-        const total_c = Math.round((b1_c + b2_c + b3_c + b4_c + b5_c + b9_c + off_c) * 10) / 10;
+        const total_gen = Math.round((b1_gen + b2_gen + b3_gen + b4_gen + b5_gen + b6_gen + b9_gen + off_gen) * 10) / 10;
+        const total_c = Math.round((b1_c + b2_c + b3_c + b4_c + b5_c + b6_c + b9_c + off_c) * 10) / 10;
 
         let note = sunFactor > 0.95 ? '☀️ แดดจัด' : (sunFactor < 0.8 ? '☁️ เมฆครึ้ม' : '🌤️ แดดปานกลาง');
         if (hasAnyGuest) {
@@ -1937,6 +2015,7 @@
           b3: b3_gen, b3_c,
           b4: b4_gen, b4_c,
           b5: b5_gen, b5_c,
+          b6: b6_gen, b6_c,
           b9: b9_gen, b9_c,
           off: off_gen, off_c,
           total: total_gen, total_c
@@ -1969,7 +2048,7 @@
         if (!h.hasSolar) {
           statusBg = 'bg-white dark:bg-slate-900 border-amber-300 dark:border-amber-700 text-slate-800 dark:text-slate-100';
           badgeClass = 'bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-300 border border-orange-300';
-          statusTag = '🏠 บ้านเช่า (ผลิต 0)';
+          statusTag = h.key === 'b6' ? '🏠 หลัง 6 (ผลิต 0)' : '🏠 บ้านเช่า (ผลิต 0)';
           statusDesc = 'จ่าย กฟภ. เต็ม 100%';
         } else if (h.key === 'b2' && currentSelectedMonthKey === '2026/09') {
           statusBg = 'bg-rose-50/30 dark:bg-rose-950/20 border-rose-300 dark:border-rose-800 text-slate-800 dark:text-slate-100';
@@ -2087,7 +2166,9 @@
 
           let statusBadge = '<span class="text-emerald-600 dark:text-emerald-400 font-bold">🟢 ผลิตปกติ</span>';
           if (!h.hasSolar) {
-            statusBadge = '<span class="text-amber-600 dark:text-amber-400 font-bold">🏠 บ้านเช่า (จ่ายเต็ม 100%)</span>';
+            statusBadge = h.key === 'b6'
+              ? '<span class="text-amber-600 dark:text-amber-400 font-bold">🏠 หลัง 6 (จ่ายเต็ม 100%)</span>'
+              : '<span class="text-amber-600 dark:text-amber-400 font-bold">🏠 บ้านเช่า (จ่ายเต็ม 100%)</span>';
           } else if (h.key === 'b2' && currentSelectedMonthKey === '2026/09') {
             statusBadge = '<span class="text-amber-600 dark:text-amber-300 font-bold">⚠️ ไฟพุ่งวันว่าง (14 ก.ย.)</span>';
           } else if (h.key === 'b4' && gen === 0) {
@@ -2095,7 +2176,7 @@
           }
 
           const tr = document.createElement('tr');
-          tr.className = h.key === 'b9' 
+          tr.className = (!h.hasSolar)
             ? 'bg-amber-50/50 dark:bg-amber-950/20 hover:bg-amber-100/40 dark:hover:bg-amber-900/30 font-medium'
             : 'hover:bg-sky-50/50 dark:hover:bg-sky-950/30 font-medium';
 
@@ -2106,7 +2187,7 @@
             <td class="py-3 px-3 text-center">
               ${h.hasSolar 
                 ? '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-900 dark:bg-amber-900/60 dark:text-amber-200">☀️ มีโซล่า</span>'
-                : '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-orange-100 text-orange-900 dark:bg-orange-900/60 dark:text-orange-200">🏠 บ้านเช่า</span>'}
+                : `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-orange-100 text-orange-900 dark:bg-orange-900/60 dark:text-orange-200">${h.key === 'b6' ? '🏠 ไม่มีโซล่า' : '🏠 บ้านเช่า'}</span>`}
             </td>
             <td class="py-3 px-3 text-right font-black ${gen > 0 ? 'text-amber-600 dark:text-amber-400' : 'text-slate-400'}">
               ${gen > 0 ? gen.toFixed(1) : '0.0'}
@@ -2136,7 +2217,7 @@
         const totalCov = sumCons > 0 ? ((sumGen / sumCons) * 100).toFixed(1) : '0.0';
         tfoot.innerHTML = `
           <tr>
-            <td class="py-3.5 px-4 font-black">รวมทั้งสาขาชะอำ (7 แห่ง)</td>
+            <td class="py-3.5 px-4 font-black">รวมทั้งสาขาชะอำ (8 แห่ง)</td>
             <td class="py-3.5 px-3 text-center text-xs">โซล่า 6 จุด</td>
             <td class="py-3.5 px-3 text-right text-amber-700 dark:text-amber-300 font-black">${sumGen.toFixed(1)}</td>
             <td class="py-3.5 px-3 text-right font-black">${sumCons.toFixed(1)}</td>
@@ -3138,28 +3219,37 @@
       if (!container) return;
       container.innerHTML = '';
 
-      houseConfig.forEach(h => {
-        const cons = monthData[h.key + '_c'] || 0;
-        const gen = monthData[h.key] || 0;
-        const peaUnits = Math.max(0, cons - gen);
-        const actualCost = Math.round(peaUnits * rateInput);
-        const savings = Math.round(gen * rateInput);
-        const withoutCost = Math.round(cons * rateInput);
-        const pct = withoutCost > 0 ? ((savings / withoutCost) * 100).toFixed(0) : '0';
-
+      meterConfig.forEach(h => {
+        const mVal = getMeterValues(monthData, h.key, rateInput);
         const card = document.createElement('div');
-        
-        if (h.key === 'b9') {
-          // Villa 9 (Rented - No Solar)
+
+        let statusBadgeHtml = '';
+        if (mVal.billStatus === 'Overdue') {
+          statusBadgeHtml = `<span class="inline-flex items-center gap-1 text-[11px] font-black text-rose-700 dark:text-rose-300 bg-rose-100 dark:bg-rose-950/80 px-2 py-0.5 rounded-full border border-rose-300 dark:border-rose-800">🔴 ค้างชำระ</span>`;
+        } else if (mVal.billStatus === 'Pending') {
+          statusBadgeHtml = `<span class="inline-flex items-center gap-1 text-[11px] font-black text-amber-700 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/80 px-2 py-0.5 rounded-full border border-amber-300 dark:border-amber-800">⏳ รอตัดรอบ</span>`;
+        } else {
+          statusBadgeHtml = `<span class="inline-flex items-center gap-1 text-[11px] font-black text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-300 dark:border-emerald-800">🟢 ชำระแล้ว</span>`;
+        }
+
+        if (!h.hasSolar) {
+          // Villa 6 or Villa 9 (No Solar)
+          const isHouse6 = h.key === 'b6';
+          const badgeText = isHouse6 ? '🏠 หลัง 6 (Villa 6)' : '🏠 หลัง 9 (บ้านเช่า)';
+          const noteText = isHouse6 ? 'ไม่มีโซล่าเซลล์ (จ่ายตามบิล กฟภ. ปกติ)' : 'บ้านเช่า จ่ายตามบิล กฟภ. เต็ม 100%';
+
           card.className = 'p-5 rounded-2xl bg-amber-50/80 dark:bg-amber-950/40 border-2 border-amber-300 dark:border-amber-700/80 shadow-sm space-y-3.5 hover:shadow-md transition-all duration-200 relative overflow-hidden';
           card.innerHTML = `
             <div class="flex items-center justify-between gap-2">
               <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-black bg-amber-600 text-white shadow-sm">
-                🏠 ${h.name}
+                ${badgeText}
               </span>
-              <span class="text-[11px] font-black text-rose-700 dark:text-rose-300 bg-rose-100 dark:bg-rose-950/80 px-2.5 py-0.5 rounded-full border border-rose-300 dark:border-rose-800">
-                จ่ายเต็ม 100%
-              </span>
+              ${statusBadgeHtml}
+            </div>
+
+            <div class="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-semibold border-b border-amber-200/60 dark:border-amber-900/40 pb-2">
+              <span>CA: ${h.ca}</span>
+              <span class="px-1.5 py-0.5 rounded bg-amber-200/60 dark:bg-amber-900/60 text-amber-900 dark:text-amber-200 font-bold">ประเภท ${h.type}</span>
             </div>
             
             <div class="space-y-1">
@@ -3167,7 +3257,7 @@
                 <span>🧾</span> ยอดค่าไฟที่จ่ายจริง กฟภ.:
               </span>
               <div class="flex items-baseline gap-1.5">
-                <span class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">฿${actualCost.toLocaleString()}</span>
+                <span class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">฿${mVal.actualCost.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                 <span class="text-xs font-bold text-slate-500 dark:text-slate-400">บาท</span>
               </div>
             </div>
@@ -3178,20 +3268,25 @@
                 <strong class="text-slate-400 dark:text-slate-400 font-extrabold">฿0 (ไม่มีโซล่า)</strong>
               </div>
               <div class="flex justify-between items-center text-[11px] text-slate-600 dark:text-slate-300 pt-1.5 border-t border-amber-100 dark:border-amber-900/60">
-                <span>ใช้ไฟไปทั้งหมด:</span>
-                <span class="font-bold text-slate-800 dark:text-slate-200">${cons.toLocaleString()} kWh</span>
+                <span>หน่วยจ่าย กฟภ.:</span>
+                <span class="font-black text-amber-800 dark:text-amber-300">${mVal.peaUnits.toLocaleString()} หน่วย</span>
+              </div>
+              <div class="flex justify-between items-center text-[10px] text-slate-500 dark:text-slate-400">
+                <span>ใช้ไฟทั้งหมด: ${mVal.cons.toLocaleString()} kWh</span>
+                <span>PEA No: ${h.peaNo}</span>
               </div>
             </div>
 
             <div class="p-2 rounded-lg bg-amber-100/70 dark:bg-amber-900/40 text-[10px] text-amber-900 dark:text-amber-200 font-bold text-center">
-              🏠 บ้านเช่า จ่ายตามบิล กฟภ. เต็มจำนวน (ไม่มีระบบโซล่า)
+              ${noteText}
             </div>
           `;
         } else {
-          // Villas 1-5 & Office (With Solar)
+          // With Solar: b1, b2_3, b4_5, off
           const isOffice = h.key === 'off';
-          const icon = isOffice ? '🏢' : '🏡';
-          const badgeBg = isOffice ? 'bg-indigo-600' : 'bg-sky-600';
+          const isCombined = h.key === 'b2_3' || h.key === 'b4_5';
+          const icon = isOffice ? '🏢' : (isCombined ? '🏘️' : '🏡');
+          const badgeBg = isOffice ? 'bg-indigo-600' : (isCombined ? 'bg-teal-600' : 'bg-sky-600');
 
           card.className = 'p-5 rounded-2xl bg-white dark:bg-[#0c213d] border border-sky-200 dark:border-sky-800/80 shadow-sm space-y-3.5 hover:shadow-md hover:border-sky-400 dark:hover:border-sky-600 transition-all duration-200 relative overflow-hidden';
           card.innerHTML = `
@@ -3199,9 +3294,17 @@
               <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-black ${badgeBg} text-white shadow-sm">
                 ${icon} ${h.name}
               </span>
-              <span class="text-[11px] font-black ${pct > 0 ? 'text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/80 border-emerald-300 dark:border-emerald-800' : 'text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700'} px-2.5 py-0.5 rounded-full border">
-                ${pct > 0 ? `เซฟได้ ${pct}%` : 'เซฟได้ 0%'}
-              </span>
+              <div class="flex items-center gap-1">
+                ${statusBadgeHtml}
+                <span class="text-[11px] font-black ${mVal.pct > 0 ? 'text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/80 border-emerald-300 dark:border-emerald-800' : 'text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700'} px-2 py-0.5 rounded-full border">
+                  ${mVal.pct > 0 ? `เซฟ ${mVal.pct}%` : '0%'}
+                </span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-semibold border-b border-sky-100 dark:border-sky-900/40 pb-2">
+              <span>CA: ${h.ca}</span>
+              <span class="px-1.5 py-0.5 rounded bg-sky-100 dark:bg-sky-900/60 text-sky-800 dark:text-sky-200 font-bold">ประเภท ${h.type}</span>
             </div>
             
             <div class="space-y-1">
@@ -3209,7 +3312,7 @@
                 <span>🧾</span> ยอดค่าไฟที่จ่ายจริง กฟภ.:
               </span>
               <div class="flex items-baseline gap-1.5">
-                <span class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">฿${actualCost.toLocaleString()}</span>
+                <span class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">฿${mVal.actualCost.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                 <span class="text-xs font-bold text-slate-500 dark:text-slate-400">บาท</span>
               </div>
             </div>
@@ -3217,16 +3320,20 @@
             <div class="p-3 rounded-xl bg-sky-50/80 dark:bg-slate-900/80 border border-sky-200/70 dark:border-sky-800/80 text-xs space-y-2 shadow-inner">
               <div class="flex justify-between items-center text-emerald-700 dark:text-emerald-300 font-extrabold">
                 <span class="flex items-center gap-1"><span>🌱</span> โซล่าช่วยเซฟ:</span>
-                <span class="text-base font-black text-emerald-600 dark:text-emerald-400">-฿${savings.toLocaleString()}</span>
+                <span class="text-base font-black text-emerald-600 dark:text-emerald-400">-฿${mVal.savings.toLocaleString()}</span>
               </div>
               <div class="flex justify-between items-center text-[11px] text-slate-600 dark:text-slate-300 pt-1.5 border-t border-sky-200/60 dark:border-sky-800/60">
                 <span>ถ้าไม่มีโซล่า:</span>
-                <span class="font-bold text-slate-700 dark:text-slate-200">฿${withoutCost.toLocaleString()} บาท</span>
+                <span class="font-bold text-slate-700 dark:text-slate-200">฿${mVal.withoutCost.toLocaleString()} บาท</span>
               </div>
               <div class="flex justify-between items-center text-[10px] text-slate-500 dark:text-slate-400">
-                <span>ใช้ไฟ ${cons.toLocaleString()} kWh</span>
-                <span class="text-cyan-600 dark:text-cyan-400 font-bold">โซล่าผลิต ${gen.toLocaleString()} kWh</span>
+                <span>ซื้อ กฟภ. ${mVal.peaUnits.toLocaleString()} หน่วย</span>
+                <span class="text-cyan-600 dark:text-cyan-400 font-bold">โซล่าผลิต ${mVal.gen.toLocaleString()} kWh</span>
               </div>
+            </div>
+
+            <div class="p-2 rounded-lg bg-sky-100/70 dark:bg-sky-900/40 text-[10px] text-sky-900 dark:text-sky-200 font-bold text-center">
+              ${h.note} • PEA No: ${h.peaNo}
             </div>
           `;
         }
@@ -3246,18 +3353,19 @@
         if (p2TableMode === 'money') {
           thead.innerHTML = `
             <tr class="bg-sky-50 dark:bg-sky-950 text-sky-900 dark:text-sky-200 border-b border-sky-200 dark:border-sky-900 font-extrabold text-[12px]">
-              <th class="py-3 px-3">อาคาร / พูลวิลล่า</th>
+              <th class="py-3 px-3">หม้อมิเตอร์ กฟภ. / อาคาร</th>
               <th class="py-3 px-2 text-center">ระบบโซล่า</th>
               <th class="py-3 px-3 text-right text-sky-950 dark:text-white font-black bg-sky-100/60 dark:bg-sky-900/40">🧾 จ่ายจริง กฟภ. (บาท)</th>
               <th class="py-3 px-3 text-right text-emerald-700 dark:text-emerald-300 font-black bg-emerald-100/60 dark:bg-emerald-950/40">🌱 โซล่าช่วยเซฟ (บาท)</th>
               <th class="py-3 px-2 text-center">สัดส่วนประหยัด (%)</th>
               <th class="py-3 px-3 text-right text-slate-500 dark:text-slate-400">ถ้าไม่มีโซล่า (บาท)</th>
+              <th class="py-3 px-2 text-center">สถานะบิล</th>
             </tr>
           `;
         } else {
           thead.innerHTML = `
             <tr class="bg-sky-50 dark:bg-sky-950 text-sky-900 dark:text-sky-200 border-b border-sky-200 dark:border-sky-900 font-extrabold text-[12px]">
-              <th class="py-3 px-3">อาคาร / พูลวิลล่า</th>
+              <th class="py-3 px-3">หม้อมิเตอร์ กฟภ. / อาคาร</th>
               <th class="py-3 px-2 text-center">ระบบโซล่า</th>
               <th class="py-3 px-3 text-right">ใช้ไฟจริง (kWh)</th>
               <th class="py-3 px-3 text-right">โซล่าผลิต (kWh)</th>
@@ -3278,69 +3386,75 @@
       let sumWithoutCost = 0;
       let sumSavings = 0;
 
-      houseConfig.forEach(h => {
-        const cons = monthData[h.key + '_c'] || 0;
-        const gen = monthData[h.key] || 0;
-        const peaUnits = Math.max(0, cons - gen);
-        const actualCost = Math.round(peaUnits * rateInput);
-        const withoutCost = Math.round(cons * rateInput);
-        const savings = Math.round(gen * rateInput);
-        const pct = withoutCost > 0 ? ((savings / withoutCost) * 100).toFixed(1) : '0.0';
+      meterConfig.forEach(h => {
+        const mVal = getMeterValues(monthData, h.key, rateInput);
 
-        sumCons += cons;
-        sumGen += gen;
-        sumPeaUnits += peaUnits;
-        sumActualCost += actualCost;
-        sumWithoutCost += withoutCost;
-        sumSavings += savings;
+        sumCons += mVal.cons;
+        sumGen += mVal.gen;
+        sumPeaUnits += mVal.peaUnits;
+        sumActualCost += mVal.actualCost;
+        sumWithoutCost += mVal.withoutCost;
+        sumSavings += mVal.savings;
+
+        let statusText = '';
+        if (mVal.billStatus === 'Overdue') {
+          statusText = '<span class="px-2 py-0.5 rounded text-[10px] font-black bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300">ค้างชำระ</span>';
+        } else if (mVal.billStatus === 'Pending') {
+          statusText = '<span class="px-2 py-0.5 rounded text-[10px] font-black bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300">รอตัดรอบ</span>';
+        } else {
+          statusText = '<span class="px-2 py-0.5 rounded text-[10px] font-black bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">ชำระแล้ว</span>';
+        }
 
         const tr = document.createElement('tr');
-        tr.className = (h.key === 'b9')
+        tr.className = (!h.hasSolar)
           ? 'bg-amber-50/60 dark:bg-amber-950/20 hover:bg-amber-100/40 dark:hover:bg-amber-900/30 font-medium'
           : 'hover:bg-sky-50/50 dark:hover:bg-sky-950/20 font-medium';
 
         if (p2TableMode === 'money') {
           tr.innerHTML = `
             <td class="py-3 px-3 font-bold text-slate-800 dark:text-slate-100">
-              ${h.key === 'b9' ? '🏠' : (h.key === 'off' ? '🏢' : '🏡')} ${h.name}
+              ${!h.hasSolar ? '🏠' : (h.key === 'off' ? '🏢' : '🏡')} ${h.name}
+              <div class="text-[10px] text-slate-400 font-normal">CA: ${h.ca}</div>
             </td>
             <td class="py-3 px-2 text-center">
               ${h.hasSolar
                 ? '<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-800 dark:bg-emerald-900/70 dark:text-emerald-300">มีโซล่าเซลล์</span>'
-                : '<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-100 text-amber-900 dark:bg-amber-900/70 dark:text-amber-200">บ้านเช่า (ไม่มี)</span>'
+                : '<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-100 text-amber-900 dark:bg-amber-900/70 dark:text-amber-200">ไม่มีโซล่า</span>'
               }
             </td>
-            <td class="py-3 px-3 text-right font-black text-sky-950 dark:text-white bg-sky-50/60 dark:bg-sky-900/20 text-sm">฿${actualCost.toLocaleString()}</td>
-            <td class="py-3 px-3 text-right font-black text-emerald-600 dark:text-emerald-400 bg-emerald-50/60 dark:bg-emerald-950/20 text-sm">${h.hasSolar ? '฿' + savings.toLocaleString() : '<span class="text-slate-400">฿0</span>'}</td>
+            <td class="py-3 px-3 text-right font-black text-sky-950 dark:text-white bg-sky-50/60 dark:bg-sky-900/20 text-sm">฿${mVal.actualCost.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+            <td class="py-3 px-3 text-right font-black text-emerald-600 dark:text-emerald-400 bg-emerald-50/60 dark:bg-emerald-950/20 text-sm">${h.hasSolar ? '฿' + mVal.savings.toLocaleString() : '<span class="text-slate-400">฿0</span>'}</td>
             <td class="py-3 px-2 text-center">
               <span class="inline-block px-2 py-0.5 rounded text-[11px] font-bold ${h.hasSolar ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200' : 'bg-slate-100 text-slate-500'}">
-                ${h.hasSolar ? `เซฟ ${pct}%` : '0%'}
+                ${h.hasSolar ? `เซฟ ${mVal.pct}%` : '0%'}
               </span>
             </td>
-            <td class="py-3 px-3 text-right text-slate-500 dark:text-slate-400">฿${withoutCost.toLocaleString()}</td>
+            <td class="py-3 px-3 text-right text-slate-500 dark:text-slate-400">฿${mVal.withoutCost.toLocaleString()}</td>
+            <td class="py-3 px-2 text-center">${statusText}</td>
           `;
         } else {
           tr.innerHTML = `
             <td class="py-3 px-3 font-bold text-slate-800 dark:text-slate-100">
-              ${h.key === 'b9' ? '🏠' : (h.key === 'off' ? '🏢' : '🏡')} ${h.name}
+              ${!h.hasSolar ? '🏠' : (h.key === 'off' ? '🏢' : '🏡')} ${h.name}
+              <div class="text-[10px] text-slate-400 font-normal">CA: ${h.ca} • Type ${h.type}</div>
             </td>
             <td class="py-3 px-2 text-center">
               ${h.hasSolar
                 ? '<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-800 dark:bg-emerald-900/70 dark:text-emerald-300">มีโซล่าเซลล์</span>'
-                : '<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-100 text-amber-900 dark:bg-amber-900/70 dark:text-amber-200">บ้านเช่า (ไม่มี)</span>'
+                : '<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-100 text-amber-900 dark:bg-amber-900/70 dark:text-amber-200">ไม่มีโซล่า</span>'
               }
             </td>
-            <td class="py-3 px-3 text-right font-medium">${cons.toLocaleString()}</td>
-            <td class="py-3 px-3 text-right font-medium text-cyan-600 dark:text-cyan-400">${gen.toLocaleString()}</td>
-            <td class="py-3 px-3 text-right font-medium">${peaUnits.toLocaleString()}</td>
-            <td class="py-3 px-3 text-right font-black text-sky-950 dark:text-white bg-sky-50/50 dark:bg-sky-900/20">฿${actualCost.toLocaleString()}</td>
-            <td class="py-3 px-3 text-right font-black text-emerald-600 dark:text-emerald-400 bg-emerald-50/50 dark:bg-emerald-950/20">฿${savings.toLocaleString()}</td>
+            <td class="py-3 px-3 text-right font-medium">${mVal.cons.toLocaleString()}</td>
+            <td class="py-3 px-3 text-right font-medium text-cyan-600 dark:text-cyan-400">${mVal.gen.toLocaleString()}</td>
+            <td class="py-3 px-3 text-right font-medium">${mVal.peaUnits.toLocaleString()}</td>
+            <td class="py-3 px-3 text-right font-black text-sky-950 dark:text-white bg-sky-50/50 dark:bg-sky-900/20">฿${mVal.actualCost.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+            <td class="py-3 px-3 text-right font-black text-emerald-600 dark:text-emerald-400 bg-emerald-50/50 dark:bg-emerald-950/20">฿${mVal.savings.toLocaleString()}</td>
             <td class="py-3 px-2 text-center">
               <span class="inline-block px-1.5 py-0.5 rounded text-[11px] font-bold ${h.hasSolar ? 'bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300' : 'bg-slate-100 text-slate-500'}">
-                ${h.hasSolar ? `-${pct}%` : '0%'}
+                ${h.hasSolar ? `-${mVal.pct}%` : '0%'}
               </span>
             </td>
-            <td class="py-3 px-3 text-right text-slate-500 dark:text-slate-400">฿${withoutCost.toLocaleString()}</td>
+            <td class="py-3 px-3 text-right text-slate-500 dark:text-slate-400">฿${mVal.withoutCost.toLocaleString()}</td>
           `;
         }
         tbody.appendChild(tr);
@@ -3351,24 +3465,25 @@
         tfoot.innerHTML = `
           <tr>
             <td class="py-3.5 px-3 font-black text-sky-950 dark:text-white" colspan="2">
-              รวมทั้งสาขาชะอำ (7 อาคาร)
+              รวมทั้งสาขาชะอำ (6 หม้อมิเตอร์ กฟภ.)
             </td>
-            <td class="py-3.5 px-3 text-right text-base text-sky-950 dark:text-white font-black bg-sky-100/80 dark:bg-sky-900/60">฿${sumActualCost.toLocaleString()}</td>
+            <td class="py-3.5 px-3 text-right text-base text-sky-950 dark:text-white font-black bg-sky-100/80 dark:bg-sky-900/60">฿${sumActualCost.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
             <td class="py-3.5 px-3 text-right text-base text-emerald-700 dark:text-emerald-300 font-black bg-emerald-100/80 dark:bg-emerald-900/60">฿${sumSavings.toLocaleString()}</td>
             <td class="py-3.5 px-2 text-center text-emerald-700 dark:text-emerald-300 font-black">เซฟ ${totalPct}%</td>
             <td class="py-3.5 px-3 text-right text-slate-600 dark:text-slate-400 font-bold">฿${sumWithoutCost.toLocaleString()}</td>
+            <td class="py-3.5 px-2 text-center text-xs font-bold text-slate-500">6 บิล</td>
           </tr>
         `;
       } else {
         tfoot.innerHTML = `
           <tr>
             <td class="py-3.5 px-3 font-black text-sky-950 dark:text-white" colspan="2">
-              รวมทั้งสาขาชะอำ (7 อาคาร)
+              รวมทั้งสาขาชะอำ (6 หม้อมิเตอร์ กฟภ.)
             </td>
-            <td class="py-3.5 px-3 text-right">${sumCons.toLocaleString()}</td>
-            <td class="py-3.5 px-3 text-right text-cyan-700 dark:text-cyan-300">${sumGen.toLocaleString()}</td>
-            <td class="py-3.5 px-3 text-right">${sumPeaUnits.toLocaleString()}</td>
-            <td class="py-3.5 px-3 text-right text-base text-sky-950 dark:text-white font-black bg-sky-100/70 dark:bg-sky-900/50">฿${sumActualCost.toLocaleString()}</td>
+            <td class="py-3.5 px-3 text-right font-black">${sumCons.toLocaleString()}</td>
+            <td class="py-3.5 px-3 text-right text-cyan-700 dark:text-cyan-300 font-black">${sumGen.toLocaleString()}</td>
+            <td class="py-3.5 px-3 text-right font-black">${sumPeaUnits.toLocaleString()}</td>
+            <td class="py-3.5 px-3 text-right text-base text-sky-950 dark:text-white font-black bg-sky-100/70 dark:bg-sky-900/50">฿${sumActualCost.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
             <td class="py-3.5 px-3 text-right text-base text-emerald-700 dark:text-emerald-300 font-black bg-emerald-100/70 dark:bg-emerald-900/50">฿${sumSavings.toLocaleString()}</td>
             <td class="py-3.5 px-2 text-center text-emerald-700 dark:text-emerald-300 font-bold">-${totalPct}%</td>
             <td class="py-3.5 px-3 text-right text-slate-600 dark:text-slate-400">฿${sumWithoutCost.toLocaleString()}</td>
@@ -3398,24 +3513,18 @@
       const textColor = isDark ? '#94a3b8' : '#64748b';
       const gridColor = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
 
-      const buildings = houseConfig.map(h => {
-        const cons = monthData[h.key + '_c'] || 0;
-        const gen = monthData[h.key] || 0;
-        const peaUnits = Math.max(0, cons - gen);
-        const actualCost = Math.round(peaUnits * rateInput);
-        const savings = Math.round(gen * rateInput);
-        const withoutCost = Math.round(cons * rateInput);
-        const pct = withoutCost > 0 ? ((savings / withoutCost) * 100).toFixed(0) : '0';
+      const buildings = meterConfig.map(h => {
+        const mVal = getMeterValues(monthData, h.key, rateInput);
         return {
           name: h.name.split(' (')[0],
           fullName: h.name,
-          actualCost,
-          savings,
-          withoutCost,
-          peaUnits,
-          cons,
-          gen,
-          pct,
+          actualCost: mVal.actualCost,
+          savings: mVal.savings,
+          withoutCost: mVal.withoutCost,
+          peaUnits: mVal.peaUnits,
+          cons: mVal.cons,
+          gen: mVal.gen,
+          pct: mVal.pct,
           hasSolar: h.hasSolar
         };
       });
@@ -3487,7 +3596,7 @@
           }
           ctx.fill();
         } else {
-          // If no solar (e.g. Villa 9), draw zero baseline line
+          // If no solar (e.g. Villa 6, 9), draw zero baseline line
           ctx.fillStyle = isDark ? '#475569' : '#cbd5e1';
           ctx.fillRect(groupCenter + 2, padTop + chartH - 2, barW, 2);
         }
@@ -3534,7 +3643,7 @@
               tooltip.innerHTML = `
                 <div class="font-extrabold text-sm border-b border-sky-400/30 pb-1 mb-1.5 flex items-center justify-between gap-3">
                   <span>${b.fullName}</span>
-                  <span class="text-[10px] px-2 py-0.5 rounded-full ${b.hasSolar ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-400/30' : 'bg-amber-500/20 text-amber-300 border border-amber-400/30'}">${b.hasSolar ? 'มีโซล่า' : 'บ้านเช่า (ไม่มี)'}</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded-full ${b.hasSolar ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-400/30' : 'bg-amber-500/20 text-amber-300 border border-amber-400/30'}">${b.hasSolar ? 'มีโซล่า' : 'ไม่มีโซล่า'}</span>
                 </div>
                 <div class="space-y-1.5 text-xs">
                   <div class="flex justify-between gap-4">
@@ -3542,7 +3651,7 @@
                       <span class="w-2 h-2 rounded-full bg-sky-500 inline-block"></span>
                       <span>ยอดจ่ายจริง กฟภ.:</span>
                     </span>
-                    <strong class="text-white text-sm">฿${b.actualCost.toLocaleString()} บาท</strong>
+                    <strong class="text-white text-sm">฿${b.actualCost.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} บาท</strong>
                   </div>
                   <div class="flex justify-between gap-4">
                     <span class="text-emerald-400 flex items-center gap-1">
@@ -3555,7 +3664,7 @@
                     <span>ถ้าไม่มีโซล่า:</span>
                     <span>฿${b.withoutCost.toLocaleString()} บาท</span>
                   </div>
-                  ${b.hasSolar ? `<div class="text-[11px] text-emerald-400 font-black text-right pt-0.5">🌱 ประหยัดค่าไฟลงได้ ${b.pct}%</div>` : '<div class="text-[11px] text-amber-400 font-bold text-right pt-0.5">⚠️ จ่ายเต็ม 100%</div>'}
+                  ${b.hasSolar ? `<div class="text-[11px] text-emerald-400 font-black text-right pt-0.5">🌱 ประหยัดค่าไฟลงได้ ${b.pct}%</div>` : '<div class="text-[11px] text-amber-400 font-bold text-right pt-0.5">⚠️ จ่ายตามบิล กฟภ. เต็มจำนวน</div>'}
                 </div>
               `;
               tooltip.style.left = `${e.pageX}px`;
@@ -3581,31 +3690,25 @@
       let csvContent = '\uFEFF'; // UTF-8 BOM
       csvContent += `รายงานการจัดสรรต้นทุนค่าไฟฟ้าแยกหน่วยงาน (Cost Allocation Report) - HuaHinHub Plus สาขาชะอำ\n`;
       csvContent += `รอบบิลเดือน: ${monthData.fullLabel}, อัตราค่าไฟเฉลี่ย: ฿${rateInput} บาท/หน่วย\n\n`;
-      csvContent += `"อาคาร / พูลวิลล่า","สถานะระบบโซล่า","ใช้ไฟจริง (kWh)","โซล่าผลิต (kWh)","หน่วยจ่าย กฟภ. (kWh)","จ่ายจริง กฟภ. (บาท)","ถ้าไม่มีโซล่า (บาท)","ประหยัดได้ (บาท)","สัดส่วนประหยัด (%)"\n`;
+      csvContent += `"หม้อมิเตอร์ กฟภ. / อาคาร","เลข CA","หมายเลข PEA","ประเภทผู้ใช้ไฟ","สถานะระบบโซล่า","ใช้ไฟจริง (kWh)","โซล่าผลิต (kWh)","หน่วยจ่าย กฟภ. (kWh)","จ่ายจริง กฟภ. (บาท)","ถ้าไม่มีโซล่า (บาท)","ประหยัดได้ (บาท)","สัดส่วนประหยัด (%)"\n`;
 
       let sumCons = 0, sumGen = 0, sumPea = 0, sumActual = 0, sumWithout = 0, sumSaved = 0;
 
-      houseConfig.forEach(h => {
-        const cons = monthData[h.key + '_c'] || 0;
-        const gen = monthData[h.key] || 0;
-        const peaUnits = Math.max(0, cons - gen);
-        const actualCost = Math.round(peaUnits * rateInput);
-        const withoutCost = Math.round(cons * rateInput);
-        const savings = Math.round(gen * rateInput);
-        const pct = withoutCost > 0 ? ((savings / withoutCost) * 100).toFixed(1) : '0.0';
+      meterConfig.forEach(h => {
+        const mVal = getMeterValues(monthData, h.key, rateInput);
 
-        sumCons += cons;
-        sumGen += gen;
-        sumPea += peaUnits;
-        sumActual += actualCost;
-        sumWithout += withoutCost;
-        sumSaved += savings;
+        sumCons += mVal.cons;
+        sumGen += mVal.gen;
+        sumPea += mVal.peaUnits;
+        sumActual += mVal.actualCost;
+        sumWithout += mVal.withoutCost;
+        sumSaved += mVal.savings;
 
-        csvContent += `"${h.name}","${h.hasSolar ? 'มีโซล่าเซลล์' : 'บ้านเช่าไม่มีโซล่า'}","${cons}","${gen}","${peaUnits}","${actualCost}","${withoutCost}","${savings}","${pct}%"\n`;
+        csvContent += `"${h.name}","${h.ca}","${h.peaNo}","${h.type}","${h.hasSolar ? 'มีโซล่าเซลล์' : 'ไม่มีโซล่า'}","${mVal.cons}","${mVal.gen}","${mVal.peaUnits}","${mVal.actualCost.toFixed(2)}","${mVal.withoutCost}","${mVal.savings}","${mVal.pct}%"\n`;
       });
 
       const totalPct = sumWithout > 0 ? ((sumSaved / sumWithout) * 100).toFixed(1) : '0.0';
-      csvContent += `"รวมทั้งสาขาชะอำ (7 อาคาร)","-","${sumCons}","${sumGen}","${sumPea}","${sumActual}","${sumWithout}","${sumSaved}","${totalPct}%"\n`;
+      csvContent += `"รวมทั้งสาขาชะอำ (6 หม้อมิเตอร์)","-","-","-","-","${sumCons}","${sumGen}","${sumPea}","${sumActual.toFixed(2)}","${sumWithout}","${sumSaved}","${totalPct}%"\n`;
 
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       const link = document.createElement('a');
