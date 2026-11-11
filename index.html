@@ -917,9 +917,45 @@
           </div>
         </div>
 
-        <!-- Calendar Heatmap Grid -->
-        <div id="booking-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2.5">
-          <!-- Dynamically populated calendar tiles -->
+        <!-- Month Navigation Bar (Calendar View Header) -->
+        <div class="flex items-center justify-between py-2.5 px-4 rounded-2xl bg-gradient-to-r from-sky-50 to-blue-50 dark:from-slate-800/80 dark:to-slate-900/80 border border-sky-200/80 dark:border-sky-800/60 shadow-xs">
+          <button onclick="navigateBookingMonth(-1)" class="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-sky-500 hover:text-white dark:hover:bg-sky-600 text-slate-700 dark:text-slate-200 font-bold text-xs flex items-center gap-1.5 transition shadow-xs cursor-pointer">
+            <span>◀</span> <span class="hidden sm:inline">เดือนก่อน</span>
+          </button>
+          
+          <div class="text-center">
+            <div id="booking-cal-title" class="text-sm sm:text-base font-black text-sky-950 dark:text-white tracking-wide">
+              October 2026 (ตุลาคม 2569)
+            </div>
+            <div class="text-[11px] text-slate-500 dark:text-slate-400">
+              ตารางปฏิทิน 7 วัน (อาทิตย์ - เสาร์) • คลิกที่ช่องวันที่เพื่อดูแจกแจงค่าไฟ
+            </div>
+          </div>
+
+          <button onclick="navigateBookingMonth(1)" class="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-sky-500 hover:text-white dark:hover:bg-sky-600 text-slate-700 dark:text-slate-200 font-bold text-xs flex items-center gap-1.5 transition shadow-xs cursor-pointer">
+            <span class="hidden sm:inline">เดือนถัดไป</span> <span>▶</span>
+          </button>
+        </div>
+
+        <!-- Calendar Heatmap Grid (Standard 7-Day Month Grid) -->
+        <div class="overflow-x-auto -mx-2 sm:mx-0 px-2 sm:px-0 pb-2">
+          <div class="min-w-[760px]">
+            <!-- 7-Day Weekday Headers -->
+            <div class="grid grid-cols-7 gap-2 text-center text-xs font-black py-2.5 rounded-xl bg-slate-100/90 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/60 mb-2 select-none">
+              <div class="text-rose-600 dark:text-rose-400">อา. <span class="text-[10px] font-normal opacity-80">(Sun)</span></div>
+              <div class="text-slate-700 dark:text-slate-300">จ. <span class="text-[10px] font-normal opacity-80">(Mon)</span></div>
+              <div class="text-slate-700 dark:text-slate-300">อ. <span class="text-[10px] font-normal opacity-80">(Tue)</span></div>
+              <div class="text-slate-700 dark:text-slate-300">พ. <span class="text-[10px] font-normal opacity-80">(Wed)</span></div>
+              <div class="text-slate-700 dark:text-slate-300">พฤ. <span class="text-[10px] font-normal opacity-80">(Thu)</span></div>
+              <div class="text-slate-700 dark:text-slate-300">ศ. <span class="text-[10px] font-normal opacity-80">(Fri)</span></div>
+              <div class="text-sky-600 dark:text-sky-400">ส. <span class="text-[10px] font-normal opacity-80">(Sat)</span></div>
+            </div>
+
+            <!-- Calendar Cells Container (Strict 7 columns) -->
+            <div id="booking-grid" class="grid grid-cols-7 gap-2">
+              <!-- Dynamically populated calendar tiles with offset padding -->
+            </div>
+          </div>
         </div>
 
         <!-- Legend for Calendar -->
@@ -3759,6 +3795,16 @@
     }
 
         // --- 7. PAGE 3 LOGIC (BOOKINGS, STAY VS VACANT, REAL AUDIT LINK) ---
+    function navigateBookingMonth(dir) {
+      const months = ['2026/06', '2026/07', '2026/08', '2026/09', '2026/10', '2026/11'];
+      let idx = months.indexOf(currentBookingMonth);
+      if (idx === -1) idx = 4;
+      const nextIdx = idx + dir;
+      if (nextIdx >= 0 && nextIdx < months.length) {
+        switchBookingMonth(months[nextIdx]);
+      }
+    }
+
     function switchBookingMonth(monthKey) {
       currentBookingMonth = monthKey;
       const allMonths = ['2026/06', '2026/07', '2026/08', '2026/09', '2026/10', '2026/11'];
@@ -3772,6 +3818,19 @@
         }
       });
 
+      const monthNamesMap = {
+        '2026/06': 'June 2026 (มิถุนายน 2569)',
+        '2026/07': 'July 2026 (กรกฎาคม 2569)',
+        '2026/08': 'August 2026 (สิงหาคม 2569)',
+        '2026/09': 'September 2026 (กันยายน 2569)',
+        '2026/10': 'October 2026 (ตุลาคม 2569)',
+        '2026/11': 'November 2026 (พฤศจิกายน 2569)'
+      };
+      const calTitle = document.getElementById('booking-cal-title');
+      if (calTitle && monthNamesMap[monthKey]) {
+        calTitle.innerText = monthNamesMap[monthKey];
+      }
+
       renderBookingGrid();
       initBookingSampleSelect();
       recalcBookingMargin();
@@ -3783,11 +3842,17 @@
       grid.innerHTML = '';
 
       const [yearStr, monthStr] = currentBookingMonth.split('/');
-      const mInfo = monthlyGenData.find(x => x.key === currentBookingMonth) || { days: new Date(parseInt(yearStr), parseInt(monthStr), 0).getDate() };
+      const year = parseInt(yearStr);
+      const month = parseInt(monthStr);
+      const mInfo = monthlyGenData.find(x => x.key === currentBookingMonth) || { days: new Date(year, month, 0).getDate() };
       const daysCount = mInfo.days;
       const bookings = bookingSchedule[currentBookingMonth] || [];
       const selectedVilla = document.getElementById('book-villa-select').value;
       const hasReal = (currentBookingMonth === '2026/09' || currentBookingMonth === '2026/10' || currentBookingMonth === '2026/11');
+
+      // Calculate calendar start day of week (0 = Sunday, 1 = Monday, ... 6 = Saturday)
+      const firstDayOfWeek = new Date(year, month - 1, 1).getDay();
+      const prevMonthDays = new Date(year, month - 1, 0).getDate();
 
       const alertsContainer = document.getElementById('alert-items-container');
       if (alertsContainer) alertsContainer.innerHTML = '';
@@ -3798,10 +3863,28 @@
       let vacKwhList = [];
       let vacCostList = [];
 
+      // 1. Render Preceding Padding Cells (Days from previous month)
+      for (let p = 0; p < firstDayOfWeek; p++) {
+        const padDay = prevMonthDays - firstDayOfWeek + p + 1;
+        const padTile = document.createElement('div');
+        padTile.className = 'p-2 sm:p-2.5 rounded-xl border border-dashed border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/20 text-slate-400 dark:text-slate-600 min-h-[118px] sm:min-h-[130px] flex flex-col justify-between opacity-35 select-none';
+        padTile.innerHTML = `
+          <div class="flex items-center justify-between text-xs font-bold text-slate-400 dark:text-slate-600">
+            <span>${padDay}</span>
+            <span class="text-[9px] font-normal">ก่อนหน้า</span>
+          </div>
+          <div class="text-[10px] text-center text-slate-400/80 italic">นอกเดือน</div>
+          <div class="h-3"></div>
+        `;
+        grid.appendChild(padTile);
+      }
+
+      // 2. Render Active Days of the Month
       for (let day = 1; day <= daysCount; day++) {
         const dStr = String(day).padStart(2, '0');
         const dateStr = `${currentBookingMonth.replace('/', '-')}-${dStr}`;
         const slashDate = `${currentBookingMonth}/${dStr}`;
+        const isToday = (currentBookingMonth === '2026/11' && day === 11);
         
         // Find matching bookings for this day
         let dayBookings = bookings.filter(b => b.date === dateStr);
@@ -3878,26 +3961,35 @@
           if (dayCons > noShowThreshold) {
             isAbnormal = true;
             abnormalReason = `ลูกค้า No-Show (${guestNames}) แต่ใช้ไฟจริงสูงถึง ${dayCons.toFixed(1)} kWh (สงสัยลืมปิดแอร์/แอบเข้าพัก)`;
-            alerts.push(`🚨 ว. ${day} (${dateStr}): ${abnormalReason}`);
+            alerts.push(`🚨 วันที่ ${day} (${dateStr}): ${abnormalReason}`);
           }
         } else if (!isOccupied) {
           const vacLimit = (selectedVilla === 'all' ? 120 : 25);
           if (dayCons > vacLimit) {
             isAbnormal = true;
             abnormalReason = `ห้องว่างแต่ใช้ไฟสูงผิดปกติ ${dayCons.toFixed(1)} kWh (เกินเกณฑ์ควบคุม ${vacLimit} kWh)`;
-            alerts.push(`⚠️ ว. ${day} (${dateStr}): ${abnormalReason}`);
+            alerts.push(`⚠️ วันที่ ${day} (${dateStr}): ${abnormalReason}`);
           }
         }
 
         const tile = document.createElement('div');
-        tile.className = isOccupied
-          ? 'p-3 rounded-xl border border-emerald-300 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/40 text-slate-800 dark:text-slate-100 flex flex-col justify-between cursor-pointer hover:shadow-lg hover:border-emerald-500 transition min-h-[105px]'
-          : (isNoShow
-              ? 'p-3 rounded-xl border border-rose-300 dark:border-rose-800 bg-rose-50 dark:bg-rose-950/40 text-slate-800 dark:text-slate-100 flex flex-col justify-between cursor-pointer hover:shadow-lg hover:border-rose-500 transition min-h-[105px]'
-              : (isAbnormal
-                  ? 'p-3 rounded-xl border-2 border-amber-400 bg-amber-50 dark:bg-amber-950/50 text-slate-800 dark:text-slate-100 flex flex-col justify-between cursor-pointer hover:shadow-lg hover:border-amber-500 transition min-h-[105px]'
-                  : 'p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/40 text-slate-700 dark:text-slate-300 flex flex-col justify-between cursor-pointer hover:shadow-md hover:border-sky-400 transition min-h-[105px]'));
+        let tileClass = 'p-2 sm:p-2.5 rounded-xl border flex flex-col justify-between cursor-pointer transition hover:shadow-lg min-h-[118px] sm:min-h-[130px] relative text-left group ';
+        if (isToday) {
+          tileClass += 'ring-2 ring-sky-500 shadow-md ';
+        }
 
+        if (isOccupied) {
+          tileClass += 'border-emerald-300 dark:border-emerald-800 bg-emerald-50/90 dark:bg-emerald-950/40 text-slate-800 dark:text-slate-100 hover:border-emerald-500';
+        } else if (isNoShow) {
+          tileClass += 'border-rose-300 dark:border-rose-800 bg-rose-50/90 dark:bg-rose-950/40 text-slate-800 dark:text-slate-100 hover:border-rose-500';
+        } else if (isAbnormal) {
+          tileClass += 'border-2 border-amber-400 bg-amber-50/95 dark:bg-amber-950/50 text-slate-800 dark:text-slate-100 hover:border-amber-500';
+        } else {
+          tileClass += 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 text-slate-700 dark:text-slate-300 hover:border-sky-400';
+        }
+        tile.className = tileClass;
+
+        // Badge & Date label
         const statusLabel = isOccupied ? '🟢 มีแขก' : (isNoShow ? '🔴 No-Show' : (isAbnormal ? '⚠️ ตรวจสอบ' : '⚪ ว่าง'));
         const statusFull = isOccupied ? '🟢 มีลูกค้าเข้าพักจริง' : (isNoShow ? '🔴 จองแต่ไม่เข้าพัก (No-Show)' : (isAbnormal ? '⚠️ วันห้องว่าง (ตรวจพบการกินไฟสูงผิดปกติ)' : '⚪ ห้องว่าง (Standby ปกติ)'));
 
@@ -3921,31 +4013,89 @@
           });
         };
 
+        // Middle Booking Items (Rendered like AppSheet Calendar event bars)
+        let middleHtml = '';
+        if (isOccupied) {
+          if (dayBookings.length === 1) {
+            const b = dayBookings[0];
+            middleHtml = `
+              <div class="mt-1 px-1.5 py-0.5 rounded bg-emerald-100/90 dark:bg-emerald-900/60 border border-emerald-300/60 dark:border-emerald-700/60 text-[10px] leading-tight font-bold text-emerald-950 dark:text-emerald-100 truncate" title="หลัง ${b.b}: ${b.guest} (${b.pax} คน)">
+                🏡 ห.${b.b}: ${b.guest} <span class="font-normal text-[9px] opacity-80">(${b.pax}p)</span>
+              </div>
+            `;
+          } else {
+            const visible = dayBookings.slice(0, 2);
+            const remaining = dayBookings.length - 2;
+            middleHtml = `
+              <div class="mt-1 space-y-0.5">
+                ${visible.map(b => `
+                  <div class="px-1.5 py-0.5 rounded bg-emerald-100/90 dark:bg-emerald-900/60 border border-emerald-300/60 dark:border-emerald-700/60 text-[10px] leading-tight font-bold text-emerald-950 dark:text-emerald-100 truncate" title="หลัง ${b.b}: ${b.guest} (${b.pax} คน)">
+                    🏡 ห.${b.b}: ${b.guest} <span class="font-normal text-[9px] opacity-80">(${b.pax}p)</span>
+                  </div>
+                `).join('')}
+                ${remaining > 0 ? `<div class="text-[9px] font-black text-emerald-700 dark:text-emerald-300 pl-0.5">+ อีก ${remaining} หลัง...</div>` : ''}
+              </div>
+            `;
+          }
+        } else if (isNoShow) {
+          middleHtml = `
+            <div class="mt-1 px-1.5 py-0.5 rounded bg-rose-100/90 dark:bg-rose-900/60 border border-rose-300/60 dark:border-rose-700/60 text-[10px] leading-tight font-bold text-rose-950 dark:text-rose-100 truncate" title="${guestNames}">
+              🚫 ${guestNames}
+            </div>
+          `;
+        } else if (isAbnormal) {
+          middleHtml = `
+            <div class="mt-1 px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-900/70 border border-amber-300 dark:border-amber-700 text-[10px] leading-tight font-bold text-amber-900 dark:text-amber-100">
+              ⚡ ไฟพุ่ง ${dayCons.toFixed(1)} kWh
+            </div>
+          `;
+        } else {
+          middleHtml = `
+            <div class="mt-1 text-[10px] text-slate-400 dark:text-slate-500 font-medium italic">
+              สแตนด์บายห้องว่าง
+            </div>
+          `;
+        }
+
         tile.innerHTML = `
           <div>
             <div class="flex items-center justify-between">
-              <span class="text-xs font-black ${isOccupied ? 'text-emerald-700 dark:text-emerald-300' : (isNoShow ? 'text-rose-600 dark:text-rose-400 font-bold' : 'text-slate-700 dark:text-slate-300')}">
-                ว. ${day}
-              </span>
-              <span class="text-[11px] font-bold">
+              <div class="flex items-center gap-1">
+                <span class="text-xs sm:text-sm font-black ${isOccupied ? 'text-emerald-800 dark:text-emerald-200' : (isNoShow ? 'text-rose-700 dark:text-rose-300' : 'text-slate-800 dark:text-slate-200')}">
+                  ${dStr}
+                </span>
+                ${isToday ? '<span class="px-1 py-0.2 rounded text-[9px] font-black bg-sky-600 text-white">วันนี้</span>' : ''}
+              </div>
+              <span class="text-[10px] font-bold">
                 ${statusLabel}
               </span>
             </div>
-            <div class="text-[11px] font-semibold truncate mt-1">
-              ${isOccupied 
-                ? `<span class="text-emerald-900 dark:text-emerald-200 font-black">${guestNames}</span>` 
-                : (isNoShow 
-                    ? `<span class="text-rose-700 dark:text-rose-300 font-bold">${guestNames}</span>` 
-                    : `<span class="text-slate-400 font-normal">สแตนด์บายห้องว่าง</span>`)}
-            </div>
+            ${middleHtml}
           </div>
-          <div class="pt-1.5 border-t border-slate-200/60 dark:border-slate-700/60 mt-1.5 flex items-center justify-between text-[10px]">
-            <span class="text-sky-900 dark:text-sky-200 font-bold">🔌 ${dayCons.toFixed(1)} <span class="text-[9px] font-normal">kWh</span></span>
-            <span class="text-amber-600 dark:text-amber-400 font-bold">☀️ ${dayGen.toFixed(1)}</span>
-            <strong class="text-slate-700 dark:text-slate-200">฿${dayCost.toLocaleString()}</strong>
+          <div class="pt-1.5 border-t border-slate-200/80 dark:border-slate-700/80 mt-1 flex items-center justify-between text-[10px] leading-none">
+            <span class="text-sky-900 dark:text-sky-200 font-bold" title="ใช้ไฟรวม">🔌 ${dayCons.toFixed(0)} <span class="text-[8px] font-normal opacity-75">kWh</span></span>
+            <span class="text-amber-600 dark:text-amber-400 font-bold" title="ผลิตโซล่า">☀️ ${dayGen.toFixed(0)}</span>
+            <strong class="text-slate-800 dark:text-slate-100 font-black" title="ค่าไฟ PEA">฿${dayCost.toLocaleString()}</strong>
           </div>
         `;
         grid.appendChild(tile);
+      }
+
+      // 3. Render Post-Month Trailing Padding Cells (to complete standard 7-col rectangular grid)
+      const totalRenderedCells = firstDayOfWeek + daysCount;
+      const trailingDays = (7 - (totalRenderedCells % 7)) % 7;
+      for (let t = 1; t <= trailingDays; t++) {
+        const nextTile = document.createElement('div');
+        nextTile.className = 'p-2 sm:p-2.5 rounded-xl border border-dashed border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/20 text-slate-400 dark:text-slate-600 min-h-[118px] sm:min-h-[130px] flex flex-col justify-between opacity-35 select-none';
+        nextTile.innerHTML = `
+          <div class="flex items-center justify-between text-xs font-bold text-slate-400 dark:text-slate-600">
+            <span>${String(t).padStart(2, '0')}</span>
+            <span class="text-[9px] font-normal">ถัดไป</span>
+          </div>
+          <div class="text-[10px] text-center text-slate-400/80 italic">นอกเดือน</div>
+          <div class="h-3"></div>
+        `;
+        grid.appendChild(nextTile);
       }
 
       // Dynamic calculation of the 3 KPI cards at the top of Page 3
