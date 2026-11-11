@@ -2144,8 +2144,8 @@
 
       for (let d = 1; d <= m.days; d++) {
         const dStr = String(d).padStart(2, '0');
-        const fullDate = ${mKey.replace('/', '-')}-;
-        const slashDate = ${mKey}/;
+        const fullDate = `${mKey.replace('/', '-')}-${dStr}`;
+        const slashDate = `${mKey}/${dStr}`;
 
         let b1_gen, b2_gen, b3_gen, b4_gen, b5_gen, b6_gen = 0.0, b9_gen = 0.0, off_gen;
         let b1_c, b2_c, b3_c, b4_c, b5_c, b6_c, b9_c, off_c;
@@ -2201,7 +2201,7 @@
             dayAnomalyAlert = 'หลัง 1: วันจองไม่เข้าพัก (No-Show) แต่ใช้ไฟสูง 80.8 kWh';
             anomalyHouse = 'b1';
           } else if (mKey === '2026/10' && (d === 5 || d === 6) && b1_c >= 75) {
-            dayAnomalyAlert = หลัง 1: วันจองไม่เข้าพัก (No-Show) แต่กินไฟ  kWh;
+            dayAnomalyAlert = 'หลัง 1: วันจองไม่เข้าพัก (No-Show) แต่กินไฟ ' + b1_c + ' kWh';
             anomalyHouse = 'b1';
           } else if (mKey === '2026/10' && d === 24) {
             dayAnomalyAlert = 'หลัง 4 & 5: การใช้ไฟพุ่งสูงกว่า 140 kWh (ตรวจสอบโหลดสระ/แอร์)';
@@ -2250,16 +2250,16 @@
 
         let note = (mKey === '2026/11' && d === 11) ? '⏱️ ข้อมูลช่วงเช้า 10:00 น.' : (sunFactor > 0.95 ? '☀️ แดดจัด' : (sunFactor < 0.75 ? '☁️ เมฆครึ้ม' : '🌤️ แดดปานกลาง'));
         if (hasAnyGuest) {
-          const bookedVillas = dayBookings.map(x => หลัง ).join(', ');
-          note +=  • มีแขก ();
+          const bookedVillas = dayBookings.map(x => `หลัง ${x.b}`).join(', ');
+          note += ` • มีแขก (${bookedVillas})`;
         } else {
           note += ' • สแตนด์บาย';
         }
 
         days.push({
           day: d,
-          shortDate: ${d} ,
-          fullDateLabel: ว. ( ),
+          shortDate: `${d} ${shortM}`,
+          fullDateLabel: `ว.${d} (${d} ${shortM})`,
           fullDate,
           sunFactor,
           hasAnyGuest,

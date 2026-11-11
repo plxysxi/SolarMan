@@ -1091,7 +1091,7 @@
 
       for (let d = 1; d <= m.days; d++) {
         const dStr = String(d).padStart(2, '0');
-        const slashDate = ${mKey}/;
+        const slashDate = `${mKey}/${dStr}`;
 
         let b1, b2, b3, b4, b5, off;
         let b1_c, b2_c, b3_c, b4_c, b5_c, off_c;
@@ -1137,7 +1137,7 @@
         const total_c = Math.round((b1_c + b2_c + b3_c + b4_c + b5_c + off_c) * 100) / 100;
 
         days.push({ 
-          label: ว., fullLabel: วันที่  , date: slashDate, 
+          label: `ว.${d}`, fullLabel: `วันที่ ${d} ${m.fullLabel}`, date: slashDate, 
           b1, b1_c, b2, b2_c, b3, b3_c, b4, b4_c, b5, b5_c, off, off_c, total, total_c 
         });
       }
