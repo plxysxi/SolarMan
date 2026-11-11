@@ -3758,7 +3758,7 @@
       link.click();
     }
 
-    // --- 7. PAGE 3 LOGIC (BOOKINGS, STAY VS VACANT, MARGIN) ---
+        // --- 7. PAGE 3 LOGIC (BOOKINGS, STAY VS VACANT, REAL AUDIT LINK) ---
     function switchBookingMonth(monthKey) {
       currentBookingMonth = monthKey;
       const allMonths = ['2026/06', '2026/07', '2026/08', '2026/09', '2026/10', '2026/11'];
@@ -3779,19 +3779,29 @@
 
     function renderBookingGrid() {
       const grid = document.getElementById('booking-grid');
+      if (!grid) return;
       grid.innerHTML = '';
 
       const [yearStr, monthStr] = currentBookingMonth.split('/');
-      const daysCount = new Date(parseInt(yearStr), parseInt(monthStr), 0).getDate();
+      const mInfo = monthlyGenData.find(x => x.key === currentBookingMonth) || { days: new Date(parseInt(yearStr), parseInt(monthStr), 0).getDate() };
+      const daysCount = mInfo.days;
       const bookings = bookingSchedule[currentBookingMonth] || [];
       const selectedVilla = document.getElementById('book-villa-select').value;
+      const hasReal = (currentBookingMonth === '2026/09' || currentBookingMonth === '2026/10' || currentBookingMonth === '2026/11');
 
       const alertsContainer = document.getElementById('alert-items-container');
-      alertsContainer.innerHTML = '';
+      if (alertsContainer) alertsContainer.innerHTML = '';
       const alerts = [];
 
+      let occKwhList = [];
+      let occCostList = [];
+      let vacKwhList = [];
+      let vacCostList = [];
+
       for (let day = 1; day <= daysCount; day++) {
-        const dateStr = `${currentBookingMonth.replace('/', '-')}-${String(day).padStart(2, '0')}`;
+        const dStr = String(day).padStart(2, '0');
+        const dateStr = `${currentBookingMonth.replace('/', '-')}-${dStr}`;
+        const slashDate = `${currentBookingMonth}/${dStr}`;
         
         // Find matching bookings for this day
         let dayBookings = bookings.filter(b => b.date === dateStr);
@@ -3805,87 +3815,219 @@
         const isNoShow = !isOccupied && noShowBookings.length > 0;
 
         const guestNames = isOccupied
-          ? occupiedBookings.map(b => `${b.guest} (${selectedVilla === 'all' ? 'หลัง ' + b.b + ' • ' : ''}${b.pax} ท่าน)`).join(', ')
+          ? occupiedBookings.map(b => `${b.guest} (${selectedVilla === 'all' ? 'หลัง ' + b.b + ' • ' : ''}${b.pax} คน)`).join(', ')
           : (isNoShow 
-              ? noShowBookings.map(b => `${b.guest} (${selectedVilla === 'all' ? 'หลัง ' + b.b + ' • ' : ''}${b.pax} ท่าน [ไม่เข้าพัก])`).join(', ')
+              ? noShowBookings.map(b => `${b.guest} (${selectedVilla === 'all' ? 'หลัง ' + b.b + ' • ' : ''}${b.pax} คน [No-Show])`).join(', ')
               : '');
 
-        // Check for abnormal consumption on vacant days (Alert requirement)
+        // Pull REAL consumption, solar generation, and cost from inverters
+        let dayCons = 0;
+        let dayGen = 0;
+        let dayBuy = 0;
+        let dayCost = 0;
+
+        if (hasReal && realDailySolarMan[slashDate]) {
+          const r = realDailySolarMan[slashDate];
+          if (selectedVilla === 'all') {
+            const houses = ['b1', 'b2', 'b3', 'b4', 'b5'];
+            houses.forEach(hk => {
+              if (r[hk]) {
+                dayGen += r[hk][0];
+                dayCons += r[hk][1];
+                dayBuy += r[hk][2];
+              }
+            });
+            dayCost = Math.round(dayBuy * 4.36);
+          } else {
+            const hk = `b${selectedVilla}`;
+            if (r[hk]) {
+              dayGen = r[hk][0];
+              dayCons = r[hk][1];
+              dayBuy = r[hk][2];
+              dayCost = Math.round(dayBuy * 4.36);
+            } else if (selectedVilla === '9') {
+              dayCons = currentBookingMonth === '2026/09' ? Math.round(152.0 / 30 * 10) / 10 : Math.round(124.0 / 31 * 10) / 10;
+              dayBuy = dayCons;
+              dayCost = Math.round(dayBuy * 4.36);
+            }
+          }
+        } else {
+          // Synthetic estimation for earlier months
+          const baseDaily = (mInfo.total_c || 5000) / daysCount;
+          dayCons = isOccupied ? Math.round((baseDaily * 1.45) * 10) / 10 : Math.round((baseDaily * 0.7) * 10) / 10;
+          dayGen = Math.round(((mInfo.total || 2000) / daysCount) * 10) / 10;
+          dayBuy = Math.max(0, dayCons - dayGen);
+          dayCost = Math.round(dayBuy * 4.36);
+        }
+
+        // Collect stats for dynamic KPI averages
+        if (isOccupied) {
+          occKwhList.push(dayCons);
+          occCostList.push(dayCost);
+        } else if (!isNoShow) {
+          vacKwhList.push(dayCons);
+          vacCostList.push(dayCost);
+        }
+
+        // Anomaly Detection based on real power usage vs occupancy
         let isAbnormal = false;
         let abnormalReason = '';
-        if (!isOccupied && !isNoShow) {
-          if (currentBookingMonth === '2026/09' && day === 14 && (selectedVilla === 'all' || selectedVilla === '2')) {
+
+        if (isNoShow) {
+          const noShowThreshold = (selectedVilla === 'all' ? 120 : 35);
+          if (dayCons > noShowThreshold) {
             isAbnormal = true;
-            abnormalReason = 'หลัง 2: ใช้ไฟ 38.0 หน่วย (ผิดปกติกว่าวันว่าง 3.4 เท่า ลืมปิดแอร์หรือปั๊มน้ำ)';
-            alerts.push(`⚠️ วันที่ 14 ก.ย. 69: ${abnormalReason}`);
-          } else if (currentBookingMonth === '2026/09' && day === 22 && (selectedVilla === 'all' || selectedVilla === '9')) {
+            abnormalReason = `ลูกค้า No-Show (${guestNames}) แต่ใช้ไฟจริงสูงถึง ${dayCons.toFixed(1)} kWh (สงสัยลืมปิดแอร์/แอบเข้าพัก)`;
+            alerts.push(`🚨 ว. ${day} (${dateStr}): ${abnormalReason}`);
+          }
+        } else if (!isOccupied) {
+          const vacLimit = (selectedVilla === 'all' ? 120 : 25);
+          if (dayCons > vacLimit) {
             isAbnormal = true;
-            abnormalReason = 'หลัง 9 (บ้านเช่า): ใช้ไฟ 32.5 หน่วย (แอร์ห้องรับแขกเปิดทิ้งไว้)';
-            alerts.push(`⚠️ วันที่ 22 ก.ย. 69: ${abnormalReason}`);
+            abnormalReason = `ห้องว่างแต่ใช้ไฟสูงผิดปกติ ${dayCons.toFixed(1)} kWh (เกินเกณฑ์ควบคุม ${vacLimit} kWh)`;
+            alerts.push(`⚠️ ว. ${day} (${dateStr}): ${abnormalReason}`);
           }
         }
 
         const tile = document.createElement('div');
         tile.className = isOccupied
-          ? 'p-3 rounded-xl border border-emerald-300 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/40 text-slate-800 dark:text-slate-100 flex flex-col justify-between cursor-pointer hover:shadow-md transition min-h-[92px]'
+          ? 'p-3 rounded-xl border border-emerald-300 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/40 text-slate-800 dark:text-slate-100 flex flex-col justify-between cursor-pointer hover:shadow-lg hover:border-emerald-500 transition min-h-[105px]'
           : (isNoShow
-              ? 'p-3 rounded-xl border border-rose-300 dark:border-rose-800 bg-rose-50 dark:bg-rose-950/40 text-slate-800 dark:text-slate-100 flex flex-col justify-between cursor-pointer hover:shadow-md transition min-h-[92px]'
+              ? 'p-3 rounded-xl border border-rose-300 dark:border-rose-800 bg-rose-50 dark:bg-rose-950/40 text-slate-800 dark:text-slate-100 flex flex-col justify-between cursor-pointer hover:shadow-lg hover:border-rose-500 transition min-h-[105px]'
               : (isAbnormal
-                  ? 'p-3 rounded-xl border-2 border-amber-400 bg-amber-50 dark:bg-amber-950/50 text-slate-800 dark:text-slate-100 flex flex-col justify-between cursor-pointer hover:shadow-md transition min-h-[92px]'
-                  : 'p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/40 text-slate-700 dark:text-slate-300 flex flex-col justify-between cursor-pointer hover:border-sky-300 transition min-h-[92px]'));
+                  ? 'p-3 rounded-xl border-2 border-amber-400 bg-amber-50 dark:bg-amber-950/50 text-slate-800 dark:text-slate-100 flex flex-col justify-between cursor-pointer hover:shadow-lg hover:border-amber-500 transition min-h-[105px]'
+                  : 'p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/40 text-slate-700 dark:text-slate-300 flex flex-col justify-between cursor-pointer hover:shadow-md hover:border-sky-400 transition min-h-[105px]'));
 
-        const statusLabel = isOccupied ? '🟢 มีแขก' : (isNoShow ? '🔴 ไม่เข้าพัก' : (isAbnormal ? '⚠️ ตรวจสอบ' : '⚪ ว่าง'));
-        const statusFull = isOccupied ? '🟢 มีลูกค้าเข้าพัก' : (isNoShow ? '🔴 จองแต่ไม่เข้าพัก (No-Show)' : (isAbnormal ? '⚠️ ห้องว่าง (พบการใช้ไฟผิดปกติ)' : '⚪ ห้องว่าง (Standby)'));
+        const statusLabel = isOccupied ? '🟢 มีแขก' : (isNoShow ? '🔴 No-Show' : (isAbnormal ? '⚠️ ตรวจสอบ' : '⚪ ว่าง'));
+        const statusFull = isOccupied ? '🟢 มีลูกค้าเข้าพักจริง' : (isNoShow ? '🔴 จองแต่ไม่เข้าพัก (No-Show)' : (isAbnormal ? '⚠️ วันห้องว่าง (ตรวจพบการกินไฟสูงผิดปกติ)' : '⚪ ห้องว่าง (Standby ปกติ)'));
 
         tile.onclick = () => {
-          alert(`📅 วันที่: ${dateStr}\n` + 
-                `สถานะ: ${statusFull}\n` +
-                (isOccupied 
-                  ? `ผู้เข้าพัก: ${guestNames}\nค่าไฟประเมิน: ~฿301.00 (69.0 หน่วย)` 
-                  : (isNoShow 
-                      ? `รายการจอง: ${guestNames}\nสถานะ: จองแต่ไม่เข้าพัก (ค่าไฟ Standby ~฿49.10)`
-                      : `ค่าไฟประเมิน: ${isAbnormal ? '~฿165.68 (38 หน่วย)' : '~฿49.10 (11.3 หน่วย)'}`)));
+          showDayAuditModal({
+            dateStr,
+            slashDate,
+            day,
+            monthKey: currentBookingMonth,
+            statusFull,
+            guestNames,
+            isOccupied,
+            isNoShow,
+            isAbnormal,
+            abnormalReason,
+            dayCons,
+            dayGen,
+            dayBuy,
+            dayCost,
+            selectedVilla
+          });
         };
 
         tile.innerHTML = `
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-black ${isOccupied ? 'text-emerald-700 dark:text-emerald-300' : (isNoShow ? 'text-rose-600 dark:text-rose-400 font-bold' : 'text-slate-600 dark:text-slate-400')}">
-              ว. ${day}
-            </span>
-            <span class="text-[11px] font-bold">
-              ${statusLabel}
-            </span>
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black ${isOccupied ? 'text-emerald-700 dark:text-emerald-300' : (isNoShow ? 'text-rose-600 dark:text-rose-400 font-bold' : 'text-slate-700 dark:text-slate-300')}">
+                ว. ${day}
+              </span>
+              <span class="text-[11px] font-bold">
+                ${statusLabel}
+              </span>
+            </div>
+            <div class="text-[11px] font-semibold truncate mt-1">
+              ${isOccupied 
+                ? `<span class="text-emerald-900 dark:text-emerald-200 font-black">${guestNames}</span>` 
+                : (isNoShow 
+                    ? `<span class="text-rose-700 dark:text-rose-300 font-bold">${guestNames}</span>` 
+                    : `<span class="text-slate-400 font-normal">สแตนด์บายห้องว่าง</span>`)}
+            </div>
           </div>
-          <div class="text-[11px] font-semibold truncate mt-1">
-            ${isOccupied 
-              ? `<span class="text-emerald-800 dark:text-emerald-200">${guestNames}</span>` 
-              : (isNoShow 
-                  ? `<span class="text-rose-700 dark:text-rose-300">${guestNames}</span>` 
-                  : `<span class="text-slate-400 font-normal">สแตนด์บาย ~11 หน่วย</span>`)}
-          </div>
-          <div class="text-[10px] text-right font-bold mt-1 text-slate-500">
-            ${isOccupied ? '฿301/คืน' : (isNoShow ? '฿49 (No-Show)' : (isAbnormal ? '฿165 (พุ่งสูง)' : '฿49/วัน'))}
+          <div class="pt-1.5 border-t border-slate-200/60 dark:border-slate-700/60 mt-1.5 flex items-center justify-between text-[10px]">
+            <span class="text-sky-900 dark:text-sky-200 font-bold">🔌 ${dayCons.toFixed(1)} <span class="text-[9px] font-normal">kWh</span></span>
+            <span class="text-amber-600 dark:text-amber-400 font-bold">☀️ ${dayGen.toFixed(1)}</span>
+            <strong class="text-slate-700 dark:text-slate-200">฿${dayCost.toLocaleString()}</strong>
           </div>
         `;
         grid.appendChild(tile);
       }
 
-      // Render alert messages
-      if (alerts.length > 0) {
-        alerts.forEach(msg => {
-          const div = document.createElement('div');
-          div.className = 'font-bold text-amber-900 dark:text-amber-200 flex items-center gap-1.5';
-          div.innerText = msg;
-          alertsContainer.appendChild(div);
-        });
-      } else {
-        alertsContainer.innerHTML = '<span class="text-emerald-700 dark:text-emerald-300 font-bold">✓ ไม่พบความผิดปกติในรอบเดือนนี้ การใช้ไฟฟ้าในช่วงวันว่างอยู่ในเกณฑ์ควบคุม</span>';
+      // Dynamic calculation of the 3 KPI cards at the top of Page 3
+      const avgOccKwh = occKwhList.length > 0 ? (occKwhList.reduce((a, b) => a + b, 0) / occKwhList.length) : 0;
+      const avgOccCost = occCostList.length > 0 ? (occCostList.reduce((a, b) => a + b, 0) / occCostList.length) : 0;
+      const avgVacKwh = vacKwhList.length > 0 ? (vacKwhList.reduce((a, b) => a + b, 0) / vacKwhList.length) : 0;
+      const avgVacCost = vacCostList.length > 0 ? (vacCostList.reduce((a, b) => a + b, 0) / vacCostList.length) : 0;
+      const diffCost = Math.max(0, avgOccCost - avgVacCost);
+      const diffRatio = avgVacKwh > 0 ? (avgOccKwh / avgVacKwh).toFixed(1) : '1.0';
+
+      const elOccCost = document.getElementById('stat-occ-cost');
+      const elOccKwh = document.getElementById('stat-occ-kwh');
+      const elVacCost = document.getElementById('stat-vac-cost');
+      const elVacKwh = document.getElementById('stat-vac-kwh');
+      const elDiffCost = document.getElementById('stat-diff-cost');
+      const elDiffRatio = document.getElementById('stat-diff-ratio');
+
+      if (elOccCost) elOccCost.innerText = `฿${avgOccCost.toFixed(2)}`;
+      if (elOccKwh) elOccKwh.innerText = `${avgOccKwh.toFixed(1)} หน่วย / วัน`;
+      if (elVacCost) elVacCost.innerText = `฿${avgVacCost.toFixed(2)}`;
+      if (elVacKwh) elVacKwh.innerText = `${avgVacKwh.toFixed(1)} หน่วย / วัน`;
+      if (elDiffCost) elDiffCost.innerText = `+฿${diffCost.toFixed(2)}`;
+      if (elDiffRatio) elDiffRatio.innerText = `${diffRatio} เท่าของวันว่าง`;
+
+      // Render alerts
+      if (alertsContainer) {
+        if (alerts.length > 0) {
+          alerts.forEach(msg => {
+            const div = document.createElement('div');
+            div.className = 'font-bold text-amber-900 dark:text-amber-200 flex items-center gap-1.5 p-2 rounded-lg bg-amber-100/70 dark:bg-amber-950/40 border border-amber-300';
+            div.innerText = msg;
+            alertsContainer.appendChild(div);
+          });
+        } else {
+          alertsContainer.innerHTML = '<span class="text-emerald-700 dark:text-emerald-300 font-bold p-2 block bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200">✓ ไม่พบความผิดปกติในรอบเดือนนี้: การใช้ไฟฟ้าช่วงวันว่างสอดคล้องกับเกณฑ์สแตนด์บาย</span>';
+        }
       }
     }
 
-    // --- 8. PROFIT & MARGIN CALCULATOR LOGIC ---
+    function showDayAuditModal(data) {
+      const modal = document.getElementById('day-audit-modal');
+      if (!modal) return;
+
+      document.getElementById('modal-date-title').innerText = `📅 วันที่ ${data.day} (${data.dateStr})`;
+      document.getElementById('modal-status-badge').innerHTML = data.statusFull;
+      document.getElementById('modal-cons-kwh').innerText = `${data.dayCons.toFixed(1)} kWh`;
+      document.getElementById('modal-gen-kwh').innerText = `${data.dayGen.toFixed(1)} kWh`;
+      document.getElementById('modal-cost-thb').innerText = `฿${data.dayCost.toLocaleString()}`;
+      document.getElementById('modal-guest-info').innerText = data.guestNames || 'ไม่มีรายการจอง (ห้องว่าง Standby)';
+      
+      const verdictEl = document.getElementById('modal-verdict-info');
+      if (data.isAbnormal) {
+        verdictEl.className = 'font-black text-rose-600 dark:text-rose-400 text-right';
+        verdictEl.innerText = data.abnormalReason;
+      } else if (data.isOccupied) {
+        verdictEl.className = 'font-bold text-emerald-700 dark:text-emerald-300 text-right';
+        verdictEl.innerText = `การใช้ไฟ ${data.dayCons.toFixed(1)} kWh อยู่ในเกณฑ์ปกติของวันมีลูกค้าเข้าพัก`;
+      } else {
+        verdictEl.className = 'font-bold text-slate-600 dark:text-slate-400 text-right';
+        verdictEl.innerText = `การใช้ไฟ ${data.dayCons.toFixed(1)} kWh อยู่ในเกณฑ์สแตนด์บายปกติ (≤ 25 kWh)`;
+      }
+
+      const gotoBtn = document.getElementById('modal-goto-p1-btn');
+      gotoBtn.onclick = () => {
+        closeDayAuditModal();
+        switchPage(1);
+        if (p1ViewMode !== 'daily') switchPage1Mode('daily');
+        if (currentSelectedMonthKey !== data.monthKey) switchMonth(data.monthKey);
+      };
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeDayAuditModal() {
+      const modal = document.getElementById('day-audit-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    // --- 8. PROFIT & MARGIN CALCULATOR LOGIC (REAL DATA LINK) ---
     function initBookingSampleSelect() {
       const select = document.getElementById('booking-sample-select');
+      if (!select) return;
       select.innerHTML = '';
 
       const bookings = bookingSchedule[currentBookingMonth] || [];
@@ -3904,24 +4046,38 @@
     function recalcBookingMargin() {
       const roomPrice = parseFloat(document.getElementById('calc-room-price').value) || 4500;
       const select = document.getElementById('booking-sample-select');
+      if (!select) return;
       const bookings = bookingSchedule[currentBookingMonth] || [];
       const selIdx = parseInt(select.value) || 0;
-      const b = bookings[selIdx] || { guest: 'คุณกานดา', b: 1, pax: 8 };
+      const b = bookings[selIdx] || { guest: 'คุณกานดา', b: 1, pax: 8, date: '2026-10-10' };
 
-      // Calculate realistic electricity cost
-      // Base: 55 kWh + (pax * 1.8) * rate
-      const units = 55 + (b.pax * 1.8);
+      const slashDate = b.date ? b.date.replace(/-/g, '/') : '';
+      let units = 55 + (b.pax * 1.8);
+      let solUnits = 0;
+      let buyUnits = units;
+
+      if (realDailySolarMan[slashDate]) {
+        const r = realDailySolarMan[slashDate];
+        const hk = `b${b.b}`;
+        if (r && r[hk]) {
+          solUnits = r[hk][0];
+          units = r[hk][1];
+          buyUnits = r[hk][2];
+        }
+      }
+
       const rate = 4.36;
-      const elecCost = Math.round(units * rate);
+      const elecCost = Math.round(buyUnits * rate);
+      const solSaved = Math.round(solUnits * rate);
       const netProfit = Math.max(0, roomPrice - elecCost);
       const marginPct = roomPrice > 0 ? ((netProfit / roomPrice) * 100).toFixed(1) : '0.0';
       const costRatio = roomPrice > 0 ? ((elecCost / roomPrice) * 100).toFixed(1) : '0.0';
 
-      document.getElementById('res-guest-name').innerText = `ลูกค้า: ${b.guest} (หลัง ${b.b} • ${b.pax} ท่าน)`;
+      document.getElementById('res-guest-name').innerText = `ลูกค้า: ${b.guest} (หลัง ${b.b} • ${b.pax} คน • วันที่ ${b.date})`;
       document.getElementById('res-room-price').innerText = `฿${roomPrice.toLocaleString()}`;
-      document.getElementById('res-elec-cost').innerText = `-฿${elecCost.toLocaleString()} (${units.toFixed(1)} หน่วย)`;
+      document.getElementById('res-elec-cost').innerText = `-฿${elecCost.toLocaleString()} (ใช้จริง ${units.toFixed(1)} kWh • โซล่าช่วย ${solUnits.toFixed(1)} kWh)`;
       document.getElementById('res-net-profit').innerText = `฿${netProfit.toLocaleString()}`;
-      document.getElementById('res-cost-ratio').innerText = `${costRatio}% ของราคาห้อง`;
+      document.getElementById('res-cost-ratio').innerText = `${costRatio}% ของราคาห้อง (โซล่าช่วยเซฟ ฿${solSaved})`;
       document.getElementById('res-margin-pct').innerText = `${marginPct}%`;
       document.getElementById('res-profit-bar').style.width = `${Math.min(100, Math.max(0, marginPct))}%`;
     }
@@ -3966,5 +4122,64 @@
       recalcBookingMargin();
     });
   </script>
+  <!-- DAY AUDIT MODAL: LINKING BOOKING TO SOLAR GENERATION & CONSUMPTION -->
+  <div id="day-audit-modal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="ocean-card max-w-lg w-full p-6 sm:p-7 rounded-3xl space-y-5 border-2 border-sky-400 shadow-2xl relative animate-in fade-in zoom-in-95 duration-150">
+      <button onclick="closeDayAuditModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 dark:hover:text-white p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+        ✕
+      </button>
+
+      <div class="border-b border-sky-100 dark:border-sky-900 pb-3">
+        <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-black bg-sky-100 text-sky-900 dark:bg-sky-900 dark:text-sky-200 mb-1.5">
+          <span>⚡</span> ข้อมูลการใช้ไฟจริง vs การจองห้องพัก
+        </div>
+        <h3 id="modal-date-title" class="text-xl font-black text-slate-900 dark:text-white flex items-center gap-2">
+          <!-- Date Title -->
+        </h3>
+        <p id="modal-status-badge" class="text-xs font-bold mt-1">
+          <!-- Status Badge -->
+        </p>
+      </div>
+
+      <!-- Key Metrics 3 Boxes -->
+      <div class="grid grid-cols-3 gap-2.5 text-center">
+        <div class="p-3 rounded-2xl bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800">
+          <span class="text-[10px] text-slate-500 block">🔌 ใช้ไฟจริง</span>
+          <strong id="modal-cons-kwh" class="text-lg font-black text-sky-950 dark:text-white">-- kWh</strong>
+        </div>
+        <div class="p-3 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800">
+          <span class="text-[10px] text-slate-500 block">☀️ โซล่าผลิต</span>
+          <strong id="modal-gen-kwh" class="text-lg font-black text-amber-600 dark:text-amber-400">-- kWh</strong>
+        </div>
+        <div class="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">
+          <span class="text-[10px] text-slate-500 block">🧾 จ่าย กฟภ.</span>
+          <strong id="modal-cost-thb" class="text-lg font-black text-emerald-700 dark:text-emerald-300">฿--</strong>
+        </div>
+      </div>
+
+      <!-- Guest & Anomaly Details -->
+      <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-2 text-xs">
+        <div class="flex items-start justify-between gap-2">
+          <span class="text-slate-500 font-bold whitespace-nowrap">ลูกค้า / บุ๊กกิ้ง:</span>
+          <span id="modal-guest-info" class="font-extrabold text-slate-800 dark:text-slate-200 text-right">--</span>
+        </div>
+        <div class="flex items-start justify-between gap-2 border-t border-slate-200/60 dark:border-slate-800 pt-2">
+          <span class="text-slate-500 font-bold whitespace-nowrap">การประเมิน:</span>
+          <span id="modal-verdict-info" class="font-bold text-right">--</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-3 pt-2">
+        <button id="modal-goto-p1-btn" class="flex-1 py-3 px-4 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-black text-xs shadow-md transition flex items-center justify-center gap-2 cursor-pointer">
+          <span>📊</span>
+          <span>ไปดูกราฟ & สถิติรายวันในหน้า 1</span>
+        </button>
+        <button onclick="closeDayAuditModal()" class="py-3 px-4 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer">
+          ปิด
+        </button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

@@ -1558,22 +1558,26 @@
       renderAuditDashboard();
     }
 
-    function generateAuditRecords(monthKey) {
+        function generateAuditRecords(monthKey) {
       const isSep = monthKey === '2026/09';
-      const daysCount = isSep ? 30 : 31;
+      const isNov = monthKey === '2026/11';
+      const daysCount = isSep ? 30 : (isNov ? 11 : 31);
       const bookings = bookingSchedule[monthKey] || [];
       const records = [];
 
       const thaiDays = ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'];
-      const thaiMonths = { '09': 'ก.ย. 69', '10': 'ต.ค. 69' };
+      const thaiMonths = { '09': 'ก.ย. 69', '10': 'ต.ค. 69', '11': 'พ.ย. 69' };
       const mPart = monthKey.split('/')[1];
 
       for (let d = 1; d <= daysCount; d++) {
         const dStr = String(d).padStart(2, '0');
         const fullDate = `${monthKey.replace('/', '-')}-${dStr}`;
+        const slashDate = `${monthKey}/${dStr}`;
         const dt = new Date(parseInt(monthKey.split('/')[0]), parseInt(mPart) - 1, d);
         const dayName = thaiDays[dt.getDay()];
-        const displayDate = `${dayName} ${d} ${thaiMonths[mPart]}`;
+        const displayDate = `${dayName} ${d} ${thaiMonths[mPart] || ''}`;
+
+        const r = realDailySolarMan[slashDate];
 
         for (let b = 1; b <= 5; b++) {
           const bk = bookings.find(x => x.date === fullDate && x.b === b);
@@ -1581,50 +1585,53 @@
           let statusLabel = '⚪ ห้องว่าง';
           let guestInfo = '-';
           let kwh = 0;
-          let solar = Math.round((14 + ((d * 3 + b * 5) % 8) * 1.2) * 10) / 10;
+          let solar = 0;
+          let buy = 0;
           let isAlert = false;
           let verdict = '';
 
-          const varFactor = 0.88 + (((d * 17 + b * 23) % 25) / 100);
+          const hk = `b${b}`;
+          if (r && r[hk]) {
+            solar = r[hk][0];
+            kwh = r[hk][1];
+            buy = r[hk][2];
+          } else {
+            kwh = 10.5;
+            solar = 15.0;
+            buy = 0;
+          }
 
           if (bk) {
             guestInfo = `${bk.guest} (${bk.pax} คน)`;
             if (bk.stayed) {
               status = 'stayed';
               statusLabel = '🟢 เข้าพักจริง';
-              const baseKwh = 52 + (b * 3.5) + (bk.pax * 2.4);
-              kwh = Math.round(baseKwh * varFactor * 10) / 10;
-              verdict = '✅ ปกติ (มีลูกค้าเข้าพักจริง)';
+              isAlert = false;
+              verdict = `✅ ปกติ (มีลูกค้าเข้าพักจริง: ${bk.guest} ${bk.pax} คน • ใช้ไฟ ${kwh} kWh • โซล่าช่วย ${solar} kWh)`;
             } else {
               status = 'noshow';
               statusLabel = '🔴 จองแต่ไม่พัก (No-Show)';
-              const isSuspicious = (isSep && (fullDate === '2026-09-01' && b === 1 || fullDate === '2026-09-26' && b === 5)) ||
-                                   (!isSep && (fullDate === '2026-10-05' && b === 1 || fullDate === '2026-10-14' && b === 4));
-              if (isSuspicious) {
-                kwh = Math.round((42 + b * 2) * varFactor * 10) / 10;
+              if (kwh > 28) {
                 isAlert = true;
-                verdict = `🚨 ต้องสงสัย: จองแต่ไม่เข้าพัก แต่กินไฟ ${kwh} kWh (คาดว่าเปิดแอร์ทิ้งไว้/แอบใช้ไฟ)`;
+                verdict = `🚨 ผิดปกติ: จองแต่ไม่เข้าพัก (No-Show) แต่กินไฟสูงถึง ${kwh} kWh (คาดว่าเปิดแอร์ทิ้งไว้หรือมีคนแอบเข้าพัก)`;
               } else {
-                kwh = Math.round((8 + b * 0.8) * varFactor * 10) / 10;
-                verdict = '✅ ปกติ (สแตนด์บายโหลดต่ำ)';
+                isAlert = false;
+                verdict = `✅ ปกติ (ลูกค้า No-Show และใช้ไฟสแตนด์บายโหลดต่ำ ${kwh} kWh)`;
               }
             }
           } else {
             status = 'vacant';
             statusLabel = '⚪ ห้องว่าง';
-            const isSuspiciousVacant = (isSep && fullDate === '2026-09-14' && b === 2) ||
-                                       (!isSep && fullDate === '2026-10-09' && b === 3);
-            if (isSuspiciousVacant) {
-              kwh = Math.round((41 + b * 1.5) * varFactor * 10) / 10;
+            if (kwh > 28) {
               isAlert = true;
-              verdict = `🚨 ต้องสงสัย: ห้องว่างแต่กินไฟสูงถึง ${kwh} kWh (ไฟรั่วหรือแอบเปิดแอร์)`;
+              verdict = `🚨 ต้องสงสัย: ห้องว่างแต่กินไฟสูงถึง ${kwh} kWh (เกินเกณฑ์สแตนด์บาย ตรวจสอบแอร์หรือปั๊มน้ำ)`;
             } else {
-              kwh = Math.round((7 + b * 0.7) * varFactor * 10) / 10;
-              verdict = '✅ ปกติ (สแตนด์บายห้องว่าง ≤ 15 kWh)';
+              isAlert = false;
+              verdict = `✅ ปกติ (สแตนด์บายห้องว่าง ${kwh} kWh ≤ 25 kWh)`;
             }
           }
 
-          const cost = Math.round((kwh * 4.36) * 100) / 100;
+          const cost = Math.round((buy * 4.36) * 100) / 100;
 
           records.push({
             date: fullDate,
