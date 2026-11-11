@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="th" class="light">
 <head>
   <meta charset="UTF-8">
@@ -167,9 +167,9 @@
       </div>
     </header>
 
-    <!-- NAVIGATION TABS (4 MAIN PAGES) -->
+    <!-- NAVIGATION TABS (3 MAIN PAGES) -->
     <nav class="ocean-card p-2 no-print flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-2 w-full">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full">
         <!-- Tab 1 -->
         <button id="nav-btn-1" onclick="switchPage(1)" class="tab-active flex items-center justify-center gap-2 py-3 px-2 sm:px-3 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer text-slate-700 dark:text-slate-200">
           <span class="text-base">📊</span>
@@ -189,13 +189,6 @@
           <span class="text-base">🏖️</span>
           <span class="hidden xl:inline">หน้า 3:</span>
           <span>ค่าไฟตามการจอง</span>
-        </button>
-
-        <!-- Tab 4: New Guide Tab for Caretakers & Accounting -->
-        <button id="nav-btn-4" onclick="switchPage(4)" class="flex items-center justify-center gap-2 py-3 px-2 sm:px-3 rounded-xl text-xs sm:text-sm font-semibold transition cursor-pointer text-slate-700 dark:text-slate-200 hover:bg-sky-50 dark:hover:bg-slate-800">
-          <span class="text-base">📖</span>
-          <span class="hidden xl:inline">หน้า 4:</span>
-          <span>คู่มือใช้งาน (ช่าง & บัญชี)</span>
         </button>
       </div>
     </nav>
@@ -1152,9 +1145,9 @@
             </div>
 
             <div class="pt-2">
-              <button onclick="switchPage(4); selectGuideTab('sync');" class="w-full py-2 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-1.5 cursor-pointer">
+              <button onclick="alert('ระบบเชื่อมต่อข้อมูลการจองจะรวมเข้ากับเว็บไซต์หลัก HuaHinHub เร็วๆ นี้')" class="w-full py-2 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-1.5 cursor-pointer">
                 <span>📖</span>
-                <span>ดูขั้นตอนเชื่อมต่อในคู่มือ (หน้า 4)</span>
+                <span>เตรียมรวมเข้าสู่ระบบหลัก HuaHinHub</span>
               </button>
             </div>
           </div>
@@ -1173,351 +1166,6 @@
     </main>
 
     <!-- ================================================================= -->
-    <!-- PAGE 4: คู่มือการดูและใช้งานระบบ (ช่าง & บัญชี) / SOP & USER GUIDE -->
-    <!-- ================================================================= -->
-    <main id="page-4" class="space-y-6 hidden">
-
-      <!-- Top Header & Role Switcher -->
-      <section class="ocean-card p-5 sm:p-7 space-y-5">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-sky-100 dark:border-sky-900/40 pb-4">
-          <div>
-            <div class="flex items-center gap-2">
-              <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-cyan-100 text-cyan-900 dark:bg-cyan-900 dark:text-cyan-200">
-                คู่มือการใช้งาน & มาตรฐานปฏิบัติงาน (SOP)
-              </span>
-              <h2 class="text-lg sm:text-xl font-black text-slate-900 dark:text-white flex items-center gap-2">
-                <span>📖</span> คู่มือการดูและการใช้งานระบบ HuaHinHub Plus
-              </h2>
-            </div>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
-              คู่มือขั้นตอนปฏิบัติงานเฉพาะทาง ออกแบบแยกตามหน้าที่: สำหรับพนักงานดูแลวิลล่า/ช่าง และ แผนกบัญชีการเงิน
-            </p>
-          </div>
-
-          <!-- Quick Role Selector Tabs -->
-          <div class="inline-flex p-1 bg-sky-100/80 dark:bg-sky-950 rounded-2xl border border-sky-200 dark:border-sky-800 self-start md:self-center">
-            <button id="guide-tab-btn-ops" onclick="selectGuideTab('ops')" class="px-3.5 py-2 rounded-xl text-xs font-black bg-sky-600 text-white shadow-sm transition cursor-pointer flex items-center gap-1.5">
-              <span>👷‍♂️</span>
-              <span>พนักงานวิลล่า & ช่าง</span>
-            </button>
-            <button id="guide-tab-btn-acc" onclick="selectGuideTab('acc')" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition cursor-pointer flex items-center gap-1.5">
-              <span>💼</span>
-              <span>แผนกบัญชี & การเงิน</span>
-            </button>
-            <button id="guide-tab-btn-sync" onclick="selectGuideTab('sync')" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition cursor-pointer flex items-center gap-1.5">
-              <span>🔄</span>
-              <span>การดึงข้อมูลจอง</span>
-            </button>
-            <button id="guide-tab-btn-glossary" onclick="selectGuideTab('glossary')" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition cursor-pointer flex items-center gap-1.5">
-              <span>📘</span>
-              <span>สูตร & คำศัพท์</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- ================================================================= -->
-        <!-- TAB CONTENT 1: พนักงานดูแลวิลล่า & ช่างประจำสาขา (OPERATIONS & TECH) -->
-        <!-- ================================================================= -->
-        <div id="guide-content-ops" class="space-y-6">
-          <div class="p-4 rounded-2xl bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800 flex items-start gap-3">
-            <span class="text-2xl">👷‍♂️</span>
-            <div class="text-xs sm:text-sm text-sky-950 dark:text-sky-200 space-y-1">
-              <strong class="font-extrabold text-sky-900 dark:text-white">ภารกิจหลักของพนักงานดูแลวิลล่าและช่าง:</strong>
-              <p class="text-slate-600 dark:text-slate-400">
-                1) ตรวจสุขภาพการผลิตไฟโซล่าประจำวันว่าทำงานปกติหรือไม่ &bull; 2) สอดส่องป้องกันการลืมปิดแอร์ในวันที่ไม่มีแขก &bull; 3) ดูแล "หลัง 9 (บ้านเช่า)" เป็นพิเศษเนื่องจากไม่มีโซล่าเซลล์
-              </p>
-            </div>
-          </div>
-
-          <!-- Step 1: Daily Solar Health Check -->
-          <div class="ocean-card p-5 border-l-4 border-l-cyan-500 space-y-3">
-            <div class="flex items-center justify-between">
-              <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-                <span class="w-6 h-6 rounded-full bg-cyan-500 text-white inline-flex items-center justify-center text-xs font-black">1</span>
-                ขั้นตอนตรวจเช็คสุขภาพโซล่าเซลล์ประจำวัน (ช่วง 11:30 – 13:30 น.)
-              </h3>
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200">ตรวจหน้า 1</span>
-            </div>
-            <p class="text-xs text-slate-600 dark:text-slate-400">
-              ทุกวันเวลาเที่ยง ให้ช่างหรือพนักงานประจำสาขาเปิด <strong>"หน้า 1: ผลิตไฟ vs ใช้ไฟ"</strong> และสังเกตการ์ดสถานะสุขภาพทั้ง 7 จุด:
-            </p>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-              <div class="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-xs space-y-1">
-                <div class="font-black text-emerald-800 dark:text-emerald-300 flex items-center gap-1.5">
-                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> 🟢 ป้ายเขียว: สุขภาพดีปกติ
-                </div>
-                <p class="text-slate-600 dark:text-slate-400">แผงผลิตไฟได้ตามมาตรฐานแดด (>18-25 หน่วย/วัน/หลัง) ไม่ต้องทำอะไร</p>
-              </div>
-              <div class="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 text-xs space-y-1">
-                <div class="font-black text-amber-800 dark:text-amber-300 flex items-center gap-1.5">
-                  <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> 🟡 ป้ายเหลือง: เฝ้าระวัง
-                </div>
-                <p class="text-slate-600 dark:text-slate-400">ผลิตต่ำกว่าปกติ 20% ให้เดินไปดูหลังคาว่ามีขี้นก ใบไม้ทับ หรือฝุ่นเกาะหนาหรือไม่ เพื่อเตรียมล้างแผง</p>
-              </div>
-              <div class="p-3 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-xs space-y-1">
-                <div class="font-black text-rose-800 dark:text-rose-300 flex items-center gap-1.5">
-                  <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> 🔴 ป้ายแดง: แผงตัด/ดับ
-                </div>
-                <p class="text-slate-600 dark:text-slate-400">ผลิตได้ 0.0 หน่วย ให้รีบเดินไปที่ตู้ Inverter ชะอำ เช็คเบรกเกอร์ DC/AC ทันที (เช่น กรณีหลัง 4 ในช่วงปิดปรับปรุง)</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 2: Prevent AC Left ON on Vacant Days -->
-          <div class="ocean-card p-5 border-l-4 border-l-amber-500 space-y-3">
-            <div class="flex items-center justify-between">
-              <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-                <span class="w-6 h-6 rounded-full bg-amber-500 text-white inline-flex items-center justify-center text-xs font-black">2</span>
-                การป้องกันลืมปิดแอร์ & ไฟรั่วในวันไม่มีลูกค้า (Standby Guard)
-              </h3>
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200">ตรวจหน้า 1 & 3</span>
-            </div>
-            <div class="text-xs text-slate-600 dark:text-slate-400 space-y-2">
-              <p>
-                ในวันที่ <strong>"ไม่มีลูกค้าเข้าพัก (วันว่าง)"</strong> พูลวิลล่าแต่ละหลังควรมีค่าไฟสแตนด์บายเพียง <strong>10 – 18 หน่วย/วัน</strong> (ตู้เย็น ปั๊มบำบัดน้ำสระ Router Wi-Fi และไฟกิ่ง)
-              </p>
-              <div class="p-3 rounded-xl bg-amber-100/60 dark:bg-amber-900/30 border border-amber-300 dark:border-amber-700 text-amber-950 dark:text-amber-200">
-                🚨 <strong>จุดสังเกตสำคัญ:</strong> หากเปิดหน้า 3 แล้วพบการ์ดสีส้มเตือนว่า <em>"วันว่างแต่ค่าไฟพุ่งสูง >30-50 หน่วย"</em> แปลว่ามีโอกาสสูงที่แม่บ้านหรือช่างอาจลืมปิดแอร์ห้องนอน! 
-                <strong>การปฏิบัติ:</strong> ให้พนักงานเดินเข้าไปตรวจสอบวิลล่าหลังนั้นและปิดแอร์ทันที จะช่วยเซฟเงินบริษัทได้คืนละ ฿150 – ฿300 บาทต่อหลัง!
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 3: Special Attention for Villa 9 -->
-          <div class="ocean-card p-5 border-l-4 border-l-rose-500 space-y-3">
-            <div class="flex items-center justify-between">
-              <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-                <span class="w-6 h-6 rounded-full bg-rose-500 text-white inline-flex items-center justify-center text-xs font-black">3</span>
-                ข้อควรจำพิเศษสำหรับ "หลัง 9 (Villa 9 - บ้านเช่า)"
-              </h3>
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-200">จ่ายไฟเต็ม 100%</span>
-            </div>
-            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              หลัง 9 เป็นบ้านเช่า <strong>ไม่มีการติดตั้งแผงโซล่าเซลล์</strong> ค่าไฟทุกหน่วยคิดจากการไฟฟ้าเต็มจำนวน (ไม่มีพลังงานแสงอาทิตย์ฟรีมาช่วยซับต้นทุนเหมือนหลัง 1-5) 
-              ดังนั้น แม่บ้านและช่างต้องหมั่นตรวจสอบหลัง 9 ปิดไฟและแอร์ทุกครั้งหลังทำความสะอาดเสร็จทันที
-            </p>
-          </div>
-
-          <!-- Interactive Daily Checklist for Villa Staff -->
-          <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-sky-200 dark:border-sky-800 space-y-2">
-            <h4 class="text-xs font-black text-slate-800 dark:text-slate-200 flex items-center gap-2">
-              <span>✅</span> เช็คลิสต์ประจำวันของพนักงานสาขาชะอำ (Daily Checklist)
-            </h4>
-            <div class="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
-              <label class="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" class="w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
-                <span>12:00 น. เปิดหน้า 1 ดูแถบ Health Badge ครบทั้ง 7 จุด (ไม่มีสีแดงผิดปกติ)</span>
-              </label>
-              <label class="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" class="w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
-                <span>ตรวจดูหน้า 3 ว่ามีสัญญาณเตือนไฟวันว่างพุ่งสูงหรือไม่</span>
-              </label>
-              <label class="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" class="w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
-                <span>หลังแขกเช็คเอาท์ 12:00 น. ตรวจปิดแอร์ทุกห้องก่อนปิดบ้าน</span>
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <!-- ================================================================= -->
-        <!-- TAB CONTENT 2: แผนกบัญชีและการเงิน (ACCOUNTING & FINANCE)           -->
-        <!-- ================================================================= -->
-        <div id="guide-content-acc" class="space-y-6 hidden">
-          <div class="p-4 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 flex items-start gap-3">
-            <span class="text-2xl">💼</span>
-            <div class="text-xs sm:text-sm text-indigo-950 dark:text-indigo-200 space-y-1">
-              <strong class="font-extrabold text-indigo-900 dark:text-white">ภารกิจหลักของแผนกบัญชีและการเงิน:</strong>
-              <p class="text-slate-600 dark:text-slate-400">
-                1) กระทบยอดบิลค่าไฟ กฟภ. ประจำเดือน &bull; 2) ปันส่วนต้นทุนค่าไฟแยกวิลล่าเพื่อลงบัญชีต้นทุนขาย &bull; 3) รายงานตัวเลขเงินสดที่ประหยัดได้จากโซล่าให้ผู้บริหาร
-              </p>
-            </div>
-          </div>
-
-          <!-- Step 1: PEA Bill Reconciliation -->
-          <div class="ocean-card p-5 border-l-4 border-l-indigo-500 space-y-3">
-            <div class="flex items-center justify-between">
-              <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-                <span class="w-6 h-6 rounded-full bg-indigo-600 text-white inline-flex items-center justify-center text-xs font-black">1</span>
-                วิธีกระทบยอดบิลค่าไฟจริงจากการไฟฟ้า (PEA Reconciliation)
-              </h3>
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200">ตรวจหน้า 2</span>
-            </div>
-            <ol class="list-decimal list-inside text-xs text-slate-600 dark:text-slate-400 space-y-1.5 leading-relaxed">
-              <li>เปิด <strong>"หน้า 2: ค่าไฟรายหลัง & คุ้มค่า"</strong> แล้วเลือกรอบบิลเดือนที่ได้รับแจ้งหนี้ (เช่น มี.ค. 69, เม.ย. 69)</li>
-              <li>ตรวจสอบช่อง <strong>"ค่าไฟจ่ายจริงจากการไฟฟ้า"</strong> และตาราง <strong>"สถิติบิลค่าไฟจริง กฟภ."</strong> ด้านล่าง เทียบกับใบแจ้งหนี้ PEA</li>
-              <li>หากอัตราค่าไฟเฉลี่ยต่อหน่วยของบิลนั้นแตกต่างจาก ฿4.36 บาท/หน่วย สามารถพิมพ์ตัวเลขอัตราจริงในช่อง <em>"อัตราค่าไฟเฉลี่ย (บาท/หน่วย)"</em> ได้ทันที ระบบจะคำนวณยอดเงินใหม่ให้ทุกช่อง</li>
-            </ol>
-          </div>
-
-          <!-- Step 2: Cost Allocation -->
-          <div class="ocean-card p-5 border-l-4 border-l-emerald-500 space-y-3">
-            <div class="flex items-center justify-between">
-              <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-                <span class="w-6 h-6 rounded-full bg-emerald-600 text-white inline-flex items-center justify-center text-xs font-black">2</span>
-                วิธีนำค่าไฟรายหลังไปบันทึกบัญชีต้นทุนแยกวิลล่า (Cost Allocation)
-              </h3>
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200">ดาวน์โหลด CSV ได้</span>
-            </div>
-            <div class="text-xs text-slate-600 dark:text-slate-400 space-y-2 leading-relaxed">
-              <p>
-                ในหน้า 2 ดูที่หัวข้อ <strong>"ตารางจัดสรรต้นทุนค่าไฟฟ้าแยกหน่วยงาน (Cost Allocation Table)"</strong>:
-              </p>
-              <div class="overflow-x-auto rounded-xl border border-sky-200 dark:border-sky-800 text-[11px]">
-                <table class="w-full text-left bg-white dark:bg-slate-800">
-                  <thead class="bg-sky-50 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-bold">
-                    <tr>
-                      <th class="p-2">ชื่ออาคาร / พูลวิลล่า</th>
-                      <th class="p-2">ลักษณะต้นทุน</th>
-                      <th class="p-2 text-right">ยอดที่นำไปลงบัญชี</th>
-                    </tr>
-                  </thead>
-                  <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
-                    <tr><td class="p-2 font-bold text-sky-900 dark:text-white">พูลวิลล่า หลัง 1</td><td class="p-2">ต้นทุนขาย/บริการ (มีหักไฟโซล่า)</td><td class="p-2 text-right font-bold">ช่อง "จ่ายจริง กฟภ."</td></tr>
-                    <tr><td class="p-2 font-bold text-sky-900 dark:text-white">พูลวิลล่า หลัง 2 ถึง 5</td><td class="p-2">ต้นทุนขาย/บริการ (มีหักไฟโซล่า)</td><td class="p-2 text-right font-bold">ช่อง "จ่ายจริง กฟภ."</td></tr>
-                    <tr><td class="p-2 font-bold text-amber-600">พูลวิลล่า หลัง 9</td><td class="p-2 text-rose-600 dark:text-rose-400 font-semibold">ต้นทุนขาย (จ่ายไฟหลวง 100% ไม่มีหักโซล่า)</td><td class="p-2 text-right font-bold text-rose-600">ยอดจ่ายเต็ม</td></tr>
-                    <tr><td class="p-2 font-bold text-sky-900 dark:text-white">ออฟฟิศชะอำ</td><td class="p-2">ค่าใช้จ่ายในการบริหาร (Admin Overhead)</td><td class="p-2 text-right font-bold">ช่อง "จ่ายจริง กฟภ."</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <p class="pt-1">
-                👉 <strong>ทางลัดสำหรับบัญชี:</strong> กดปุ่ม <em>"📥 ส่งออกตารางบัญชี (CSV)"</em> เพื่อดาวน์โหลดไฟล์เข้าโปรแกรมบัญชี (Express, Peak, FlowAccount, SAP) ได้ทันที
-              </p>
-            </div>
-          </div>
-
-          <!-- Step 3: Executive ROI & Cash Savings Report -->
-          <div class="ocean-card p-5 border-l-4 border-l-cyan-500 space-y-3">
-            <div class="flex items-center justify-between">
-              <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-                <span class="w-6 h-6 rounded-full bg-cyan-600 text-white inline-flex items-center justify-center text-xs font-black">3</span>
-                การรายงานผลประหยัดเงินสด (Solar ROI & Cost Savings) เสนอผู้บริหาร
-              </h3>
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200">สำหรับผู้บริหาร</span>
-            </div>
-            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              นำตัวเลขจากช่อง <strong>"เงินสดที่ประหยัดได้จริง!" (ช่องสีเขียว)</strong> รายงานผู้บริหารประจำเดือน:
-              ตัวเลขนี้สะท้อนเงินสดที่บริษัท <em>ไม่ต้องควักกระเป๋าจ่ายให้ กฟภ.</em> โดยเฉลี่ยประหยัดได้เดือนละ <strong>฿9,000 – ฿13,700 บาท</strong> (คิดเป็นลดภาระค่าไฟลงได้ 25% – 42% ต่อเดือน)
-            </p>
-          </div>
-        </div>
-
-        <!-- ================================================================= -->
-        <!-- TAB CONTENT 3: การเชื่อมต่อระบบจอง (PMS DATA INTEGRATION GUIDE)     -->
-        <!-- ================================================================= -->
-        <div id="guide-content-sync" class="space-y-6 hidden">
-          <div class="p-4 rounded-2xl bg-cyan-50 dark:bg-cyan-950/40 border border-cyan-200 dark:border-cyan-800 flex items-start gap-3">
-            <span class="text-2xl">🔄</span>
-            <div class="text-xs sm:text-sm text-cyan-950 dark:text-cyan-200 space-y-1">
-              <strong class="font-extrabold text-cyan-900 dark:text-white">คำตอบสำหรับ: "มีระบบการจองอยู่แล้ว จะให้ดึงข้อมูลมาเองได้อย่างไร?"</strong>
-              <p class="text-slate-600 dark:text-slate-400">
-                ระบบ HuaHinHub Plus รองรับการเชื่อมต่อกับระบบจองเดิมได้ 3 รูปแบบ เลือกวิธีที่สะดวกกับทีมงานได้เลย:
-              </p>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <!-- Method 1: Google Sheets -->
-            <div class="ocean-card p-5 space-y-3 border-t-4 border-t-sky-500">
-              <div class="flex items-center justify-between">
-                <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-200">วิธีที่ 1 (แนะนำ)</span>
-                <span class="text-xl">📊</span>
-              </div>
-              <h4 class="font-bold text-slate-900 dark:text-white text-sm">Google Sheets Live Sync</h4>
-              <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                เหมาะที่สุดหากทีมงานอัปเดตการจองผ่าน Google Sheets หรือระบบเดิมมีฟังก์ชันยิงข้อมูลเข้า Sheet:
-              </p>
-              <ol class="list-decimal list-inside text-[11px] text-slate-600 dark:text-slate-400 space-y-1">
-                <li>เปิด Google Sheet ของการจอง</li>
-                <li>ไปที่ <strong>File &gt; Share &gt; Publish to web</strong></li>
-                <li>เลือก Sheet นั้น และเปลี่ยนเป็นแบบ <strong>CSV</strong></li>
-                <li>คัดลอก URL มาแปะในช่อง <em>"Google Sheets Live Sync"</em> บนหน้า 3</li>
-                <li>ระบบจะดึงข้อมูลมาลงปฏิทินให้อัตโนมัติทุกครั้งที่เข้าหน้าเว็บ!</li>
-              </ol>
-            </div>
-
-            <!-- Method 2: Drag & Drop Export -->
-            <div class="ocean-card p-5 space-y-3 border-t-4 border-t-emerald-500">
-              <div class="flex items-center justify-between">
-                <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200">วิธีที่ 2 (ส่งออกไฟล์)</span>
-                <span class="text-xl">📁</span>
-              </div>
-              <h4 class="font-bold text-slate-900 dark:text-white text-sm">ส่งออก CSV / Excel จาก PMS</h4>
-              <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                หากใช้ระบบ PMS เช่น Little Hotelier, Cloudbeds, WebBeds หรือ Beds24:
-              </p>
-              <ol class="list-decimal list-inside text-[11px] text-slate-600 dark:text-slate-400 space-y-1">
-                <li>กดปุ่ม Export Reservations จากระบบเดิมเป็นไฟล์ Excel หรือ CSV</li>
-                <li>เปิดหน้า 3 แล้วลากไฟล์มาปล่อยในกล่อง <em>"อัปโหลดไฟล์ Excel / CSV"</em></li>
-                <li>ระบบจะอ่านรายชื่อแขก วันที่เข้าพัก และหมายเลขวิลล่าให้อัตโนมัติทันที</li>
-              </ol>
-            </div>
-
-            <!-- Method 3: REST API / Webhook -->
-            <div class="ocean-card p-5 space-y-3 border-t-4 border-t-indigo-500">
-              <div class="flex items-center justify-between">
-                <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200">วิธีที่ 3 (อัตโนมัติเต็มรูปแบบ)</span>
-                <span class="text-xl">⚡</span>
-              </div>
-              <h4 class="font-bold text-slate-900 dark:text-white text-sm">ต่อ Webhook / Direct API</h4>
-              <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                สำหรับเชื่อมต่อระบบระดับ Server-to-Server แบบอัตโนมัติ 100%:
-              </p>
-              <ul class="list-disc list-inside text-[11px] text-slate-600 dark:text-slate-400 space-y-1">
-                <li>เมื่อมีลูกค้าจองใหม่ ระบบเดิมจะยิง POST Request มาที่ Webhook ของเรา</li>
-                <li>ฐานข้อมูลการจองในหน้านี้จะอัปเดตแบบ Real-time ทันทีโดยไม่ต้องทำอะไรเลย</li>
-                <li>มี Endpoint JSON รองรับทั้งวันเช็คอิน เช็คเอาท์ และราคาขายห้อง</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- ================================================================= -->
-        <!-- TAB CONTENT 4: พจนานุกรมคำศัพท์ & สูตรคำนวณ (GLOSSARY & FORMULAS)   -->
-        <!-- ================================================================= -->
-        <div id="guide-content-glossary" class="space-y-6 hidden">
-          <div class="ocean-card p-5 space-y-4">
-            <h3 class="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-              <span>📘</span> สูตรคำนวณและนิยามคำศัพท์ที่ใช้ในระบบ
-            </h3>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-sky-100 dark:border-sky-900 space-y-1.5">
-                <span class="font-bold text-sky-900 dark:text-sky-300 block text-sm">⚡ หน่วยไฟฟ้า (kWh)</span>
-                <p class="text-slate-600 dark:text-slate-400">กิโลวัตต์-ชั่วโมง (Kilowatt-Hour) คือหน่วยมาตรฐานที่การไฟฟ้าใช้คิดเงิน 1 หน่วย = อุปกรณ์ 1,000 วัตต์เปิดใช้งาน 1 ชั่วโมง</p>
-              </div>
-
-              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-sky-100 dark:border-sky-900 space-y-1.5">
-                <span class="font-bold text-sky-900 dark:text-sky-300 block text-sm">☀️ หน่วยผลิตโซล่า (Solar Generation)</span>
-                <p class="text-slate-600 dark:text-slate-400">พลังงานสะอาดที่ผลิตได้จากแผงโซล่าเซลล์บนหลังคา ซึ่งนำมาจ่ายโหลดไฟฟ้าในวิลล่าทันทีในตอนกลางวัน ทำให้ไม่ต้องดึงไฟหลวง</p>
-              </div>
-
-              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-sky-100 dark:border-sky-900 space-y-1.5">
-                <span class="font-bold text-sky-900 dark:text-sky-300 block text-sm">🧾 ค่าไฟจ่ายจริง กฟภ. (Actual Cost)</span>
-                <p class="text-slate-600 dark:text-slate-400">สูตร: <code>(หน่วยไฟใช้จริง - หน่วยไฟที่โซล่าผลิตได้) × อัตราค่าไฟ</code> คือยอดเงินสดจริงที่ต้องจ่ายตามใบแจ้งหนี้ กฟภ.</p>
-              </div>
-
-              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-emerald-700 dark:text-emerald-400 block text-sm">🎉 เงินสดที่ประหยัดได้ (Net Savings)</span>
-                <p class="text-slate-600 dark:text-slate-400">สูตร: <code>หน่วยโซล่าผลิตได้ × อัตราค่าไฟ</code> คือเงินสดที่ระบบโซล่าเซลล์ช่วยเซฟให้กับบริษัทในแต่ละเดือน</p>
-              </div>
-
-              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-sky-100 dark:border-sky-900 space-y-1.5">
-                <span class="font-bold text-sky-900 dark:text-sky-300 block text-sm">🧳 ค่าไฟตามการเข้าพัก (Occupied vs Vacant)</span>
-                <p class="text-slate-600 dark:text-slate-400">วันมีแขกพักใช้ไฟเฉลี่ย ~69 หน่วย/วัน (~฿300 บาท/คืน) ส่วนวันห้องว่างใช้ไฟสแตนด์บายเพียง ~11 หน่วย/วัน (~฿49 บาท/วัน)</p>
-              </div>
-
-              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-sky-100 dark:border-sky-900 space-y-1.5">
-                <span class="font-bold text-amber-700 dark:text-amber-400 block text-sm">🏠 พูลวิลล่า หลัง 9 (บ้านเช่า)</span>
-                <p class="text-slate-600 dark:text-slate-400">บ้านเช่าไม่มีแผงโซล่าเซลล์ อัตราการประหยัด = 0% จ่ายค่าไฟให้การไฟฟ้าเต็ม 100% เสมอ</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </section>
-
-    </main>
-
     <!-- FOOTER -->
     <footer class="ocean-card p-5 text-center text-xs text-slate-500 dark:text-slate-400 space-y-1 border-t border-sky-200 dark:border-sky-800">
       <p class="font-bold text-slate-700 dark:text-slate-300">
@@ -1542,8 +1190,8 @@
       { key: '2026/06', label: 'มิ.ย. 69', fullLabel: 'มิถุนายน 2569', b1: 581.3, b1_c: 1066.2, b2: 275.4, b2_c: 600.5, b3: 497.8, b3_c: 1021.6, b4: 0.0, b4_c: 0.0, b5: 371.8, b5_c: 749.2, b6: 0.0, b6_c: 0.0, b9: 0.0, b9_c: 1120.0, off: 476.6, off_c: 476.6, b2_3: 773.2, b2_3_c: 1622.1, b4_5: 371.8, b4_5_c: 749.2, total: 2202.9, total_c: 5034.1, days: 30 },
       { key: '2026/07', label: 'ก.ค. 69', fullLabel: 'กรกฎาคม 2569', b1: 583.3, b1_c: 1382.6, b2: 237.3, b2_c: 600.3, b3: 404.9, b3_c: 1166.7, b4: 0.0, b4_c: 0.0, b5: 299.3, b5_c: 472.9, b6: 0.0, b6_c: 0.0, b9: 0.0, b9_c: 1260.0, off: 476.3, off_c: 476.3, b2_3: 642.2, b2_3_c: 1767.0, b4_5: 299.3, b4_5_c: 472.9, total: 2001.1, total_c: 5358.8, days: 31 },
       { key: '2026/08', label: 'ส.ค. 69', fullLabel: 'สิงหาคม 2569', b1: 538.2, b1_c: 1197.2, b2: 212.6, b2_c: 692.6, b3: 395.5, b3_c: 795.5, b4: 52.9, b4_c: 252.9, b5: 58.3, b5_c: 308.3, b6: 0.0, b6_c: 0.0, b9: 0.0, b9_c: 750.0, off: 405.2, off_c: 1362.2, b2_3: 608.1, b2_3_c: 1488.1, b4_5: 111.2, b4_5_c: 561.2, total: 1662.7, total_c: 5358.9, days: 31 },
-      { key: '2026/09', label: 'ก.ย. 69', fullLabel: 'กันยายน 2569', b1: 546.8, b1_c: 1264.1, b2: 113.8, b2_c: 223.2, b3: 315.0, b3_c: 857.0, b4: 329.1, b4_c: 819.9, b5: 360.8, b5_c: 824.9, b6: 0.0, b6_c: 56.0, b9: 0.0, b9_c: 230.0, off: 0.0, off_c: 785.0, b2_3: 428.8, b2_3_c: 1080.2, b4_5: 689.9, b4_5_c: 1644.8, total: 1665.5, total_c: 5060.1, days: 30 },
-      { key: '2026/10', label: 'ต.ค. 69', fullLabel: 'ตุลาคม 2569', b1: 695.8, b1_c: 2106.8, b2: 266.3, b2_c: 999.9, b3: 457.0, b3_c: 1549.3, b4: 486.5, b4_c: 1397.2, b5: 485.5, b5_c: 1193.0, b6: 0.0, b6_c: 46.0, b9: 0.0, b9_c: 280.0, off: 424.8, off_c: 846.2, b2_3: 723.3, b2_3_c: 2549.2, b4_5: 972.0, b4_5_c: 2590.2, total: 2815.9, total_c: 8418.4, days: 31 },
+      { key: '2026/09', label: 'ก.ย. 69', fullLabel: 'กันยายน 2569', b1: 546.8, b1_c: 1264.1, b2: 113.8, b2_c: 223.2, b3: 315.0, b3_c: 857.0, b4: 329.1, b4_c: 819.9, b5: 360.8, b5_c: 824.9, b6: 0.0, b6_c: 56.0, b9: 0.0, b9_c: 152.0, off: 0.0, off_c: 785.0, b2_3: 428.8, b2_3_c: 1080.2, b4_5: 689.9, b4_5_c: 1644.8, total: 1665.5, total_c: 4982.1, days: 30 },
+      { key: '2026/10', label: 'ต.ค. 69', fullLabel: 'ตุลาคม 2569', b1: 695.8, b1_c: 2106.8, b2: 266.3, b2_c: 999.9, b3: 457.0, b3_c: 1549.3, b4: 486.5, b4_c: 1397.2, b5: 485.5, b5_c: 1193.0, b6: 0.0, b6_c: 46.0, b9: 0.0, b9_c: 124.0, off: 424.8, off_c: 846.2, b2_3: 723.3, b2_3_c: 2549.2, b4_5: 972.0, b4_5_c: 2590.2, total: 2815.9, total_c: 8262.4, days: 31 },
       { key: '2026/11', label: 'พ.ย. 69*', fullLabel: 'พฤศจิกายน 2569 (1–11 พ.ย.)', b1: 212.3, b1_c: 396.8, b2: 85.3, b2_c: 330.2, b3: 146.7, b3_c: 429.2, b4: 106.4, b4_c: 208.4, b5: 114.8, b5_c: 208.7, b6: 0.0, b6_c: 0.0, b9: 0.0, b9_c: 0.0, off: 161.5, off_c: 431.4, b2_3: 232.0, b2_3_c: 759.4, b4_5: 221.2, b4_5_c: 417.1, total: 827.0, total_c: 2004.7, days: 11 }
     ];
 
@@ -1565,18 +1213,42 @@
       { key: 'b2_3', name: 'หลัง 2-3 (หม้อรวม)', ca: '020024555361', peaNo: '6700044857', type: '2225', hasSolar: true, note: 'หม้อรวม หลัง 2 + 3 (มีโซล่า)' },
       { key: 'b4_5', name: 'หลัง 4-5 (หม้อรวม)', ca: '020024555359', peaNo: '6700044869', type: '2225', hasSolar: true, note: 'หม้อรวม หลัง 4 + 5 (มีโซล่า)' },
       { key: 'b6', name: 'หลัง 6 (Villa 6)', ca: '020028931064', peaNo: '6700792071', type: '1125', hasSolar: false, note: 'ไม่มีโซล่าเซลล์ (จ่ายบิล กฟภ.)' },
-      { key: 'b9', name: 'หลัง 9 (Villa 9)', ca: '-', peaNo: '-', type: '1125', hasSolar: false, note: 'บ้านเช่า (ไม่ติดโซล่าเซลล์)' },
+      { key: 'b9', name: 'หลัง 9 (Villa 9)', ca: '020004361526', peaNo: '6201283011', type: '1125', hasSolar: false, note: 'บ้านเช่า (ไม่ติดโซล่าเซลล์)' },
       { key: 'off', name: 'ออฟฟิศชะอำ', ca: '020020700687', peaNo: '6800444197', type: '1125', hasSolar: true, note: 'มีโซล่าเซลล์ (1 หม้อ)' }
     ];
 
     // Exact PEA invoices from PEA Smart Plus screenshots
     const peaExactBills = {
+      '2026/05': {
+        b1: { units: 2566, cost: 12370.47, status: 'Normal' },
+        b2_3: { units: 3591, cost: 13865.96, status: 'Normal' },
+        b4_5: { units: 5136, cost: 21426.16, status: 'Normal' },
+        b6: { units: 378, cost: 1643.31, status: 'Normal' },
+        b9: { units: 236, cost: 977.18, status: 'Normal' },
+        off: { units: 1873, cost: 8971.39, status: 'Normal' }
+      },
+      '2026/06': {
+        b1: { units: 700, cost: 3217.97, status: 'Normal' },
+        b2_3: { units: 1331, cost: 5544.32, status: 'Normal' },
+        b4_5: { units: 1280, cost: 4894.32, status: 'Normal' },
+        b6: { units: 133, cost: 511.73, status: 'Normal' },
+        b9: { units: 599, cost: 2722.58, status: 'Normal' },
+        off: { units: 756, cost: 3492.65, status: 'Normal' }
+      },
+      '2026/07': {
+        b1: { units: 641, cost: 2928.58, status: 'Normal' },
+        b2_3: { units: 984, cost: 3436.11, status: 'Normal' },
+        b4_5: { units: 587, cost: 2148.95, status: 'Normal' },
+        b6: { units: 53, cost: 219.77, status: 'Normal' },
+        b9: { units: 319, cost: 1366.53, status: 'Normal' },
+        off: { units: 520, cost: 2335.09, status: 'Normal' }
+      },
       '2026/08': {
         b1: { units: 659, cost: 3016.88, status: 'Normal' },
-        b2_3: { units: 880, cost: 3820.00, status: 'Normal' },
-        b4_5: { units: 450, cost: 1680.00, status: 'Normal' },
-        b6: { units: 0, cost: 0.00, status: 'Normal' },
-        b9: { units: 750, cost: 3124.71, status: 'Normal' },
+        b2_3: { units: 1161, cost: 4084.64, status: 'Normal' },
+        b4_5: { units: 1234, cost: 4540.07, status: 'Normal' },
+        b6: { units: 132, cost: 508.07, status: 'Normal' },
+        b9: { units: 80, cost: 318.29, status: 'Normal' },
         off: { units: 957, cost: 4478.53, status: 'Normal' }
       },
       '2026/09': {
@@ -1584,15 +1256,15 @@
         b2_3: { units: 725, cost: 2555.50, status: 'Overdue' },
         b4_5: { units: 1259, cost: 4929.53, status: 'Overdue' },
         b6: { units: 56, cost: 215.83, status: 'Overdue' },
-        b9: { units: 230, cost: 988.46, status: 'Overdue' },
+        b9: { units: 152, cost: 540.66, status: 'Normal' },
         off: { units: 785, cost: 3489.98, status: 'Overdue' }
       },
       '2026/10': {
-        b1: { units: 605, cost: 2659.00, status: 'Pending' },
+        b1: { units: 1334, cost: 6145.50, status: 'Overdue' },
         b2_3: { units: 1336, cost: 5156.76, status: 'Overdue' },
         b4_5: { units: 1553, cost: 5965.70, status: 'Overdue' },
         b6: { units: 46, cost: 182.00, status: 'Overdue' },
-        b9: { units: 280, cost: 1201.00, status: 'Pending' },
+        b9: { units: 124, cost: 445.92, status: 'Normal' },
         off: { units: 628, cost: 2730.54, status: 'Overdue' }
       },
       '2026/11': {
@@ -1796,10 +1468,38 @@
         { date: "2026-10-23", b: 4, guest: "กันยรัก", pax: 14, stayed: true },
         { date: "2026-10-23", b: 5, guest: "เกศสุดา ประเสริฐสังข์", pax: 10, stayed: true },
         { date: "2026-10-23", b: 9, guest: "คุณวิภาวี (หลัง 9)", pax: 8, stayed: true },
-        { date: "2026-10-24", b: 2, guest: "นางสาวภัสราภรณ์ ดาสา", pax: 8, stayed: false },
-        { date: "2026-10-24", b: 3, guest: "คุณโอ๋", pax: 11, stayed: false },
         { date: "2026-10-24", b: 5, guest: "ณัฐพร", pax: 10, stayed: false },
-        { date: "2026-10-26", b: 1, guest: "คณิดา", pax: 7, stayed: false }
+        { date: "2026-10-25", b: 1, guest: "acc Kridsada", pax: 8, stayed: false },
+        { date: "2026-10-25", b: 2, guest: "acc Kridsada", pax: 8, stayed: false },
+        { date: "2026-10-25", b: 2, guest: "สรัญญา", pax: 6, stayed: true },
+        { date: "2026-10-26", b: 1, guest: "คณิดา", pax: 7, stayed: true },
+        { date: "2026-10-29", b: 4, guest: "พัชรินทร์ ผ่อนแผ่ว", pax: 8, stayed: true },
+        { date: "2026-10-30", b: 3, guest: "ธงชัย", pax: 8, stayed: true },
+        { date: "2026-10-31", b: 3, guest: "สกลพร สาลิกากูล", pax: 7, stayed: true },
+        { date: "2026-10-31", b: 4, guest: "โชติกา วังวล", pax: 10, stayed: true }
+      ],
+      "2026/11": [
+        { date: "2026-11-01", b: 1, guest: "ศิริวัลย์", pax: 6, stayed: true },
+        { date: "2026-11-01", b: 3, guest: "คุณฝน", pax: 10, stayed: true },
+        { date: "2026-11-02", b: 3, guest: "เงินเงิน", pax: 4, stayed: true },
+        { date: "2026-11-04", b: 2, guest: "พัชรดนัย", pax: 8, stayed: true },
+        { date: "2026-11-05", b: 2, guest: "พัชรดนัย", pax: 8, stayed: true },
+        { date: "2026-11-06", b: 3, guest: "เอ๊ก", pax: 7, stayed: true },
+        { date: "2026-11-10", b: 1, guest: "ศุภกฤษณ์ บุญเรืองขาว", pax: 6, stayed: true },
+        { date: "2026-11-11", b: 2, guest: "วิทยา อัศวเทวิน", pax: 8, stayed: true },
+        { date: "2026-11-11", b: 3, guest: "วิทยา อัศวเทวิน", pax: 8, stayed: true },
+        { date: "2026-11-12", b: 2, guest: "วิทยา อัศวเทวิน", pax: 8, stayed: true },
+        { date: "2026-11-12", b: 3, guest: "วิทยา อัศวเทวิน", pax: 8, stayed: true },
+        { date: "2026-11-14", b: 5, guest: "ณัฏฐวรรชิต บุญศิริปณตพล", pax: 10, stayed: true },
+        { date: "2026-11-21", b: 4, guest: "จิรารัตน์", pax: 10, stayed: true },
+        { date: "2026-11-22", b: 3, guest: "เดียร์", pax: 6, stayed: true },
+        { date: "2026-11-22", b: 4, guest: "จิรารัตน์", pax: 10, stayed: true },
+        { date: "2026-11-27", b: 1, guest: "บจก.วายเจ", pax: 10, stayed: true },
+        { date: "2026-11-27", b: 2, guest: "บจก.วายเจ", pax: 10, stayed: true },
+        { date: "2026-11-27", b: 4, guest: "บจก.วายเจ", pax: 12, stayed: true },
+        { date: "2026-11-27", b: 5, guest: "แป้ง", pax: 10, stayed: true },
+        { date: "2026-11-28", b: 1, guest: "กัญญารัตน์ รัศมา", pax: 6, stayed: true },
+        { date: "2026-11-28", b: 3, guest: "ยศพัทธ์ ธีรโชติเมธรัฐ", pax: 8, stayed: true }
       ]
     };
 
@@ -1872,7 +1572,7 @@
 
     // --- 3. PAGE SWITCHING ---
     function switchPage(pageNumber) {
-      for (let i = 1; i <= 4; i++) {
+      for (let i = 1; i <= 3; i++) {
         const pageEl = document.getElementById(`page-${i}`);
         const btnEl = document.getElementById(`nav-btn-${i}`);
         if (!pageEl || !btnEl) continue;

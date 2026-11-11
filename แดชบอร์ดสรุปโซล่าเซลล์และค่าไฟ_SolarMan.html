@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="UTF-8">
@@ -112,11 +112,8 @@
         <button id="main-tab-ceo" onclick="switchPage('page-ceo')" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-700/60 transition-all flex items-center justify-center gap-1.5">
           <span>📊</span> หน้า 3: สรุปความคุ้มค่ารายหลัง (CEO)
         </button>
-        <button id="main-tab-pty" onclick="switchPage('page-pty')" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-700/60 transition-all flex items-center justify-center gap-1.5">
-          <span>📱</span> หน้า 4: ระบบบันทึกข้อมูลสาขาชะอำ
-        </button>
         <button id="main-tab-audit" onclick="switchPage('page-audit')" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-700/60 transition-all flex items-center justify-center gap-1.5 border-l border-slate-300 dark:border-slate-600">
-          <span>🛡️</span> หน้า 5: ตรวจสอบการจอง vs ค่าไฟ (CEO Audit)
+          <span>🛡️</span> หน้า 4: ตรวจสอบการจอง vs ค่าไฟ (CEO Audit)
         </button>
       </div>
       <div class="text-xs font-bold text-slate-500 dark:text-slate-400 px-3 hidden xl:flex items-center gap-1.5">
@@ -552,168 +549,7 @@
     </div>
 
     <!-- ===================================================================== -->
-    <!-- PAGE 4: CHA-AM BRANCH LOGGING SYSTEM & SOP ACTION PLAN                -->
-    <!-- ===================================================================== -->
-    <div id="page-pty" class="hidden space-y-6">
-      
-      <!-- Solutions Overview for Cha-am Branch -->
-      <div class="glass-card p-6 sm:p-7 rounded-3xl space-y-5">
-        <div class="border-b border-slate-200 dark:border-slate-800 pb-3">
-          <div class="inline-flex items-center gap-1.5 px-3 py-0.5 bg-blue-600 text-white font-black rounded-full text-xs mb-1">
-            📱 CHA-AM BRANCH LOGGING SOLUTION
-          </div>
-          <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
-            แนวทางปฏิบัติ: ทำอย่างไรให้พนักงานสาขาชะอำสามารถลงบันทึกและเก็บข้อมูลได้สะดวก?
-          </h2>
-          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
-            แนะนำ 3 ระบบมาตรฐานที่พนักงานใช้งานง่ายใน 1 นาที และข้อมูลส่งตรงถึงผู้บริหารทันที
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          
-          <!-- Method 1: Google Form / QR Code -->
-          <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 space-y-3 relative overflow-hidden">
-            <div class="inline-block px-2.5 py-0.5 bg-emerald-500 text-white font-extrabold text-[10px] rounded-full">
-              ⭐ แนะนำอันดับ 1 (ดีที่สุด)
-            </div>
-            <h4 class="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
-              <span>📲</span> 1. Google Form + QR Code สแกนมือถือ
-            </h4>
-            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              • ปริ้นท์สติกเกอร์ <b>QR Code ไปแปะไว้ที่บอร์ดออฟฟิศชะอำ & ตู้ไฟ</b><br>
-              • พนักงานใช้มือถือสแกนแล้วติ๊ก Check-list 6 ข้อ ใช้เวลาแค่ <b>30 วินาที</b><br>
-              • <b>ข้อมูลวิ่งเข้า Google Sheets ส่วนกลาง Real-time ทันที</b> ผู้บริหารเปิดดู Dashboard สดจากมือถือได้ 24 ชม.
-            </p>
-          </div>
-
-          <!-- Method 2: Web Form on this Dashboard -->
-          <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 space-y-3">
-            <div class="inline-block px-2.5 py-0.5 bg-blue-500 text-white font-extrabold text-[10px] rounded-full">
-              💻 ทำได้ทันทีในหน้านี้
-            </div>
-            <h4 class="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
-              <span>🖥️</span> 2. Digital Web Form (บันทึกลงเครื่อง)
-            </h4>
-            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              • ใช้แบบฟอร์มด้านล่างนี้ในคอมพิวเตอร์ออฟฟิศชะอำ<br>
-              • พนักงานกรอกชื่อและติ๊กผลการตรวจสอบ<br>
-              • มีปุ่ม <b>"ดาวน์โหลดเป็นไฟล์ Excel/CSV"</b> เพื่อส่งต่อให้ฝ่ายบริหารได้ทันที
-            </p>
-          </div>
-
-          <!-- Method 3: Excel Master File -->
-          <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 space-y-3">
-            <div class="inline-block px-2.5 py-0.5 bg-amber-500 text-slate-950 font-extrabold text-[10px] rounded-full">
-              📊 ไฟล์ Excel ในโฟลเดอร์
-            </div>
-            <h4 class="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
-              <span>📁</span> 3. ชีตบันทึกใน Excel
-            </h4>
-            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              • ในไฟล์ <b>`สรุปภาพรวมการใช้ไฟฟ้าและโซล่าเซลล์_SolarMan.xlsx`</b> ได้สร้างชีต <b>`แบบฟอร์มบันทึกสาขาชะอำ`</b> ไว้เรียบร้อยแล้ว<br>
-              • สามารถแชร์ไฟล์บน OneDrive หรือส่งอีเมลให้พนักงานชะอำคีย์ข้อมูลลงตารางได้ทันที
-            </p>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Interactive Web Logging Form for Cha-am -->
-      <div class="glass-card p-5 sm:p-6 rounded-3xl space-y-4">
-        <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-3">
-          <div>
-            <h3 class="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
-              <span>📝</span> แบบฟอร์มลงบันทึกการปฏิบัติงานประจำวัน (สาขาชะอำ)
-            </h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              กรอกข้อมูลการตรวจสอบประจำวัน และกดปุ่ม Export เพื่อบันทึกประวัติ
-            </p>
-          </div>
-          <div class="flex items-center gap-2">
-            <button onclick="exportChaAmLogCSV()" class="px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-black hover:bg-emerald-500 shadow-md transition flex items-center gap-1.5">
-              <span>📥</span> Export เป็นไฟล์ CSV/Excel
-            </button>
-          </div>
-        </div>
-
-        <!-- Form Inputs -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-slate-50 dark:bg-slate-800/40 p-4 rounded-2xl border border-slate-200 dark:border-slate-700">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">📅 วันที่ตรวจสอบ:</label>
-            <input type="date" id="log-date" class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-bold focus:ring-2 focus:ring-blue-500 outline-none">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">👤 ผู้ลงบันทึก (ชื่อพนักงาน):</label>
-            <input type="text" id="log-staff" placeholder="เช่น อภิชญา / ช่างชะอำ" class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-bold focus:ring-2 focus:ring-blue-500 outline-none">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">🏢 สาขา:</label>
-            <input type="text" value="สาขาชะอำ (Cha-am Branch)" readonly class="w-full bg-slate-200 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl px-3 py-2 text-xs font-black text-slate-700 dark:text-slate-200">
-          </div>
-        </div>
-
-        <!-- Check-list Items -->
-        <div class="space-y-3">
-          <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
-            <div class="space-y-0.5">
-              <div class="text-xs font-black text-slate-900 dark:text-white">1. ตรวจสอบแอป SolarMan สถานะ Inverter (09:30 น.)</div>
-              <div class="text-[11px] text-slate-500">เกณฑ์: ไฟเขียวขึ้นครบทุกตู้ ไม่มีสัญญาณ Alarm / Offline</div>
-            </div>
-            <input type="checkbox" id="chk-1" checked class="w-5 h-5 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 cursor-pointer">
-          </div>
-
-          <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
-            <div class="space-y-0.5">
-              <div class="text-xs font-black text-slate-900 dark:text-white">2. เดินระบบปั๊มกรองสระว่ายน้ำช่วง Solar Peak (10:00 - 15:00 น.)</div>
-              <div class="text-[11px] text-slate-500">เกณฑ์: เปิดทำงาน 4-5 ชม. ต่อเนื่องช่วงแดดจัดเพื่อใช้ไฟฟรี 100%</div>
-            </div>
-            <input type="checkbox" id="chk-2" checked class="w-5 h-5 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 cursor-pointer">
-          </div>
-
-          <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
-            <div class="space-y-0.5">
-              <div class="text-xs font-black text-slate-900 dark:text-white">3. งานซักอบผ้าปูที่นอนและผ้าเช็ดตัว (10:30 - 14:30 น.)</div>
-              <div class="text-[11px] text-slate-500">เกณฑ์: ตากแดด 10 น. ก่อนเข้าตู้อบ และห้ามใช้ตู้อบหลัง 17:00 น.</div>
-            </div>
-            <input type="checkbox" id="chk-3" checked class="w-5 h-5 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 cursor-pointer">
-          </div>
-
-          <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
-            <div class="space-y-0.5">
-              <div class="text-xs font-black text-slate-900 dark:text-white">4. แม่บ้านปิดแอร์ขณะทำความสะอาดบ้านพัก (11:00 - 12:00 น.)</div>
-              <div class="text-[11px] text-slate-500">เกณฑ์: ปิดแอร์ 100% เปิดเฉพาะพัดลมระบายอากาศ</div>
-            </div>
-            <input type="checkbox" id="chk-4" checked class="w-5 h-5 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 cursor-pointer">
-          </div>
-
-          <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
-            <div class="space-y-0.5">
-              <div class="text-xs font-black text-slate-900 dark:text-white">5. เช็กเวลาแขกถึง & เปิดแอร์เตรียมห้อง 25°C + พัดลม (ก่อนแขกถึง 5-15 น.)</div>
-              <div class="text-[11px] text-slate-500">เกณฑ์: ตั้ง 25-26°C เท่านั้น ห้ามเปิดต่ำกว่า 24°C</div>
-            </div>
-            <input type="checkbox" id="chk-5" checked class="w-5 h-5 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 cursor-pointer">
-          </div>
-
-          <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
-            <div class="space-y-0.5">
-              <div class="text-xs font-black text-slate-900 dark:text-white">6. ตรวจเช็กปิดไฟและสับเบรกเกอร์แอร์หลังที่ไม่มีแขก (18:30 น.)</div>
-              <div class="text-[11px] text-slate-500">เกณฑ์: ปิดไฟ ดึงปลั๊กต้มน้ำ ตรวจสอบไม่ให้มีไฟรั่วไหล</div>
-            </div>
-            <input type="checkbox" id="chk-6" checked class="w-5 h-5 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 cursor-pointer">
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">💬 หมายเหตุ / ปัญหาที่พบเพิ่มเติม:</label>
-          <textarea id="log-notes" rows="2" placeholder="เช่น หลัง 3 ลูกค้าแจ้งแอร์มีเสียงดัง, แดดจัดผลิตไฟได้เต็มที่..." class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ===================================================================== -->
-    <!-- PAGE 5: CEO OCCUPANCY VS ELECTRICITY AUDIT & ANOMALY DETECTION         -->
+    <!-- PAGE 4: CEO OCCUPANCY VS ELECTRICITY AUDIT & ANOMALY DETECTION         -->
     <!-- ===================================================================== -->
     <div id="page-audit" class="hidden space-y-6">
       
@@ -950,7 +786,7 @@
       { key: '2026/07', month: 'ก.ค. 69', off: 2335.09, b1: 2928.58, b23: 3436.11, b45: 2148.95, paid: 10848.73, units: 2732, solUnits: 2001.00, solSavings: 7945.94, withoutSol: 18794.67, pct: 42.28 },
       { key: '2026/08', month: 'ส.ค. 69', off: 4478.53, b1: 3016.88, b23: 4084.64, b45: 4540.07, paid: 16120.12, units: 4011, solUnits: 1662.70, solSavings: 6682.35, withoutSol: 22802.47, pct: 29.31 },
       { key: '2026/09', month: 'ก.ย. 69', off: 3489.98, b1: 2488.70, b23: 2555.50, b45: 4929.53, paid: 13463.71, units: 3633, solUnits: 1665.50, solSavings: 7261.58, withoutSol: 20725.29, pct: 35.04 },
-      { key: '2026/10', month: 'ต.ค. 69', off: 2730.54, b1: 2659.00, b23: 5156.76, b45: 5965.70, paid: 16512.00, units: 4448, solUnits: 2815.90, solSavings: 12277.32, withoutSol: 28789.32, pct: 42.65 },
+      { key: '2026/10', month: 'ต.ค. 69', off: 2730.54, b1: 6145.50, b23: 5156.76, b45: 5965.70, paid: 19998.50, units: 4851, solUnits: 2815.90, solSavings: 12277.32, withoutSol: 32275.82, pct: 38.04 },
     ];
 
     let currentPage = 'page-gen';
@@ -968,10 +804,9 @@
       document.getElementById('page-gen').style.display = (pageId === 'page-gen') ? 'block' : 'none';
       document.getElementById('page-pea').style.display = (pageId === 'page-pea') ? 'block' : 'none';
       document.getElementById('page-ceo').style.display = (pageId === 'page-ceo') ? 'block' : 'none';
-      document.getElementById('page-pty').style.display = (pageId === 'page-pty') ? 'block' : 'none';
       document.getElementById('page-audit').style.display = (pageId === 'page-audit') ? 'block' : 'none';
 
-      const navIds = ['gen', 'pea', 'ceo', 'pty', 'audit'];
+      const navIds = ['gen', 'pea', 'ceo', 'audit'];
       navIds.forEach(id => {
         const btn = document.getElementById(`main-tab-${id}`);
         if (`page-${id}` === pageId) {
@@ -1680,10 +1515,38 @@
         { date: "2026-10-23", b: 4, guest: "กันยรัก", pax: 14, stayed: true },
         { date: "2026-10-23", b: 5, guest: "เกศสุดา ประเสริฐสังข์", pax: 10, stayed: true },
         { date: "2026-10-23", b: 9, guest: "คุณวิภาวี (หลัง 9)", pax: 8, stayed: true },
-        { date: "2026-10-24", b: 2, guest: "นางสาวภัสราภรณ์ ดาสา", pax: 8, stayed: false },
-        { date: "2026-10-24", b: 3, guest: "คุณโอ๋", pax: 11, stayed: false },
         { date: "2026-10-24", b: 5, guest: "ณัฐพร", pax: 10, stayed: false },
-        { date: "2026-10-26", b: 1, guest: "คณิดา", pax: 7, stayed: false }
+        { date: "2026-10-25", b: 1, guest: "acc Kridsada", pax: 8, stayed: false },
+        { date: "2026-10-25", b: 2, guest: "acc Kridsada", pax: 8, stayed: false },
+        { date: "2026-10-25", b: 2, guest: "สรัญญา", pax: 6, stayed: true },
+        { date: "2026-10-26", b: 1, guest: "คณิดา", pax: 7, stayed: true },
+        { date: "2026-10-29", b: 4, guest: "พัชรินทร์ ผ่อนแผ่ว", pax: 8, stayed: true },
+        { date: "2026-10-30", b: 3, guest: "ธงชัย", pax: 8, stayed: true },
+        { date: "2026-10-31", b: 3, guest: "สกลพร สาลิกากูล", pax: 7, stayed: true },
+        { date: "2026-10-31", b: 4, guest: "โชติกา วังวล", pax: 10, stayed: true }
+      ],
+      "2026/11": [
+        { date: "2026-11-01", b: 1, guest: "ศิริวัลย์", pax: 6, stayed: true },
+        { date: "2026-11-01", b: 3, guest: "คุณฝน", pax: 10, stayed: true },
+        { date: "2026-11-02", b: 3, guest: "เงินเงิน", pax: 4, stayed: true },
+        { date: "2026-11-04", b: 2, guest: "พัชรดนัย", pax: 8, stayed: true },
+        { date: "2026-11-05", b: 2, guest: "พัชรดนัย", pax: 8, stayed: true },
+        { date: "2026-11-06", b: 3, guest: "เอ๊ก", pax: 7, stayed: true },
+        { date: "2026-11-10", b: 1, guest: "ศุภกฤษณ์ บุญเรืองขาว", pax: 6, stayed: true },
+        { date: "2026-11-11", b: 2, guest: "วิทยา อัศวเทวิน", pax: 8, stayed: true },
+        { date: "2026-11-11", b: 3, guest: "วิทยา อัศวเทวิน", pax: 8, stayed: true },
+        { date: "2026-11-12", b: 2, guest: "วิทยา อัศวเทวิน", pax: 8, stayed: true },
+        { date: "2026-11-12", b: 3, guest: "วิทยา อัศวเทวิน", pax: 8, stayed: true },
+        { date: "2026-11-14", b: 5, guest: "ณัฏฐวรรชิต บุญศิริปณตพล", pax: 10, stayed: true },
+        { date: "2026-11-21", b: 4, guest: "จิรารัตน์", pax: 10, stayed: true },
+        { date: "2026-11-22", b: 3, guest: "เดียร์", pax: 6, stayed: true },
+        { date: "2026-11-22", b: 4, guest: "จิรารัตน์", pax: 10, stayed: true },
+        { date: "2026-11-27", b: 1, guest: "บจก.วายเจ", pax: 10, stayed: true },
+        { date: "2026-11-27", b: 2, guest: "บจก.วายเจ", pax: 10, stayed: true },
+        { date: "2026-11-27", b: 4, guest: "บจก.วายเจ", pax: 12, stayed: true },
+        { date: "2026-11-27", b: 5, guest: "แป้ง", pax: 10, stayed: true },
+        { date: "2026-11-28", b: 1, guest: "กัญญารัตน์ รัศมา", pax: 6, stayed: true },
+        { date: "2026-11-28", b: 3, guest: "ยศพัทธ์ ธีรโชติเมธรัฐ", pax: 8, stayed: true }
       ]
     };
 
