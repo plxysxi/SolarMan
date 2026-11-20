@@ -813,7 +813,10 @@
                 ต.ค. 69
               </button>
               <button id="book-btn-2026-11" onclick="switchBookingMonth('2026/11')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition cursor-pointer">
-                พ.ย. 69*
+                พ.ย. 69
+              </button>
+              <button id="book-btn-2026-12" onclick="switchBookingMonth('2026/12')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition cursor-pointer">
+                ธ.ค. 69
               </button>
             </div>
           </div>
@@ -1228,7 +1231,8 @@
       { key: '2026/08', label: 'ส.ค. 69', fullLabel: 'สิงหาคม 2569', b1: 538.2, b1_c: 1197.2, b2: 212.6, b2_c: 692.6, b3: 395.5, b3_c: 795.5, b4: 52.9, b4_c: 252.9, b5: 58.3, b5_c: 308.3, b6: 0.0, b6_c: 0.0, b9: 0.0, b9_c: 750.0, off: 405.2, off_c: 1362.2, b2_3: 608.1, b2_3_c: 1488.1, b4_5: 111.2, b4_5_c: 561.2, total: 1662.7, total_c: 5358.9, days: 31 },
       { key: '2026/09', label: 'ก.ย. 69', fullLabel: 'กันยายน 2569', b1: 546.8, b1_c: 1264.1, b2: 113.8, b2_c: 223.2, b3: 315.0, b3_c: 857.0, b4: 329.1, b4_c: 819.9, b5: 360.8, b5_c: 824.9, b6: 0.0, b6_c: 56.0, b9: 0.0, b9_c: 152.0, off: 0.0, off_c: 785.0, b2_3: 428.8, b2_3_c: 1080.2, b4_5: 689.9, b4_5_c: 1644.8, total: 1665.5, total_c: 4982.1, days: 30 },
       { key: '2026/10', label: 'ต.ค. 69', fullLabel: 'ตุลาคม 2569', b1: 695.8, b1_c: 2106.8, b2: 266.3, b2_c: 999.9, b3: 457.0, b3_c: 1549.3, b4: 486.5, b4_c: 1397.2, b5: 485.5, b5_c: 1193.0, b6: 0.0, b6_c: 46.0, b9: 0.0, b9_c: 124.0, off: 424.8, off_c: 846.2, b2_3: 723.3, b2_3_c: 2549.2, b4_5: 972.0, b4_5_c: 2590.2, total: 2815.9, total_c: 8262.4, days: 31 },
-      { key: '2026/11', label: 'พ.ย. 69*', fullLabel: 'พฤศจิกายน 2569 (1–11 พ.ย.)', b1: 212.3, b1_c: 396.8, b2: 85.3, b2_c: 330.2, b3: 146.7, b3_c: 429.2, b4: 106.4, b4_c: 208.4, b5: 114.8, b5_c: 208.7, b6: 0.0, b6_c: 0.0, b9: 0.0, b9_c: 0.0, off: 161.5, off_c: 431.4, b2_3: 232.0, b2_3_c: 759.4, b4_5: 221.2, b4_5_c: 417.1, total: 827.0, total_c: 2004.7, days: 11 }
+      { key: '2026/11', label: 'พ.ย. 69', fullLabel: 'พฤศจิกายน 2569', b1: 212.3, b1_c: 396.8, b2: 85.3, b2_c: 330.2, b3: 146.7, b3_c: 429.2, b4: 106.4, b4_c: 208.4, b5: 114.8, b5_c: 208.7, b6: 0.0, b6_c: 0.0, b9: 0.0, b9_c: 0.0, off: 161.5, off_c: 431.4, b2_3: 232.0, b2_3_c: 759.4, b4_5: 221.2, b4_5_c: 417.1, total: 827.0, total_c: 2004.7, days: 30 },
+      { key: '2026/12', label: 'ธ.ค. 69', fullLabel: 'ธันวาคม 2569', b1: 0.0, b1_c: 0.0, b2: 0.0, b2_c: 0.0, b3: 0.0, b3_c: 0.0, b4: 0.0, b4_c: 0.0, b5: 0.0, b5_c: 0.0, b6: 0.0, b6_c: 0.0, b9: 0.0, b9_c: 0.0, off: 0.0, off_c: 0.0, b2_3: 0.0, b2_3_c: 0.0, b4_5: 0.0, b4_5_c: 0.0, total: 0.0, total_c: 0.0, days: 31 }
     ];
 
     // Individual Buildings (for technical & solar inverter monitoring in Page 1)
@@ -1526,7 +1530,7 @@
         { date: "2026-11-11", b: 3, guest: "วิทยา อัศวเทวิน", pax: 8, stayed: true },
         { date: "2026-11-12", b: 2, guest: "วิทยา อัศวเทวิน", pax: 8, stayed: true },
         { date: "2026-11-12", b: 3, guest: "วิทยา อัศวเทวิน", pax: 8, stayed: true },
-        { date: "2026-11-14", b: 5, guest: "ณัฏฐวรรชิต บุญศิริปณตพล", pax: 10, stayed: true },
+        { date: "2026-11-14", b: 5, guest: "ณัฏฐวรรชิต บุญศิริปณตพล", pax: 10, stayed: false },
         { date: "2026-11-21", b: 4, guest: "จิรารัตน์", pax: 10, stayed: true },
         { date: "2026-11-22", b: 3, guest: "เดียร์", pax: 6, stayed: true },
         { date: "2026-11-22", b: 4, guest: "จิรารัตน์", pax: 10, stayed: true },
@@ -1534,8 +1538,18 @@
         { date: "2026-11-27", b: 2, guest: "บจก.วายเจ", pax: 10, stayed: true },
         { date: "2026-11-27", b: 4, guest: "บจก.วายเจ", pax: 12, stayed: true },
         { date: "2026-11-27", b: 5, guest: "แป้ง", pax: 10, stayed: true },
-        { date: "2026-11-28", b: 1, guest: "กัญญารัตน์ รัศมา", pax: 6, stayed: true },
-        { date: "2026-11-28", b: 3, guest: "ยศพัทธ์ ธีรโชติเมธรัฐ", pax: 8, stayed: true }
+        { date: "2026-11-28", b: 1, guest: "บจก.วายเจ", pax: 10, stayed: true },
+        { date: "2026-11-28", b: 2, guest: "บจก.วายเจ", pax: 10, stayed: true },
+        { date: "2026-11-28", b: 3, guest: "ยศพัทธ์ ธีรโชติเมธรัฐ", pax: 8, stayed: true },
+        { date: "2026-11-28", b: 4, guest: "บจก.วายเจ", pax: 12, stayed: true },
+        { date: "2026-11-28", b: 5, guest: "แป้ง", pax: 10, stayed: true }
+      ],
+      "2026/12": [
+        { date: "2026-12-05", b: 1, guest: "กัญญารัตน์ รัศมา", pax: 6, stayed: true },
+        { date: "2026-12-06", b: 1, guest: "กัญญารัตน์ รัศมา", pax: 6, stayed: true },
+        { date: "2026-12-06", b: 4, guest: "Apisorn Chaweewong", pax: 10, stayed: true },
+        { date: "2026-12-12", b: 5, guest: "คุณยู", pax: 10, stayed: true },
+        { date: "2026-12-31", b: 1, guest: "ดอกไม้", pax: 6, stayed: true }
       ]
     };
 
@@ -3796,7 +3810,7 @@
 
         // --- 7. PAGE 3 LOGIC (BOOKINGS, STAY VS VACANT, REAL AUDIT LINK) ---
     function navigateBookingMonth(dir) {
-      const months = ['2026/06', '2026/07', '2026/08', '2026/09', '2026/10', '2026/11'];
+      const months = ['2026/06', '2026/07', '2026/08', '2026/09', '2026/10', '2026/11', '2026/12'];
       let idx = months.indexOf(currentBookingMonth);
       if (idx === -1) idx = 4;
       const nextIdx = idx + dir;
@@ -3807,7 +3821,7 @@
 
     function switchBookingMonth(monthKey) {
       currentBookingMonth = monthKey;
-      const allMonths = ['2026/06', '2026/07', '2026/08', '2026/09', '2026/10', '2026/11'];
+      const allMonths = ['2026/06', '2026/07', '2026/08', '2026/09', '2026/10', '2026/11', '2026/12'];
       allMonths.forEach(m => {
         const id = 'book-btn-' + m.replace('/', '-');
         const btn = document.getElementById(id);
@@ -3824,7 +3838,8 @@
         '2026/08': 'August 2026 (สิงหาคม 2569)',
         '2026/09': 'September 2026 (กันยายน 2569)',
         '2026/10': 'October 2026 (ตุลาคม 2569)',
-        '2026/11': 'November 2026 (พฤศจิกายน 2569)'
+        '2026/11': 'November 2026 (พฤศจิกายน 2569)',
+        '2026/12': 'December 2026 (ธันวาคม 2569)'
       };
       const calTitle = document.getElementById('booking-cal-title');
       if (calTitle && monthNamesMap[monthKey]) {
@@ -3845,7 +3860,7 @@
       const year = parseInt(yearStr);
       const month = parseInt(monthStr);
       const mInfo = monthlyGenData.find(x => x.key === currentBookingMonth) || { days: new Date(year, month, 0).getDate() };
-      const daysCount = mInfo.days;
+      const daysCount = new Date(year, month, 0).getDate();
       const bookings = bookingSchedule[currentBookingMonth] || [];
       const selectedVilla = document.getElementById('book-villa-select').value;
       const hasReal = (currentBookingMonth === '2026/09' || currentBookingMonth === '2026/10' || currentBookingMonth === '2026/11');
@@ -3884,7 +3899,7 @@
         const dStr = String(day).padStart(2, '0');
         const dateStr = `${currentBookingMonth.replace('/', '-')}-${dStr}`;
         const slashDate = `${currentBookingMonth}/${dStr}`;
-        const isToday = (currentBookingMonth === '2026/11' && day === 11);
+        const isToday = (currentBookingMonth === '2026/11' && day === 20);
         
         // Find matching bookings for this day
         let dayBookings = bookings.filter(b => b.date === dateStr);
